@@ -1,0 +1,35 @@
+$gradient-degrees: 40deg !default;
+
+$enable-btn-outline-gradients: false !default;
+
+@function linear-gradient-custom($color-1, $color-2) {
+	@return $color-1 linear-gradient($gradient-degrees, $color-2 5%, $color-1 77%) repeat-x
+}
+
+@mixin define-gradient(
+	$gradient-name,
+	$main-value,
+	$gradient,
+	$color: color-contrast($main-value),
+	$blend-mode: 0
+) {
+	.bg-#{$gradient-name} {
+		@include shadows-from-color($main-value);
+		background: $gradient !important;
+		color: $color;
+		@if ($blend-mode != 0) {
+			background-blend-mode: $blend-mode;
+		}
+	}
+}
+
+@each $name-1, $value-1 in $theme-colors {
+	@each $name-2, $value-2 in $theme-colors {
+		@if $value-1 != $value-2 {
+			@include define-gradient(
+					gradient-#{$name-1}-#{$name-2},
+					$value-1,
+					linear-gradient-custom($value-1, $value-2));
+		}
+	}
+}

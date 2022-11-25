@@ -1,0 +1,27 @@
+@use "sass:map" as map;
+@use '../../../node_modules/@material/theme/index' as mat;
+
+$primary: mat.$blue-300;
+$secondary: mat.$purple-a200;
+$tertiary: mat.$orange-300;
+$quaternary: mat.$pink-300;
+$success: mat.$green-300;
+$info: mat.$cyan-300;
+$warning: mat.$amber-300;
+$danger: mat.$red-300;
+$light: #E4EBF5;
+$dark: #262626;
+$body-bg: $light;
+
+$theme-colors: (
+	"primary": $primary,
+	"secondary": $secondary,
+	"tertiary": $tertiary,
+	"quaternary": $quaternary,
+	"success": $success,
+	"info": $info,
+	"warning": $warning,
+	"danger": $danger,
+	"light": $light,
+	"dark": $dark,
+);
