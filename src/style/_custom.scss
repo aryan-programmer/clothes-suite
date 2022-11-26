@@ -10,7 +10,7 @@
 @include define-gradient(
 		gradient--perfect-white--circular,
 		#f1f2f8,
-		radial-gradient(circle farthest-side at bottom, #E3FDF5 0%, #FFE6FA 100%),
+		radial-gradient(circle closest-side at center, #FFE6FA 0%, #E3FDF5 100%),
 );
 
 .img-thumbnail-sized {

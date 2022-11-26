@@ -10,9 +10,11 @@
 @import "../../../node_modules/bootstrap/scss/images";
 @import "../../../node_modules/bootstrap/scss/containers";
 
+@import "./mixins/buttons";
 @import "../add-bg-noise";
 @import "./bs-gradients";
 @import "./form-control";
+@import "./buttons";
 @import "../../../node_modules/bootstrap/scss/forms/labels";
 @import "../../../node_modules/bootstrap/scss/forms/floating-labels";
 @import "../../../node_modules/bootstrap/scss/forms/input-group";
@@ -32,6 +34,17 @@
 @import "../../../node_modules/bootstrap/scss/grid";
 @import "../../../node_modules/bootstrap/scss/card";
 @import "../../../node_modules/bootstrap/scss/placeholders";
+
+@each $color, $value in $theme-colors {
+	.bg-#{$color} {
+		@include shadows-from-color($value);
+	}
+}
+
+.bg-transparent, .default-shadows, body {
+	--light-bg-dark-shadow: #bec8e4; //'hsl(155,41%,82%,50%)',
+	--light-bg-light-shadow: #ffffff;
+}
 
 @each $i, $value in (
 	h1: $h1-font-size,
@@ -73,14 +86,15 @@
 	border: none;
 }
 
-.el-0{
+.el-0 {
 	box-shadow: none;
 }
+
 @for $i from 1 through 5 {
-	.el-#{$i}{
+	.el-#{$i} {
 		box-shadow: box-shadow-gen($i);
 	}
-	.el-in-#{$i}{
+	.el-in-#{$i} {
 		box-shadow: box-shadow-inset-gen($i);
 	}
 }

@@ -1,0 +1,6 @@
+@import "./boostrap-neu/vars";
+
+:export {
+	spacer-1: #{strip-unit($spacer-1)};
+	spacer-1-unit: #{unit($spacer-1)};
+}

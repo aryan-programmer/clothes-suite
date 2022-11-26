@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './style/style.scss';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHatCowboySide, faVest, faShoePrints, faFemale, faMale } from '@fortawesome/free-solid-svg-icons'
+library.add(faHatCowboySide, faVest, faShoePrints, faFemale, faMale )
 
 declare module 'react' {
 	interface Attributes {
