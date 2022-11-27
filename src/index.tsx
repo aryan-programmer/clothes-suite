@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/App';
+import {BrowserRouter} from "react-router-dom";
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './style/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHatCowboySide, faVest, faShoePrints, faFemale, faMale } from '@fortawesome/free-solid-svg-icons'
-library.add(faHatCowboySide, faVest, faShoePrints, faFemale, faMale )
+import {
+	faHatCowboySide,
+	faVest,
+	faShoePrints,
+	faFemale,
+	faMale,
+	faBoxesStacked, faTShirt, faShoppingBag, faShoppingCart, faHomeLg, faBars, faClose
+} from '@fortawesome/free-solid-svg-icons'
+library.add(faHatCowboySide, faVest, faShoePrints, faFemale, faMale, faBoxesStacked, faTShirt, faShoppingBag, faShoppingCart, faHomeLg, faBars, faClose)
 
 declare module 'react' {
 	interface Attributes {
@@ -18,7 +26,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 	<React.StrictMode>
-		<App />
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
 	</React.StrictMode>
 );
 

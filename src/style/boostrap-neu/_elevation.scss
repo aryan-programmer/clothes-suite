@@ -1,0 +1,19 @@
+.el-0 {
+	box-shadow: none;
+}
+
+@for $i from 1 through 5 {
+	.el-#{$i} {
+		box-shadow: box-shadow-gen($i);
+	}
+	.el-in-#{$i} {
+		box-shadow: box-shadow-inset-gen($i);
+	}
+
+	.btn-el-#{$i} {
+		--#{$prefix}btn-box-shadow: #{box-shadow-gen($i)};
+		--#{$prefix}btn-hover-box-shadow: #{box-shadow-gen($i*0.5)};
+		--#{$prefix}btn-focus-box-shadow: none;
+		--#{$prefix}btn-active-shadow: #{box-shadow-inset-gen($i)};
+	}
+}

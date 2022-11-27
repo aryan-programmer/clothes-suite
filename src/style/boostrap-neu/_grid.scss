@@ -1,0 +1,13 @@
+.row-30 {
+	@include make-row();
+
+	> * {
+		@include make-col-ready();
+	}
+
+	& > {
+		@include make-grid-columns(30);
+	}
+}
+
+@import "../../../node_modules/bootstrap/scss/grid";
