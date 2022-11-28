@@ -30,6 +30,12 @@
 @import "./bs-gradients";
 @import "./elevation";
 
+@each $k, $i in $border-widths {
+	.border-#{$k} {
+		--#{$prefix}border-width: #{$i} !important;
+	}
+}
+
 .navbar-nav {
 	// scss-docs-start navbar-nav-css-vars
 	--#{$prefix}nav-link-padding-x: #{$nav-link-padding-x};
@@ -86,6 +92,6 @@
 	border: none;
 }
 
-a:hover{
+a:hover {
 	text-decoration: unset;
 }

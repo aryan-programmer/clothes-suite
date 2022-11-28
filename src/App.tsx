@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import {overrideThemeVariables, Tab, Tabs} from 'ui-neumorphism';
+import {overrideThemeVariables} from 'ui-neumorphism';
 import NavBar from "./pages/NavBar";
 import HomePage from "./pages/HomePage";
+import SignIn from "./pages/SignIn";
 import variables from "./style/material-pallete.module.scss";
 
 type AppProps_T = {};
@@ -20,6 +21,8 @@ function App (props: AppProps_T) {
 				<Route path="/" element={<NavBar />}>
 					<Route index element={<HomePage />}/>
 					<Route path="/shop" element={<div>Shop</div>}></Route>
+					<Route path="/sign-in" element={<SignIn/>}></Route>
+					<Route path="/cart" element={<div>Cart</div>}></Route>
 				</Route>
 			</Routes>
 	);

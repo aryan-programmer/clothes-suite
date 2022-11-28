@@ -1,19 +1,39 @@
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {
+	faBars,
+	faBoxesStacked,
+	faClose,
+	faFemale,
+	faHatCowboySide,
+	faHomeLg,
+	faMale,
+	faShoePrints,
+	faShoppingBag,
+	faShoppingCart, faSignIn, faStore,
+	faTShirt,
+	faVest
+} from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './style/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
+
+library.add(
 	faHatCowboySide,
 	faVest,
 	faShoePrints,
 	faFemale,
 	faMale,
-	faBoxesStacked, faTShirt, faShoppingBag, faShoppingCart, faHomeLg, faBars, faClose
-} from '@fortawesome/free-solid-svg-icons'
-library.add(faHatCowboySide, faVest, faShoePrints, faFemale, faMale, faBoxesStacked, faTShirt, faShoppingBag, faShoppingCart, faHomeLg, faBars, faClose)
+	faBoxesStacked,
+	faStore,
+	faHomeLg,
+	faBars,
+	faClose,
+	faSignIn,
+	faShoppingCart
+)
 
 declare module 'react' {
 	interface Attributes {
