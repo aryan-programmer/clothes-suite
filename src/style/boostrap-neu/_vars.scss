@@ -89,11 +89,16 @@ $box-shadow-sm: box-shadow-gen(0.5);
 $box-shadow-lg: box-shadow-gen(2);
 $box-shadow-inset: box-shadow-inset-gen(1);
 $border-width: 0px;
+$hr-border-width: 2px;
 $card-box-shadow: $box-shadow;
 $btn-box-shadow: $box-shadow;
 $btn-focus-box-shadow: none;
 $btn-hover-box-shadow: $box-shadow-sm;
 $btn-active-box-shadow: $box-shadow-inset;
+$btn-bordered-border: 1px;
+
+$modal-backdrop-bg: $light;
+$modal-backdrop-opacity: .9;
 
 $input-box-shadow: box-shadow-inset-gen();
 $input-focus-box-shadow: box-shadow-inset-gen(0.5);
@@ -103,7 +108,7 @@ $input-group-addon-bg: transparent;
 
 $navbar-padding-y: $spacer;
 $navbar-padding-x: $spacer;
-//$nav-pills-border-radius: $border-radius-pill;
+$nav-pills-border-radius: $border-radius-xl;
 
 $nav-link-padding-y: 0.5rem;
 $navbar-nav-link-padding-x: 1rem;

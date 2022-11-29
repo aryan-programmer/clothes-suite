@@ -143,6 +143,9 @@
 	.btn-outline-#{$color} {
 		@include button-outline-variant-neu($value);
 	}
+	.btn-bordered-#{$color} {
+		@include button-bordered-variant-neu($value);
+	}
 }
 
 // scss-docs-end btn-variant-loops

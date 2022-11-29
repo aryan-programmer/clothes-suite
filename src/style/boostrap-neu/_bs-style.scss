@@ -25,6 +25,7 @@
 @import "../../../node_modules/bootstrap/scss/navbar";
 @import "../../../node_modules/bootstrap/scss/offcanvas";
 @import "../../../node_modules/bootstrap/scss/close";
+@import "../../../node_modules/bootstrap/scss/modal";
 
 @import "../add-bg-noise";
 @import "./bs-gradients";
@@ -43,6 +44,10 @@
 
 @each $color, $value in $theme-colors {
 	.bg-#{$color} {
+		@include shadows-from-color($value);
+	}
+
+	.shadows-bg-#{$color} {
 		@include shadows-from-color($value);
 	}
 }

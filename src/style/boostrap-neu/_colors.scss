@@ -13,6 +13,23 @@ $light: #E4EBF5;
 $dark: #262626;
 $body-bg: $light;
 $solarized: #fcf7eb;
+//$solarized-green: hsl(155, 43%, 95%);
+$light-primary: hsl(214, 91%, 88%);
+$light-secondary: hsl(275, 92%, 88%);
+$light-tertiary: hsl(16, 95%, 88%);
+$light-quaternary: hsl(350, 100%, 88%);
+$light-success: hsl(152, 91%, 88%);
+$light-info: hsl(187, 95%, 88%);
+$light-warning: hsl(49, 100%, 88%);
+$light-danger: hsl(2, 100%, 88%);
+//$primary: #96C1FA;
+//$secondary: #CB8AFA;
+//$tertiary: #fca98b;
+//$quaternary: #ffc0cb;
+//$success: #91FAC9;
+//$info: #8beffc;
+//$warning: #FFE575;
+//$danger: #FF938F;
 
 $theme-colors: (
 	"primary": $primary,
@@ -25,4 +42,13 @@ $theme-colors: (
 	"danger": $danger,
 	"light": $light,
 	"dark": $dark,
+	"solarized": $solarized,
+	"light-primary": $light-primary,
+	"light-secondary": $light-secondary,
+	"light-tertiary": $light-tertiary,
+	"light-quaternary": $light-quaternary,
+	"light-success": $light-success,
+	"light-info": $light-info,
+	"light-warning": $light-warning,
+	"light-danger": $light-danger,
 );

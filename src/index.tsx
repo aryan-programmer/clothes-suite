@@ -10,7 +10,7 @@ import {
 	faShoePrints,
 	faShoppingBag,
 	faShoppingCart, faSignIn, faStore,
-	faTShirt,
+	faTShirt, faUserPlus,
 	faVest
 } from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
@@ -32,7 +32,8 @@ library.add(
 	faBars,
 	faClose,
 	faSignIn,
-	faShoppingCart
+	faShoppingCart,
+	faUserPlus,
 )
 
 declare module 'react' {

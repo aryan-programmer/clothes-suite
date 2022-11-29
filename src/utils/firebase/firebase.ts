@@ -1,8 +1,21 @@
 import {initializeApp} from 'firebase/app';
-import {getAuth, GoogleAuthProvider, signInWithPopup, User, UserCredential} from 'firebase/auth';
+import {
+	createUserWithEmailAndPassword,
+	getAuth,
+	getRedirectResult as getRedirectResult_,
+	GoogleAuthProvider,
+	signInWithPopup,
+	signInWithRedirect,
+	User,
+	UserCredential
+} from 'firebase/auth';
 import {doc, DocumentReference, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 import nn from '../functions/nn';
 import {UserData} from "../types";
+
+export {FirebaseError} from 'firebase/app';
+export * from "./firebaseAuthErrorCodes";
+
 
 const {firebaseConfig} = require("./firebase.config");
 const app              = initializeApp(firebaseConfig);
@@ -17,9 +30,23 @@ export function signInWithGooglePopup (): Promise<UserCredential> {
 	return signInWithPopup(auth, provider);
 }
 
+export function signInWithGoogleRedirect (): Promise<UserCredential> {
+	return signInWithRedirect(auth, provider);
+}
+
+export function getRedirectResult () {
+	return getRedirectResult_(auth);
+}
+
 export const db = getFirestore(app);
 
-export async function createUserDocument (user: User) {
+export async function signUpWithEmailAndPassword (email: string, password: string) {
+	if (email.length === 0) return;
+	if (password.length === 0) return;
+	return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export async function createUserDocument (user: User, overridingData?: Partial<UserData>) {
 	const userDoc  = doc(db, 'users', user.uid) as DocumentReference<UserData>;
 	const userSnap = await getDoc(userDoc);
 	if (!userSnap.exists()) {
@@ -32,7 +59,8 @@ export async function createUserDocument (user: User) {
 				displayName,
 				phoneNumber,
 				photoURL,
-				createdAt
+				createdAt,
+				...overridingData,
 			});
 		} catch (error) {
 			console.error("Failed to create user", error)

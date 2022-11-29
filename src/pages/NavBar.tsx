@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {useLocation} from "react-router";
 import {Link, Outlet} from "react-router-dom";
+import Btn from "../components/Btn";
 import {NavLink} from "../components/NavLink";
 
 export type NavBarProps_T = {};
@@ -44,6 +45,13 @@ function SideNav () {
 					<Nav.Link
 						className="nav-link-with-icon"
 						activeClassName="active"
+						as={NavLink} to="/sign-up">
+						<FontAwesomeIcon icon="user-plus" />
+						Sign up
+					</Nav.Link>
+					<Nav.Link
+						className="nav-link-with-icon"
+						activeClassName="active"
 						as={NavLink} to="/cart">
 						<FontAwesomeIcon icon="cart-shopping" />
 						Cart
@@ -67,12 +75,12 @@ export default function NavBar (props: NavBarProps_T) {
 		<div className="row-30 vw-100 justify-content-end">
 			<Navbar className="topnav-sizing" expand="xs">
 				<Container className="justify-content-start gap-2">
-					<button
+					<Btn
 						onClick={handleShow}
-						className="h5-imp mb-0 btn border-dark border-1 text-wrap text-center fw-bold mx-0"
-						role="button">
+						borderColor="dark"
+						className="h5-imp mb-0 text-wrap text-center fw-bold mx-0">
 						<FontAwesomeIcon icon="bars"></FontAwesomeIcon>
-					</button>
+					</Btn>
 					<a className="navbar-brand h4-imp text-wrap fw-bold mx-0">
 						<FontAwesomeIcon icon="boxes-stacked" />Clothes suite
 					</a>
@@ -84,12 +92,12 @@ export default function NavBar (props: NavBarProps_T) {
 				backdropClassName="bg-gradient--salt-mountain">
 				<Offcanvas.Body className="bg-gradient--salt-mountain">
 					<div className="d-flex w-100 justify-content-end">
-						<button
-							className="h5-imp mb-0 btn border-dark border-1 text-wrap text-center fw-bold mx-0"
-							type="button"
+						<Btn
+							borderColor="dark"
+							className="h5-imp mb-0 text-wrap text-center fw-bold mx-0"
 							onClick={handleClose}>
 							<FontAwesomeIcon icon="close"></FontAwesomeIcon>
-						</button>
+						</Btn>
 					</div>
 					<Navbar className="pt-0" expand={true}>
 						<SideNav />

@@ -19,7 +19,7 @@ export default function CategoriesCard ({cat}: CategoriesCardProps_T) {
 				marginLeft: "auto",
 				marginRight: "auto",
 			}}>
-				<div className="btn btn-el-2 bg-light border-1 border-primary default-shadows rounded-5" style={{
+				<div className="btn btn-el-2 btn-bordered-primary bg-light default-shadows rounded-5" style={{
 					marginLeft: spacing(3),
 					marginRight: spacing(3),
 					padding: spacing(3),
