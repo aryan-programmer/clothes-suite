@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {overrideThemeVariables} from 'ui-neumorphism';
+import variables from "../style/material-pallete.module.scss";
 import AuthenticationPage from "./pages/AuthenticationPage";
 import HomePage from "./pages/HomePage";
 import NavBar from "./pages/NavBar";
-import variables from "./style/material-pallete.module.scss";
 
 type AppProps_T = {};
 

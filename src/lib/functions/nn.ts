@@ -1,4 +1,4 @@
-import {Optional} from "../../utils/types";
+import {Optional} from "../../app/utils/types";
 
 class NullOrUndefinedValueException extends Error {
 	public readonly nullOrUndefined: null | undefined;

@@ -1,4 +1,4 @@
-import vars from "../style/export-vars.module.scss";
+import vars from "../../style/export-vars.module.scss";
 
 export const spacer     = +vars["spacer-1"];
 export const spacerUnit = vars["spacer-1-unit"];

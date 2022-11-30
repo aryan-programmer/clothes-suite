@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {useLocation} from "react-router";
 import {Link, Outlet} from "react-router-dom";
-import Btn from "../components/Btn";
+import Btn from "../components/common/Btn";
 import {NavLink} from "../components/NavLink";
 
 export type NavBarProps_T = {};

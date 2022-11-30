@@ -11,7 +11,7 @@ import {
 	UserCredential
 } from 'firebase/auth';
 import {doc, DocumentReference, getDoc, getFirestore, setDoc} from 'firebase/firestore';
-import nn from '../../lib/functions/nn';
+import nn from '../../../lib/functions/nn';
 import {UserData} from "../types";
 
 export {FirebaseError} from 'firebase/app';

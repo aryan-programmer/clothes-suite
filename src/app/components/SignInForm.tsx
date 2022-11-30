@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {ChangeEvent, FormEvent} from "react";
 import Modal from "react-bootstrap/esm/Modal";
-import nn from "../lib/functions/nn";
+import nn from "../../lib/functions/nn";
 import {APPLICATION_NAME} from "../utils/consts";
 import {
 	createUserDocument,
@@ -11,8 +11,8 @@ import {
 	signInWithGoogleRedirect,
 } from "../utils/firebase/firebase";
 import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
-import Btn from "./Btn";
-import InputBox from "./InputBox";
+import Btn from "./common/Btn";
+import InputBox from "./common/InputBox";
 
 export type SignInProps_T = {};
 export type SignInState_T = {
