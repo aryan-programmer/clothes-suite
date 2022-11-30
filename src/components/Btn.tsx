@@ -17,7 +17,7 @@ export default function Btn (props: BtnProps_T) {
 	let className                                                                  = "btn rounded-pill text-uppercase ";
 	if (extension != null) className += `btn-${extension} `;
 	if (borderColor != null) className += `btn-bordered-${borderColor} `;
-	if (newClasses) className += newClasses;
+	if (newClasses != null) className += newClasses;
 	type ??= "button";
 	return (
 		<button

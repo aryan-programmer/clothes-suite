@@ -77,12 +77,12 @@
 //	(linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)),
 //);
 //
-//// 012 Tempting Azure
-//@include define-gradient(
-//	gradient--tempting-azure,
-//	#8ae7d5,
-//	(linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)),
-//);
+// 012 Tempting Azure
+@include define-gradient(
+	gradient--tempting-azure,
+	#8ae7d5,
+	(linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)),
+);
 //
 //// 013 Heavy Rain
 //@include define-gradient(

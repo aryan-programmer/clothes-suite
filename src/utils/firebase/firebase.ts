@@ -7,10 +7,11 @@ import {
 	signInWithPopup,
 	signInWithRedirect,
 	User,
-	UserCredential
+	UserCredential,
+	signInWithEmailAndPassword as signInWithEmailAndPassword_
 } from 'firebase/auth';
 import {doc, DocumentReference, getDoc, getFirestore, setDoc} from 'firebase/firestore';
-import nn from '../functions/nn';
+import nn from '../../lib/functions/nn';
 import {UserData} from "../types";
 
 export {FirebaseError} from 'firebase/app';
@@ -44,6 +45,12 @@ export async function signUpWithEmailAndPassword (email: string, password: strin
 	if (email.length === 0) return;
 	if (password.length === 0) return;
 	return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export async function signInWithEmailAndPassword (email: string, password: string) {
+	if (email.length === 0) return;
+	if (password.length === 0) return;
+	return await signInWithEmailAndPassword_(auth, email, password);
 }
 
 export async function createUserDocument (user: User, overridingData?: Partial<UserData>) {

@@ -38,16 +38,9 @@ function SideNav () {
 					<Nav.Link
 						className="nav-link-with-icon"
 						activeClassName="active"
-						as={NavLink} to="/sign-in">
+						as={NavLink} to="/auth">
 						<FontAwesomeIcon icon="sign-in" />
 						Sign in
-					</Nav.Link>
-					<Nav.Link
-						className="nav-link-with-icon"
-						activeClassName="active"
-						as={NavLink} to="/sign-up">
-						<FontAwesomeIcon icon="user-plus" />
-						Sign up
 					</Nav.Link>
 					<Nav.Link
 						className="nav-link-with-icon"
@@ -111,7 +104,7 @@ export default function NavBar (props: NavBarProps_T) {
 				</Navbar>
 			</div>
 			<div className="row-30 content-sizing d-flex justify-content-center">
-				<div className="col-lg-28 col-md-29 col-30 p-3 h-100">
+				<div className="col-30 p-lg-4 p-3 h-100">
 					<Outlet />
 				</div>
 			</div>

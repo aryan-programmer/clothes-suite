@@ -87,7 +87,7 @@ export enum FirebaseAuthErrorCodes {
 	UNSUPPORTED_TENANT_OPERATION    = "auth/unsupported-tenant-operation",
 	UNVERIFIED_EMAIL                = "auth/unverified-email",
 	USER_CANCELLED                  = "auth/user-cancelled",
-	USER_DELETED                    = "auth/user-not-found",
+	USER_NOT_FOUND                  = "auth/user-not-found",
 	USER_DISABLED                   = "auth/user-disabled",
 	USER_MISMATCH                   = "auth/user-mismatch",
 	USER_SIGNED_OUT                 = "auth/user-signed-out",

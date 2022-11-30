@@ -8,11 +8,11 @@ import {
 	faHomeLg,
 	faMale,
 	faShoePrints,
-	faShoppingBag,
 	faShoppingCart, faSignIn, faStore,
 	faTShirt, faUserPlus,
-	faVest
-} from '@fortawesome/free-solid-svg-icons'
+	faVest,
+} from '@fortawesome/free-solid-svg-icons';
+import {faGoogle} from "@fortawesome/free-brands-svg-icons"
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
@@ -33,7 +33,9 @@ library.add(
 	faClose,
 	faSignIn,
 	faShoppingCart,
+	faTShirt,
 	faUserPlus,
+	faGoogle,
 )
 
 declare module 'react' {

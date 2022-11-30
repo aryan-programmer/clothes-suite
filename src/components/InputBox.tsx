@@ -8,6 +8,7 @@ export type InputBoxPropsOrig_T = {
 	label?: string,
 	placeholder?: string,
 	id?: string,
+	border?: string,
 };
 
 export type InputBoxProps_T =
@@ -17,15 +18,18 @@ export type InputBoxProps_T =
 export default function InputBox (props: InputBoxProps_T) {
 	const [id] = useState(props.id ?? _.uniqueId("InputBox-id-"));
 
-	let {className, placeholder, onChange, value, ...remainingProps} = props;
-	className ??= "";
+	let {className: newClasses, placeholder, onChange, value, border, ...remainingProps} = props;
+
+	let className = "form-control rounded-pill ";
 	placeholder ??= " ";
 	value ??= "";
+	if (border != null) className += `border-${border} border-1 `;
+	if (newClasses != null) className += newClasses;
 	return (
 		<div className="form-floating">
 			<input
 				id={id}
-				className={`form-control rounded-pill ${className}`}
+				className={className}
 				placeholder={placeholder}
 				onChange={onChange}
 				value={value}

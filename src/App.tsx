@@ -3,9 +3,9 @@ import {Route, Routes} from 'react-router-dom';
 import {overrideThemeVariables} from 'ui-neumorphism';
 import NavBar from "./pages/NavBar";
 import HomePage from "./pages/HomePage";
-import SignIn from "./pages/SignIn";
+import AuthenticationPage from "./pages/AuthenticationPage";
 import variables from "./style/material-pallete.module.scss";
-import SignUp from './pages/SignUp';
+import SignUpForm from './components/SignUpForm';
 
 type AppProps_T = {};
 
@@ -22,9 +22,8 @@ function App (props: AppProps_T) {
 				<Route path="/" element={<NavBar />}>
 					<Route index element={<HomePage />}/>
 					<Route path="/shop" element={<div>Shop</div>}></Route>
-					<Route path="/sign-in" element={<SignIn/>}></Route>
-					<Route path="/sign-up" element={<SignUp/>}></Route>
 					<Route path="/cart" element={<div>Cart</div>}></Route>
+					<Route path="/auth" element={<AuthenticationPage/>}></Route>
 				</Route>
 			</Routes>
 	);

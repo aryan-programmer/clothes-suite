@@ -1,4 +1,4 @@
-import {Object} from "../types";
+import {Object} from "../../utils/types";
 
 type OthT<T> = T[] & Object;
 

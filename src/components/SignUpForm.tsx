@@ -1,8 +1,7 @@
 import React, {ChangeEvent, FormEvent} from "react";
 import Modal from "react-bootstrap/esm/Modal";
-import { Button } from "ui-neumorphism";
-import Btn from "../components/Btn";
-import InputBox from "../components/InputBox";
+import Btn from "./Btn";
+import InputBox from "./InputBox";
 import {APPLICATION_NAME} from "../utils/consts";
 import {
 	createUserDocument,
@@ -10,7 +9,7 @@ import {
 	signUpWithEmailAndPassword
 } from "../utils/firebase/firebase";
 import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
-import nn from "../utils/functions/nn";
+import nn from "../lib/functions/nn";
 
 export type SignUpProps_T = {};
 export type SignUpState_T = {
@@ -23,7 +22,7 @@ export type SignUpState_T = {
 	alertBg: string,
 };
 
-export default class SignUp extends React.Component<SignUpProps_T, SignUpState_T> {
+export default class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 	constructor (props: SignUpProps_T) {
 		super(props);
 
@@ -87,9 +86,9 @@ export default class SignUp extends React.Component<SignUpProps_T, SignUpState_T
 	override render () {
 		return (
 			<>
-				<form className="card el-2 bg-gradient--confident-cloud rounded-4" onSubmit={this.onSubmit}>
+				<form className="card bg-gradient--confident-cloud rounded-4" onSubmit={this.onSubmit}>
 					<div className="card-header add-bg-noise rounded-4 rounded-bottom-0">
-						<h2 className="mb-0">Sign up/Register</h2>
+						<h2 className="mb-0">Don't have an account? Register now!</h2>
 					</div>
 					<div className="card-body d-flex flex-column gap-2">
 						<InputBox
