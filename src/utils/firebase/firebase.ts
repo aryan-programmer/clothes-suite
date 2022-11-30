@@ -4,11 +4,11 @@ import {
 	getAuth,
 	getRedirectResult as getRedirectResult_,
 	GoogleAuthProvider,
+	signInWithEmailAndPassword as signInWithEmailAndPassword_,
 	signInWithPopup,
 	signInWithRedirect,
 	User,
-	UserCredential,
-	signInWithEmailAndPassword as signInWithEmailAndPassword_
+	UserCredential
 } from 'firebase/auth';
 import {doc, DocumentReference, getDoc, getFirestore, setDoc} from 'firebase/firestore';
 import nn from '../../lib/functions/nn';

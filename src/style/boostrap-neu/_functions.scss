@@ -6,17 +6,17 @@
 	@return $number;
 }
 
-@function box-shadow-gen($m:1){
+@function box-shadow-gen($m:1) {
 	@return 3px *$m 3px*$m 6px*$m var(--light-bg-dark-shadow), -3px*$m -3px*$m 6px*$m var(--light-bg-light-shadow);
 }
 
-@function box-shadow-inset-gen($m:1){
+@function box-shadow-inset-gen($m:1) {
 	@return inset 3px*$m 3px*$m 6px*$m var(--light-bg-dark-shadow), inset -3px*$m -3px*$m 6px*$m var(--light-bg-light-shadow);
 }
 
-@mixin shadows-from-color($main-value){
+@mixin shadows-from-color($main-value) {
 	--bg-avg-value: #{red($main-value)}, #{green($main-value)}, #{blue($main-value)};
-	--light-bg-dark-shadow: #{hsla(hue($main-value),60%,77%)};//,80%,77%)};
+	--light-bg-dark-shadow: #{hsla(hue($main-value),60%,77%)}; //,80%,77%)};
 	--light-bg-light-shadow: #{hsla(hue($main-value),70%,93%)};
 	//--v: hsl(225, 39%, 85%);
 }

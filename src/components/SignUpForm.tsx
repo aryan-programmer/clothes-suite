@@ -1,15 +1,11 @@
 import React, {ChangeEvent, FormEvent} from "react";
 import Modal from "react-bootstrap/esm/Modal";
+import nn from "../lib/functions/nn";
+import {APPLICATION_NAME} from "../utils/consts";
+import {createUserDocument, FirebaseError, signUpWithEmailAndPassword} from "../utils/firebase/firebase";
+import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
 import Btn from "./Btn";
 import InputBox from "./InputBox";
-import {APPLICATION_NAME} from "../utils/consts";
-import {
-	createUserDocument,
-	FirebaseError,
-	signUpWithEmailAndPassword
-} from "../utils/firebase/firebase";
-import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
-import nn from "../lib/functions/nn";
 
 export type SignUpProps_T = {};
 export type SignUpState_T = {
@@ -96,7 +92,6 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 							required
 							name="name"
 							label="Name"
-							value={this.state.name}
 							onChange={this.onInputBoxChange}
 						/>
 						<InputBox
@@ -104,7 +99,6 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 							required
 							name="email"
 							label="Email"
-							value={this.state.email}
 							onChange={this.onInputBoxChange}
 						/>
 						<InputBox
@@ -112,7 +106,6 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 							required
 							name="password"
 							label="Password"
-							value={this.state.password}
 							onChange={this.onInputBoxChange}
 						/>
 						<InputBox
@@ -120,7 +113,6 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 							required
 							name="rePassword"
 							label="Confirm Password"
-							value={this.state.rePassword}
 							onChange={this.onInputBoxChange}
 						/>
 					</div>
@@ -142,9 +134,9 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 					<Modal.Header closeButton className="pb-0">
 						<Modal.Title><h3 className="mb-0">{APPLICATION_NAME} - Registration Form</h3></Modal.Title>
 					</Modal.Header>
-					<hr/>
+					<hr />
 					<Modal.Body>{this.state.alertMessage}</Modal.Body>
-					<hr/>
+					<hr />
 					<Modal.Footer className="p-2 pt-0">
 						<Btn
 							borderColor="quaternary"

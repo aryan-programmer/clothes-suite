@@ -29,6 +29,7 @@
 
 @import "../add-bg-noise";
 @import "./bs-gradients";
+@import "../web_gradients";
 @import "./elevation";
 
 @each $k, $i in $border-widths {

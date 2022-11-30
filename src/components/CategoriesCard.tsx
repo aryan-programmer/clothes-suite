@@ -9,17 +9,20 @@ export type CategoriesCardProps_T = {
 
 export default function CategoriesCard ({cat}: CategoriesCardProps_T) {
 	return (
-		<div className="card el-in-1 rounded-4 bg-gradient--perfect-white" style={{
+		<div
+			className="card el-in-1 rounded-4 bg-gradient--perfect-white" style={{
 			marginTop: spacing(18)
 		}}>
-			<div className="card-img-top w-auto" style={{
+			<div
+				className="card-img-top w-auto" style={{
 				maxWidth: "100%",
 				marginTop: spacing(-15),
 				marginBottom: spacing(3),
 				marginLeft: "auto",
 				marginRight: "auto",
 			}}>
-				<div className="btn btn-el-2 btn-bordered-primary bg-light default-shadows rounded-5" style={{
+				<div
+					className="btn btn-el-2 btn-bordered-primary bg-light default-shadows rounded-5" style={{
 					marginLeft: spacing(3),
 					marginRight: spacing(3),
 					padding: spacing(3),

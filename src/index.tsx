@@ -1,4 +1,5 @@
 import {library} from '@fortawesome/fontawesome-svg-core';
+import {faGoogle} from "@fortawesome/free-brands-svg-icons"
 import {
 	faBars,
 	faBoxesStacked,
@@ -8,11 +9,13 @@ import {
 	faHomeLg,
 	faMale,
 	faShoePrints,
-	faShoppingCart, faSignIn, faStore,
-	faTShirt, faUserPlus,
+	faShoppingCart,
+	faSignIn,
+	faStore,
+	faTShirt,
+	faUserPlus,
 	faVest,
 } from '@fortawesome/free-solid-svg-icons';
-import {faGoogle} from "@fortawesome/free-brands-svg-icons"
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";

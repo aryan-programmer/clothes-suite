@@ -1,6 +1,6 @@
 @import "../../../node_modules/bootstrap/scss/nav";
 
-.nav-pills .nav-link.active{
+.nav-pills .nav-link.active {
 	box-shadow: box-shadow-inset-gen();
 	@include shadows-from-color($nav-pills-link-active-bg);
 }

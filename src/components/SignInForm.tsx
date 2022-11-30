@@ -86,7 +86,9 @@ export default class SignInForm extends React.Component<SignInProps_T, SignInSta
 	override render () {
 		return (
 			<>
-				<form className="card bg-gradient--tempting-azure rounded-4 mb-3" onSubmit={this.onSubmit}>
+				<form
+					className="card bg-gradient--tempting-azure rounded-4 mb-3 shadows-bg-light-primary"
+					onSubmit={this.onSubmit}>
 					<div className="card-header add-bg-noise rounded-4 rounded-bottom-0">
 						<h2 className="mb-0">Already have an account? Sign in here.</h2>
 					</div>
@@ -96,8 +98,6 @@ export default class SignInForm extends React.Component<SignInProps_T, SignInSta
 							required
 							name="email"
 							label="Email"
-							value={this.state.email}
-							border="tertiary"
 							onChange={this.onInputBoxChange}
 						/>
 						<InputBox
@@ -105,19 +105,17 @@ export default class SignInForm extends React.Component<SignInProps_T, SignInSta
 							required
 							name="password"
 							label="Password"
-							border="tertiary"
-							value={this.state.password}
 							onChange={this.onInputBoxChange}
 						/>
 					</div>
 					<div className="card-footer rounded-4 rounded-top-0 d-flex gap-3">
 						<Btn
 							extension="lg"
-							borderColor="tertiary"
+							borderColor="primary"
 							className=""
 							type="submit">Sign In
 						</Btn>
-						<Btn extension="lg" className="" borderColor="tertiary" onClick={signInWithGoogleRedirect}>
+						<Btn extension="lg" className="" borderColor="primary" onClick={signInWithGoogleRedirect}>
 							<FontAwesomeIcon icon={["fab", "google"]} /> Sign in with Google
 						</Btn>
 					</div>

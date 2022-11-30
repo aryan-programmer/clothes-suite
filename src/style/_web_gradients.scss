@@ -79,9 +79,9 @@
 //
 // 012 Tempting Azure
 @include define-gradient(
-	gradient--tempting-azure,
-	#8ae7d5,
-	(linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)),
+		gradient--tempting-azure,
+		#8ae7d5,
+			(linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)),
 );
 //
 //// 013 Heavy Rain
@@ -744,9 +744,9 @@
 //
 // 107 Confident Cloud
 @include define-gradient(
-	gradient--confident-cloud,
-	#e7deeb,
-	(linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%)),
+		gradient--confident-cloud,
+		#e7deeb,
+			(linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%)),
 );
 //
 //// 108 Le Cocktail
@@ -1122,16 +1122,16 @@
 //
 // 161 Salt Mountain
 @include define-gradient(
-	gradient--salt-mountain,
-	#ecffff,
-	(linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)),
+		gradient--salt-mountain,
+		#ecffff,
+			(linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)),
 );
 //
 // 162 Perfect White
 @include define-gradient(
-	gradient--perfect-white,
-	#f1f2f8,
-	(linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)),
+		gradient--perfect-white,
+		#f1f2f8,
+			(linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)),
 );
 //
 //// 163 Fresh Oasis
