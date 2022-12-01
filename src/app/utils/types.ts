@@ -1,10 +1,5 @@
 import {IconName} from "@fortawesome/fontawesome-common-types";
-
-export type Optional<T> = T | null | undefined;
-export type Null<T> = T | null;
-export type Undefined<T> = T | undefined;
-export type Object = { [key: string | symbol | number]: Object | any };
-export type PromiseOrT<T> = Promise<T> | T;
+import {Optional} from "../../lib/types";
 
 export type Category = {
 	id: number;

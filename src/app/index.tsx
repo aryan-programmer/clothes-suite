@@ -20,10 +20,18 @@ import {
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
+import {DialogProvider} from "../lib/dialogs/DialogContext";
 import reportWebVitals from '../reportWebVitals';
 import '../style/style.scss';
 import App from './App';
+import {
+	alertDefaultProps,
+	AlertPropsContext,
+	confirmDefaultProps,
+	ConfirmPropsContext
+} from "../lib/dialogs/basic-dialogs/DialogBasicProps.context";
 import {UserContextProvider} from "./context/user.context";
+import {APPLICATION_NAME} from './utils/consts';
 
 library.add(
 	faHatCowboySide,
@@ -56,9 +64,15 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<UserContextProvider>
-				<App />
-			</UserContextProvider>
+			<AlertPropsContext.Provider value={{...alertDefaultProps, title: APPLICATION_NAME}}>
+				<ConfirmPropsContext.Provider value={{...confirmDefaultProps, title: APPLICATION_NAME}}>
+					<DialogProvider>
+						<UserContextProvider>
+							<App />
+						</UserContextProvider>
+					</DialogProvider>
+				</ConfirmPropsContext.Provider>
+			</AlertPropsContext.Provider>
 		</BrowserRouter>
 	</React.StrictMode>
 );

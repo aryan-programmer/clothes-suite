@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -14,10 +14,11 @@ export default function NavBarWrapper (props: NavBarProps_T) {
 	const [show, setShow] = useState(false);
 	const history         = useLocation()
 
-	const handleClose = () => setShow(false);
-	const handleShow  = () => setShow(true);
+	const handleClose = useCallback(() => setShow(false), []);
+	const handleShow  = useCallback(() => setShow(true), []);
 
-	useEffect(handleClose, [history])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(handleClose, [history]);
 
 	return (
 		<div className="row-30 vw-100 justify-content-end">
@@ -48,14 +49,14 @@ export default function NavBarWrapper (props: NavBarProps_T) {
 						</Btn>
 					</div>
 					<Navbar className="pt-0" expand={true}>
-						<SideNav />
+						<SideNav handleClose={handleClose} />
 					</Navbar>
 				</Offcanvas.Body>
 			</Offcanvas>
 			<div
 				className="row-30 sidenav-sizing align-self-stretch align-items-stretch fixed-top scroll-y shadow-lg">
 				<Navbar bg="gradient--salt-mountain" className="el-1 align-items-start p-1">
-					<SideNav />
+					<SideNav handleClose={handleClose} />
 				</Navbar>
 			</div>
 			<div className="row-30 content-sizing d-flex justify-content-center">

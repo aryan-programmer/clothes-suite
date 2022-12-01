@@ -1,19 +1,19 @@
 import {User} from "firebase/auth";
 import React, {ComponentType, createContext, useEffect, useState} from "react";
+import {Optional} from "../../lib/types";
 import {withContext} from "../../lib/withContext";
 import {createUserDocumentOrOverrideData, onAuthStateChanged} from "../utils/firebase/firebase";
-import {Optional} from "../utils/types";
 
 export type UserContextProps_T = {
 	children: any,
 }
 
-export type UserContext_T = {
+export type UserContextData_T = {
 	user: Optional<User>,
 	setUser (value: React.SetStateAction<Optional<User>>): void;
 };
 
-export const UserContext = createContext<UserContext_T>({
+export const UserContext = createContext<UserContextData_T>({
 	user: null,
 	setUser (value: React.SetStateAction<Optional<User>>) {
 	}
@@ -35,7 +35,7 @@ export function UserContextProvider (props: UserContextProps_T) {
 }
 
 export type HasUserContext_Props_T = {
-	userContext: UserContext_T,
+	userContext: UserContextData_T,
 }
 
 export function withUserContext<TProps extends Record<string, any>> (WrappedComponent: ComponentType<TProps>) {

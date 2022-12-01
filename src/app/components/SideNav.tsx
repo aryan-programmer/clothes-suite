@@ -4,12 +4,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {Link} from "react-router-dom";
+import {IDialogOpener, withDialog} from "../../lib/dialogs/DialogContext";
 import {HasUserContext_Props_T, withUserContext} from "../context/user.context";
 import {signOut} from "../utils/firebase/firebase";
+import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
 import {NavLink} from "./NavLink";
 
-export type SideNavOwnProps_T = {};
-export type SideNavProps_T = SideNavOwnProps_T & HasUserContext_Props_T;
+export type SideNavOwnProps_T = {
+	handleClose (): void;
+};
+export type SideNavProps_T = SideNavOwnProps_T & HasUserContext_Props_T & IDialogOpener;
 export type SideNavState_T = {};
 
 class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
@@ -18,6 +22,14 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 
 		this.state = {};
 	}
+
+	signOut = async () => {
+		this.props.handleClose();
+		await signOut();
+		await this.props.openDialog(Alert, {
+			body: "Signed out successfully"
+		});
+	};
 
 	override render () {
 		return (
@@ -54,7 +66,7 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 						) /* else */ : (
 							<Nav.Link
 								className="nav-link-with-icon"
-								onClick={signOut}>
+								onClick={this.signOut}>
 								<FontAwesomeIcon icon="sign-out" />
 								Sign out
 							</Nav.Link>
@@ -73,4 +85,4 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 	}
 }
 
-export default withUserContext(SideNav);
+export default withDialog(withUserContext(SideNav));
