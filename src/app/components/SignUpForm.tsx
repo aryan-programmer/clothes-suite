@@ -2,7 +2,7 @@ import React, {ChangeEvent, FormEvent} from "react";
 import Modal from "react-bootstrap/esm/Modal";
 import nn from "../../lib/functions/nn";
 import {APPLICATION_NAME} from "../utils/consts";
-import {createUserDocument, FirebaseError, signUpWithEmailAndPassword} from "../utils/firebase/firebase";
+import {createUserDocumentOrOverrideData, FirebaseError, signUpWithEmailAndPassword} from "../utils/firebase/firebase";
 import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
 import Btn from "./common/Btn";
 import InputBox from "./common/InputBox";
@@ -18,7 +18,7 @@ export type SignUpState_T = {
 	alertBg: string,
 };
 
-export default class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
+class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 	constructor (props: SignUpProps_T) {
 		super(props);
 
@@ -46,7 +46,7 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 		}
 		try {
 			const res = nn(await signUpWithEmailAndPassword(email, password));
-			const doc = await createUserDocument(res.user, {displayName: name});
+			const doc = await createUserDocumentOrOverrideData(res.user, {displayName: name});
 			this.setState({
 				alertMessage: "Signed up successfully",
 				alertVisible: true,
@@ -150,3 +150,5 @@ export default class SignUpForm extends React.Component<SignUpProps_T, SignUpSta
 		);
 	}
 }
+
+export default SignUpForm;

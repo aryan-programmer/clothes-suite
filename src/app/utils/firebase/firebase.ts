@@ -1,12 +1,18 @@
+import {NextOrObserver} from "@firebase/auth";
+import {Unsubscribe} from "@firebase/util";
 import {initializeApp} from 'firebase/app';
 import {
+	CompleteFn,
 	createUserWithEmailAndPassword,
+	ErrorFn,
 	getAuth,
 	getRedirectResult as getRedirectResult_,
 	GoogleAuthProvider,
+	onAuthStateChanged as onAuthStateChanged_,
 	signInWithEmailAndPassword as signInWithEmailAndPassword_,
 	signInWithPopup,
 	signInWithRedirect,
+	signOut as signOut_,
 	User,
 	UserCredential
 } from 'firebase/auth';
@@ -53,10 +59,18 @@ export async function signInWithEmailAndPassword (email: string, password: strin
 	return await signInWithEmailAndPassword_(auth, email, password);
 }
 
-export async function createUserDocument (user: User, overridingData?: Partial<UserData>) {
+export function signOut () {
+	return signOut_(auth);
+}
+
+export function onAuthStateChanged (nextOrObserver: NextOrObserver<User>, error?: ErrorFn, completed?: CompleteFn): Unsubscribe {
+	return onAuthStateChanged_(auth, nextOrObserver, error, completed);
+}
+
+export async function createUserDocumentOrOverrideData (user: User, overridingData?: Partial<UserData>) {
 	const userDoc  = doc(db, 'users', user.uid) as DocumentReference<UserData>;
 	const userSnap = await getDoc(userDoc);
-	if (!userSnap.exists()) {
+	if (!userSnap.exists() || overridingData != null) {
 		const {email, displayName, phoneNumber, photoURL} = user;
 		const createdAt                                   = new Date();
 		try {

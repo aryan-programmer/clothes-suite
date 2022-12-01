@@ -1,61 +1,16 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {useLocation} from "react-router";
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import Btn from "../components/common/Btn";
-import {NavLink} from "../components/NavLink";
+import SideNav from "../components/SideNav";
 
 export type NavBarProps_T = {};
 
-function SideNav () {
-	return (
-		<Container className="flex-column h-100">
-			<Navbar.Brand as={Link} className="h4 text-wrap text-center fw-bold mx-1" to="/">
-				<FontAwesomeIcon icon="boxes-stacked" /><br />Clothes suite
-			</Navbar.Brand>
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-1">
-				<Nav className="flex-column w-100 gap-1" variant="pills">
-					<Nav.Link
-						className="nav-link-with-icon"
-						activeClassName="active"
-						as={NavLink}
-						to="/">
-						<FontAwesomeIcon icon="home-lg" />
-						Home
-					</Nav.Link>
-					<Nav.Link
-						className="nav-link-with-icon"
-						activeClassName="active"
-						as={NavLink} to="/shop">
-						<FontAwesomeIcon icon="store" />
-						Shop
-					</Nav.Link>
-					<Nav.Link
-						className="nav-link-with-icon"
-						activeClassName="active"
-						as={NavLink} to="/auth">
-						<FontAwesomeIcon icon="sign-in" />
-						Sign in
-					</Nav.Link>
-					<Nav.Link
-						className="nav-link-with-icon"
-						activeClassName="active"
-						as={NavLink} to="/cart">
-						<FontAwesomeIcon icon="cart-shopping" />
-						Cart
-					</Nav.Link>
-				</Nav>
-			</Navbar.Collapse>
-		</Container>
-	);
-}
-
-export default function NavBar (props: NavBarProps_T) {
+export default function NavBarWrapper (props: NavBarProps_T) {
 	const [show, setShow] = useState(false);
 	const history         = useLocation()
 

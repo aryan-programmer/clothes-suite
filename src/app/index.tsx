@@ -11,6 +11,7 @@ import {
 	faShoePrints,
 	faShoppingCart,
 	faSignIn,
+	faSignOut,
 	faStore,
 	faTShirt,
 	faUserPlus,
@@ -22,6 +23,7 @@ import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from '../reportWebVitals';
 import '../style/style.scss';
 import App from './App';
+import {UserContextProvider} from "./context/user.context";
 
 library.add(
 	faHatCowboySide,
@@ -35,6 +37,7 @@ library.add(
 	faBars,
 	faClose,
 	faSignIn,
+	faSignOut,
 	faShoppingCart,
 	faTShirt,
 	faUserPlus,
@@ -53,7 +56,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<UserContextProvider>
+				<App />
+			</UserContextProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 );

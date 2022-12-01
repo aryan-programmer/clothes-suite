@@ -4,7 +4,7 @@ import {overrideThemeVariables} from 'ui-neumorphism';
 import variables from "../style/material-pallete.module.scss";
 import AuthenticationPage from "./pages/AuthenticationPage";
 import HomePage from "./pages/HomePage";
-import NavBar from "./pages/NavBar";
+import NavBarWrapper from "./pages/NavBarWrapper";
 
 type AppProps_T = {};
 
@@ -18,7 +18,7 @@ function App (props: AppProps_T) {
 	}, []);
 	return (
 		<Routes>
-			<Route path="/" element={<NavBar />}>
+			<Route path="/" element={<NavBarWrapper />}>
 				<Route index element={<HomePage />} />
 				<Route path="/shop" element={<div>Shop</div>}></Route>
 				<Route path="/cart" element={<div>Cart</div>}></Route>

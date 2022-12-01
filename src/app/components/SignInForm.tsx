@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/esm/Modal";
 import nn from "../../lib/functions/nn";
 import {APPLICATION_NAME} from "../utils/consts";
 import {
-	createUserDocument,
+	createUserDocumentOrOverrideData,
 	FirebaseError,
 	getRedirectResult,
 	signInWithEmailAndPassword,
@@ -23,7 +23,7 @@ export type SignInState_T = {
 	alertBg: string,
 };
 
-export default class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
+class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 	constructor (props: SignInProps_T) {
 		super(props);
 
@@ -39,7 +39,7 @@ export default class SignInForm extends React.Component<SignInProps_T, SignInSta
 	async componentDidMount () {
 		const credential = await getRedirectResult();
 		if (credential == null) return;
-		const doc = await createUserDocument(credential.user);
+		const doc = await createUserDocumentOrOverrideData(credential.user);
 		this.setState({
 			alertMessage: "Signed in successfully",
 			alertVisible: true,
@@ -144,3 +144,5 @@ export default class SignInForm extends React.Component<SignInProps_T, SignInSta
 		);
 	}
 }
+
+export default SignInForm;
