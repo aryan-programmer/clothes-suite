@@ -1,21 +1,30 @@
-import React, {ComponentType, createContext, useCallback, useState} from "react";
+import React, {ComponentType, createContext, useCallback, useMemo, useState} from "react";
 import {withContext} from "../../lib/withContext";
-import {CartItem} from "../utils/types";
+import {CartItem, Product} from "../utils/types";
 
 export type CartContextProps_T = {
 	children: any,
 }
 
 export type CartContextData_T = {
+	cartItems: number,
 	cart: CartItem[];
-	addItem (item: CartItem): void;
+	addItem (item: Product): void;
 };
 
-function addItemToCart (cartItems: CartItem[], item: CartItem): CartItem[] {
-	return cartItems;
+function addItemToCart (cartItems: CartItem[], item: Product): CartItem[] {
+	const idx = cartItems.findIndex(value => value.id === item.id);
+	if (idx === -1)
+		return [...cartItems, {...item, quantity: 1}];
+	else {
+		const res = [...cartItems];
+		res[idx]  = {...res[idx], quantity: res[idx].quantity + 1};
+		return res;
+	}
 }
 
 export const CartContext = createContext<CartContextData_T>({
+	cartItems: 0,
 	cart: [],
 	addItem (item: CartItem) {
 	}
@@ -24,9 +33,13 @@ export const CartContext = createContext<CartContextData_T>({
 export function CartContextProvider (props: CartContextProps_T) {
 	const [cart, setCart] = useState<CartItem[]>([]);
 
-	const addItem = useCallback((item: CartItem) => setCart(cart => addItemToCart(cart, item)), []);
+	const cartItems = useMemo(() => {
+		return cart.reduce((p, c) => p + c.quantity, 0);
+	}, [cart]);
 
-	const value: CartContextData_T = {cart: cart, addItem};
+	const addItem = useCallback((item: CartItem) => setCart(addItemToCart(cart, item)), [cart]);
+
+	const value: CartContextData_T = {cart, cartItems, addItem};
 	return (<CartContext.Provider value={value}>
 		{props.children}
 	</CartContext.Provider>)

@@ -1,5 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
+import {CartContext} from "../../context/cart.context";
 import {fac} from "../../utils/consts";
 import {Product} from "../../utils/types";
 
@@ -11,6 +12,8 @@ export default function ProductCard (props: ProductCardProps_T) {
 	const {product}                     = props;
 	const [imgAvgColor, setImgAvgColor] = useState("#000");
 	const [textColor, setTextColor]     = useState("#fff");
+	const {cart, addItem} = useContext(CartContext);
+	const addCurrentItem = useCallback(()=>addItem(product), [addItem, product]);
 	useEffect(() => {
 		fac.getColorAsync(product.imageUrl, {top: 45}).then(value => {
 			setImgAvgColor(value.hex);
@@ -20,7 +23,7 @@ export default function ProductCard (props: ProductCardProps_T) {
 	return (
 		<div className="hex">
 			<div className="hex-rounded">
-				<div className="hex-card hex-button bg-light justify-content-align-items-center">
+				<div className="hex-card hex-button bg-light justify-content-align-items-center" onClick={addCurrentItem}>
 					<div className="hex-image">
 						<img className="w-100 h-100" src={product.imageUrl} crossOrigin="anonymous" />
 					</div>

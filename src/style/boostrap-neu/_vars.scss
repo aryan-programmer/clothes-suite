@@ -67,7 +67,7 @@ $h3-font-size: $font-size-base * 1.5;
 $h4-font-size: $font-size-base * 1.25;
 $h5-font-size: $font-size-base * 1;
 $h6-font-size: $font-size-base * 0.95;
-$font-size-sm: $font-size-base * .8;
+$font-size-sm: $font-size-base * .875;
 $font-size-lg: $font-size-base * 1.25;
 $code-font-size: 95%;
 $font-family-sans-serif: 'Josefin Sans', sans-serif;
@@ -87,6 +87,7 @@ $gradient: inset 0.2rem 0.2rem 1rem hsl(214, 100%, 100%, 77%), inset -0.2rem -0.
 $box-shadow: box-shadow-gen();
 $box-shadow-sm: box-shadow-gen(0.5);
 $box-shadow-lg: box-shadow-gen(2);
+$box-shadow-inset-sm: box-shadow-inset-gen(0.5);
 $box-shadow-inset: box-shadow-inset-gen(1);
 $border-width: 0px;
 $hr-border-width: 2px;
@@ -102,6 +103,8 @@ $popover-header-bg: transparent;
 $popover-box-shadow: $box-shadow-inset;
 $popover-arrow-width: 2rem;
 $popover-arrow-height: 1rem;
+$popover-max-width: 300px;
+$popover-max-height: 80vh;
 
 $modal-backdrop-bg: $light;
 $modal-backdrop-opacity: .9;
@@ -120,6 +123,12 @@ $nav-link-padding-y: 0.5rem;
 $navbar-nav-link-padding-x: 1rem;
 $nav-link-padding-x: 1rem;
 $nav-pills-link-active-bg: $solarized;
+
+$list-group-bg: transparent;
+$list-group-border-color: rgba($dark, 0.125);
+$list-group-border-width: 1px;
+//$list-group-hover-bg: transparent;
+//$list-group-active-bg: transparent;
 
 // Grid has by default gutter width of 1.5rem set it to 0 by default
 $grid-gutter-width: 0px;

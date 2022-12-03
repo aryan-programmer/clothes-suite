@@ -1,10 +1,12 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import Nav from "react-bootstrap/Nav";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import {useLocation} from "react-router";
 import {Link, useMatch} from "react-router-dom";
+import {CartContext} from "../../context/cart.context";
+import {clamp99} from "../../utils/consts";
 import {smallestSizeSideNav} from "../../utils/css-vars";
 import {Media} from "../../utils/media-breakpoints";
 import CartComponent from "./CartComponent";
@@ -14,12 +16,13 @@ export type CartNavLinkProps_T = {};
 type RenderCartNavProps_T = {};
 
 function CartNavContent (props: RenderCartNavProps_T) {
+	const {cartItems} = useContext(CartContext);
 	return (
 		<>
 			<div className="cart-icon">
 				<FontAwesomeIcon icon="cart-shopping" className="h4-imp mb-0" />
 				<span className="cart-icons__items-badge bg-primary">
-					99+
+					{clamp99(cartItems)}
 				</span>
 			</div>
 			Cart
@@ -60,12 +63,12 @@ export default function CartNavLink (props: CartNavLinkProps_T) {
 				<OverlayTrigger
 					show={popoverVisible}
 					onToggle={onToggle}
-					trigger="focus"
+					trigger="click"
 					placement="right"
 					overlay={
-						<Popover>
+						<Popover className="">
 							<Popover.Body>
-								<CartComponent showRedirect />
+								<CartComponent isSmall />
 							</Popover.Body>
 						</Popover>
 					}

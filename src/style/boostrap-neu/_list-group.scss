@@ -1,0 +1,40 @@
+@import "../../../node_modules/bootstrap/scss/list-group";
+
+.list-group {
+	box-shadow: $box-shadow;
+	padding: $spacer-1 * 2;
+}
+
+.list-group-item-action {
+	@include transition($btn-transition);
+
+	&:focus:not(:hover) {
+		background-color: unset;
+	}
+
+	&:hover {
+		@include shadows-from-color($list-group-hover-bg);
+		box-shadow: $box-shadow-inset-sm;
+	}
+
+	&:active {
+		@include shadows-from-color($list-group-action-active-bg);
+		box-shadow: $box-shadow-inset;
+		@extend .el-in-1;
+	}
+}
+
+
+.list-group-item {
+	&.disabled,
+	&:disabled {
+		@include shadows-from-color($list-group-disabled-bg);
+	}
+
+	&.active {
+		@include shadows-from-color($list-group-active-bg);
+		@extend .el-in-1;
+	}
+}
+
+

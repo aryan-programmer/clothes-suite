@@ -1,3 +1,18 @@
+@import "../../../node_modules/bootstrap/scss/popover";
+
+.popover {
+	--#{$prefix}popover-max-height: #{$popover-max-height};
+}
+
+.popover-body {
+	max-height: var(--#{$prefix}popover-max-height);
+	@extend .scroll-y;
+}
+
 .popover-arrow {
 	--#{$prefix}popover-bg: #{darken($popover-bg, 15%)};
+}
+
+.popover-full-text {
+	--#{$prefix}popover-font-size: 1rem;
 }

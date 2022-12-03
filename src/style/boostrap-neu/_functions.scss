@@ -19,11 +19,11 @@
 @mixin shadows-from-color($main-value, $imp: false) {
 	@if $imp {
 		--bg-avg-value: #{red($main-value)}, #{green($main-value)}, #{blue($main-value)} !important;
-		--light-bg-dark-shadow: #{hsla(hue($main-value),60%,77%)} !important;
+		--light-bg-dark-shadow: #{hsla(hue($main-value),60%,65%)} !important;
 		--light-bg-light-shadow: #{hsla(hue($main-value),70%,93%)} !important;
 	} @else {
 		--bg-avg-value: #{red($main-value)}, #{green($main-value)}, #{blue($main-value)};
-		--light-bg-dark-shadow: #{hsla(hue($main-value),60%,77%)}; //,80%,77%)};
+		--light-bg-dark-shadow: #{hsla(hue($main-value),60%,65%)}; //,80%,77%)};
 		--light-bg-light-shadow: #{hsla(hue($main-value),70%,93%)};
 	}
 	//--v: hsl(225, 39%, 85%);

@@ -21,11 +21,11 @@
 @import "../../../node_modules/bootstrap/scss/forms/floating-labels";
 @import "../../../node_modules/bootstrap/scss/forms/input-group";
 @import "../../../node_modules/bootstrap/scss/placeholders";
+@import "../../../node_modules/bootstrap/scss/close";
 @import "./nav";
 @import "../../../node_modules/bootstrap/scss/navbar";
+@import "./list-group";
 @import "../../../node_modules/bootstrap/scss/offcanvas";
-@import "../../../node_modules/bootstrap/scss/close";
-@import "../../../node_modules/bootstrap/scss/popover";
 @import "./popovers";
 @import "../../../node_modules/bootstrap/scss/modal";
 @import "../../../node_modules/bootstrap/scss/badge";
@@ -90,6 +90,11 @@
 
 .font-xs {
 	@include font-size($font-size-sm*0.75);
+}
+
+.scroll-y {
+	overflow-y: scroll;
+	overflow-y: overlay;
 }
 
 .input-group-text:not(.bordered) {
