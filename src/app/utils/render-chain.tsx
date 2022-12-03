@@ -18,7 +18,7 @@ export class RenderChain {
 		let child: Optional<JSX.Element> = null;
 		for (let i = this.components.length - 1; i >= 0; --i) {
 			const [Comp, props] = this.components[i];
-			child = <Comp {...props}>{child}</Comp>;
+			child               = <Comp {...props}>{child}</Comp>;
 		}
 		return child;
 	}

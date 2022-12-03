@@ -1,18 +1,18 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {ChangeEvent, FormEvent} from "react";
-import {IDialogOpener, withDialog} from "../../lib/dialogs/DialogContext";
-import nn from "../../lib/functions/nn";
+import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
+import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import nn from "../../../lib/functions/nn";
 import {
 	createUserDocumentOrOverrideData,
 	FirebaseError,
 	getRedirectResult,
 	signInWithEmailAndPassword,
 	signInWithGoogleRedirect,
-} from "../utils/firebase/firebase";
-import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
-import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
-import Btn from "./common/Btn";
-import InputBox from "./common/InputBox";
+} from "../../utils/firebase/firebase";
+import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
+import Btn from "../common/Btn";
+import InputBox from "../common/InputBox";
 
 export type SignInProps_T = IDialogOpener & {};
 export type SignInState_T = {

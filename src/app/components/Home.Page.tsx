@@ -1,7 +1,7 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
-import CategoriesList from "../components/CategoriesList";
 import {Category} from "../utils/types";
+import CategoriesList from "./categories/CategoriesList";
 
 export type HomePageProps_T = {};
 

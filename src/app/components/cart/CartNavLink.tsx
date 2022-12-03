@@ -5,8 +5,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import {useLocation} from "react-router";
 import {Link, useMatch} from "react-router-dom";
-import {smallestSizeSideNav} from "../utils/css-vars";
-import {Media} from "../utils/media-breakpoints";
+import {smallestSizeSideNav} from "../../utils/css-vars";
+import {Media} from "../../utils/media-breakpoints";
 import CartComponent from "./CartComponent";
 
 export type CartNavLinkProps_T = {};

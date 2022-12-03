@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import {DialogComponent_Props_T} from "../DialogContext";
 import Btn from "../../../app/components/common/Btn";
+import {DialogComponent_Props_T} from "../DialogContext";
 import {CloseReason} from "./close-reason";
 import {AlertPropsContext, DialogBasicProps} from "./DialogBasicProps.context";
 

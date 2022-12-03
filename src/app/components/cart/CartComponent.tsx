@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import Btn from "./common/Btn";
+import Btn from "../common/Btn";
 
 export type CartComponentProps_T = {
 	showRedirect?: boolean

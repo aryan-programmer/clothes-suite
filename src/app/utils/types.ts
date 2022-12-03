@@ -14,6 +14,10 @@ export type Product = {
 	price: number;
 };
 
+export type CartItem = Product & {
+	quantity: number;
+};
+
 export type UserData = {
 	id: string;
 	email: string;
@@ -22,3 +26,9 @@ export type UserData = {
 	displayName: Optional<string>;
 	createdAt: Date;
 };
+
+declare module 'react' {
+	interface Attributes {
+		children?: any;
+	}
+}

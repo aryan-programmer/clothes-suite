@@ -20,7 +20,7 @@ export default function Btn<As extends React.ElementType = "button"> (props: Btn
 	if (extension != null) className += `btn-${extension} `;
 	if (borderColor != null) className += `btn-bordered-${borderColor} `;
 	if (newClasses != null) className += newClasses;
-	if(AsElem === "button"){
+	if (AsElem === "button") {
 		// @ts-ignore
 		others.type ??= "button";
 	}

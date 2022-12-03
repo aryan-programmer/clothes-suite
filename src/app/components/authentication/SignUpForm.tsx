@@ -1,12 +1,16 @@
 import React, {ChangeEvent, FormEvent} from "react";
-import {IDialogOpener, withDialog} from "../../lib/dialogs/DialogContext";
-import nn from "../../lib/functions/nn";
-import {Optional} from "../../lib/types";
-import {createUserDocumentOrOverrideData, FirebaseError, signUpWithEmailAndPassword} from "../utils/firebase/firebase";
-import {FirebaseAuthErrorCodes} from "../utils/firebase/firebaseAuthErrorCodes";
-import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
-import Btn from "./common/Btn";
-import InputBox from "./common/InputBox";
+import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
+import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import nn from "../../../lib/functions/nn";
+import {Optional} from "../../../lib/types";
+import {
+	createUserDocumentOrOverrideData,
+	FirebaseError,
+	signUpWithEmailAndPassword
+} from "../../utils/firebase/firebase";
+import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
+import Btn from "../common/Btn";
+import InputBox from "../common/InputBox";
 
 export type SignUpProps_T = IDialogOpener & {};
 export type SignUpState_T = {

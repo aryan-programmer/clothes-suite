@@ -1,5 +1,5 @@
 import React from "react";
-import {Category} from "../utils/types";
+import {Category} from "../../utils/types";
 import CategoriesCard from "./CategoriesCard";
 
 export type CategoriesListProps_T = {

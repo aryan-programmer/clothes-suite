@@ -6,12 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {useLocation} from "react-router";
 import {Outlet} from "react-router-dom";
-import CartNavLink from "../components/CartNavLink";
-import Btn from "../components/common/Btn";
-import {NavLink} from "../components/NavLink";
-import SideNav from "../components/SideNav";
-import {smallestSizeSideNav} from "../utils/css-vars";
-import {Media} from "../utils/media-breakpoints";
+import {smallestSizeSideNav} from "../../utils/css-vars";
+import {Media} from "../../utils/media-breakpoints";
+import CartNavLink from "../cart/CartNavLink";
+import Btn from "../common/Btn";
+import SideNav from "./SideNav";
 
 export type NavBarProps_T = {};
 
@@ -47,7 +46,7 @@ export default function NavBarWrapper (props: NavBarProps_T) {
 								<FontAwesomeIcon icon="bars"></FontAwesomeIcon>
 							</Btn>
 							<a className="navbar-brand h4-imp mb-0 text-wrap fw-bold mx-1">
-								<FontAwesomeIcon icon="boxes-stacked" className="me-2"/>Clothes suite
+								<FontAwesomeIcon icon="boxes-stacked" className="me-2" />Clothes suite
 							</a>
 						</div>
 						<Nav className="" variant="pills">

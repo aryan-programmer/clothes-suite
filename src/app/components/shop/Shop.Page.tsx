@@ -1,9 +1,6 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
-import {Null} from "../../lib/types";
-import Btn from "../components/common/Btn";
-import ProductCard from "../components/ProductCard";
-import {ProductsContext} from "../context/products.context";
-import {fac} from "../utils/consts";
+import React, {useContext} from "react";
+import {ProductsContext} from "../../context/products.context";
+import ProductCard from "./ProductCard";
 
 export type ShopPageProps_T = {};
 

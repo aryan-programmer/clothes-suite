@@ -1,18 +1,15 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import Container from "react-bootstrap/Container";
-import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
-import Popover from "react-bootstrap/esm/Popover";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import {Link, NavLink as BaseNavLink} from "react-router-dom";
-import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
-import {IDialogOpener, withDialog} from "../../lib/dialogs/DialogContext";
-import {HasUserContext_Props_T, withUserContext} from "../context/user.context";
-import {signOut} from "../utils/firebase/firebase";
-import CartComponent from "./CartComponent";
-import CartNavLink from "./CartNavLink";
-import {NavLink} from "./NavLink";
+import {Link} from "react-router-dom";
+import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
+import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import {HasUserContext_Props_T, withUserContext} from "../../context/user.context";
+import {signOut} from "../../utils/firebase/firebase";
+import CartNavLink from "../cart/CartNavLink";
+import {NavLink} from "../common/NavLink";
 
 export type SideNavOwnProps_T = {
 	handleClose (): void;

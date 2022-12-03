@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
-import {spacing} from "../utils/spacing";
-import {Category} from "../utils/types";
+import {spacing} from "../../utils/spacing";
+import {Category} from "../../utils/types";
 
 export type CategoriesCardProps_T = {
 	cat: Category

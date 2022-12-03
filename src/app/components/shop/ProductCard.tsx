@@ -1,15 +1,14 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useEffect, useRef, useState} from "react";
-import {Null} from "../../lib/types";
-import {fac} from "../utils/consts";
-import {Product} from "../utils/types";
+import React, {useEffect, useState} from "react";
+import {fac} from "../../utils/consts";
+import {Product} from "../../utils/types";
 
 export type ProductCardProps_T = {
 	product: Product,
 };
 
 export default function ProductCard (props: ProductCardProps_T) {
-	const {product} = props;
+	const {product}                     = props;
 	const [imgAvgColor, setImgAvgColor] = useState("#000");
 	const [textColor, setTextColor]     = useState("#fff");
 	useEffect(() => {
