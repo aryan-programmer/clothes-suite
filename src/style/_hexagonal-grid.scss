@@ -1,0 +1,95 @@
+.hex-grid-parent {
+	display: flex;
+	--s: 230px; /* size  */
+	--m: 12px; /* margin */
+	--f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
+	@include media-breakpoint-down(sm) {
+		--s: 36vw; /* size  */
+		--m: 5px; /* margin */
+	}
+}
+
+.hex-grid {
+	font-size: 0; /*disable white space between inline block element */
+
+	&::before {
+		content: "";
+		width: calc(var(--s) / 2 + var(--m));
+		float: left;
+		height: 120%;
+		shape-outside: repeating-linear-gradient(#0000 0 calc(var(--f) - 3px), #000 0 var(--f));
+	}
+}
+
+.hex {
+	$m: 1.5;
+	position: relative;
+	width: var(--s);
+	margin: var(--m);
+	height: calc(var(--s) * 1.1547);
+	display: inline-block;
+	font-size: initial;
+	margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+	filter: drop-shadow(-3px*$m -3px*$m 6px*$m var(--light-bg-light-shadow)) drop-shadow(3px *$m 3px*$m 6px*$m var(--light-bg-dark-shadow));;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, filter .15s ease-in-out, transform .15s ease-in-out, width .15s ease-in-out, height .15s ease-in-out;
+
+	& .hex-rounded {
+		width: 100%;
+		height: 100%;
+		filter: url(#round);
+	}
+
+	& .hex-card {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+
+		& > .hex-image {
+			position: absolute;
+			width: 85%;
+			height: 85%;
+			clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+			transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, filter .15s ease-in-out, transform .15s ease-in-out, width .15s ease-in-out, height .15s ease-in-out;
+		}
+
+		& > .hex-content {
+			position: absolute;
+			width: var(--s);
+			height: calc(var(--s) * 1.1547 * 0.5);
+			top: calc(var(--s) * 1.1547 * 0.25);
+		}
+	}
+}
+
+.hex:has(.hex-button:hover) {
+	$m: 0.5;
+	filter: drop-shadow(-3px*$m -3px*$m 6px*$m var(--light-bg-light-shadow)) drop-shadow(3px *$m 3px*$m 6px*$m var(--light-bg-dark-shadow));;
+	//filter: none;
+}
+
+.hex:has(.hex-button:active) {
+	filter: none;
+}
+
+.hex-button {
+	&:hover {
+		cursor: pointer;
+
+		.hex-image {
+			//width: 90% !important;
+			//height: 90% !important;
+		}
+	}
+
+	&:active {
+		cursor: pointer;
+		//filter: none;
+
+		.hex-image {
+			$m: 1;
+			width: 100% !important;
+			height: 100% !important;
+		}
+	}
+}

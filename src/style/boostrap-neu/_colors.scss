@@ -1,14 +1,14 @@
 @use "sass:map" as map;
-@use '../../../node_modules/@material/theme/index' as mat;
+//@use '../../../node_modules/@material/theme/index' as mat;
 
-$primary: mat.$blue-300;
-$secondary: mat.$purple-a200;
-$tertiary: mat.$orange-300;
-$quaternary: mat.$pink-300;
-$success: mat.$green-300;
-$info: mat.$cyan-300;
-$warning: mat.$amber-300;
-$danger: mat.$red-300;
+//$primary: mat.$blue-300;
+//$secondary: mat.$purple-a200;
+//$tertiary: mat.$orange-300;
+//$quaternary: mat.$pink-300;
+//$success: mat.$green-300;
+//$info: mat.$cyan-300;
+//$warning: mat.$amber-300;
+//$danger: mat.$red-300;
 $light: #E4EBF5;
 $dark: #262626;
 $body-bg: $light;
@@ -22,14 +22,14 @@ $light-success: hsl(152, 91%, 88%);
 $light-info: hsl(187, 95%, 88%);
 $light-warning: hsl(49, 100%, 88%);
 $light-danger: hsl(2, 100%, 88%);
-//$primary: #96C1FA;
-//$secondary: #CB8AFA;
-//$tertiary: #fca98b;
-//$quaternary: #ffc0cb;
-//$success: #91FAC9;
-//$info: #8beffc;
-//$warning: #FFE575;
-//$danger: #FF938F;
+$primary: #96C1FA;
+$secondary: #CB8AFA;
+$tertiary: #fca98b;
+$quaternary: #ffc0cb;
+$success: #91FAC9;
+$info: #8beffc;
+$warning: #FFE575;
+$danger: #FF938F;
 
 $theme-colors: (
 	"primary": $primary,

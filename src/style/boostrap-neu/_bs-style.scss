@@ -25,9 +25,11 @@
 @import "../../../node_modules/bootstrap/scss/navbar";
 @import "../../../node_modules/bootstrap/scss/offcanvas";
 @import "../../../node_modules/bootstrap/scss/close";
+@import "../../../node_modules/bootstrap/scss/popover";
+@import "./popovers";
 @import "../../../node_modules/bootstrap/scss/modal";
+@import "../../../node_modules/bootstrap/scss/badge";
 
-@import "../add-bg-noise";
 @import "./bs-gradients";
 @import "../web_gradients";
 @import "./elevation";
@@ -49,7 +51,7 @@
 	}
 
 	.shadows-bg-#{$color} {
-		@include shadows-from-color($value);
+		@include shadows-from-color($value, true);
 	}
 }
 

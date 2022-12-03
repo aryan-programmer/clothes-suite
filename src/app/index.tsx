@@ -8,6 +8,7 @@ import {
 	faHatCowboySide,
 	faHomeLg,
 	faMale,
+	faPlus,
 	faShoePrints,
 	faShoppingCart,
 	faSignIn,
@@ -17,21 +18,25 @@ import {
 	faUserPlus,
 	faVest,
 } from '@fortawesome/free-solid-svg-icons';
+import {faCartPlus} from "@fortawesome/free-solid-svg-icons/faCartPlus";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
-import {DialogProvider} from "../lib/dialogs/DialogContext";
-import reportWebVitals from '../reportWebVitals';
-import '../style/style.scss';
-import App from './App';
 import {
 	alertDefaultProps,
 	AlertPropsContext,
 	confirmDefaultProps,
 	ConfirmPropsContext
 } from "../lib/dialogs/basic-dialogs/DialogBasicProps.context";
+import {DialogProvider} from "../lib/dialogs/DialogContext";
+import reportWebVitals from '../reportWebVitals';
+import '../style/style.scss';
+import App from './App';
+import {ProductsContextProvider} from "./context/products.context";
 import {UserContextProvider} from "./context/user.context";
 import {APPLICATION_NAME} from './utils/consts';
+import {MediaContextProvider} from "./utils/media-breakpoints";
+import {RenderChain} from "./utils/render-chain";
 
 library.add(
 	faHatCowboySide,
@@ -50,6 +55,8 @@ library.add(
 	faTShirt,
 	faUserPlus,
 	faGoogle,
+	faPlus,
+	faCartPlus,
 )
 
 declare module 'react' {
@@ -61,21 +68,20 @@ declare module 'react' {
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
-root.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<AlertPropsContext.Provider value={{...alertDefaultProps, title: APPLICATION_NAME}}>
-				<ConfirmPropsContext.Provider value={{...confirmDefaultProps, title: APPLICATION_NAME}}>
-					<DialogProvider>
-						<UserContextProvider>
-							<App />
-						</UserContextProvider>
-					</DialogProvider>
-				</ConfirmPropsContext.Provider>
-			</AlertPropsContext.Provider>
-		</BrowserRouter>
-	</React.StrictMode>
-);
+
+const app = new RenderChain()
+	.add(React.StrictMode, {})
+	.add(BrowserRouter, {})
+	.add(MediaContextProvider, {})
+	.add(AlertPropsContext.Provider, {value: {...alertDefaultProps, title: APPLICATION_NAME}})
+	.add(ConfirmPropsContext.Provider, {value: {...confirmDefaultProps, title: APPLICATION_NAME}})
+	.add(DialogProvider, {})
+	.add(UserContextProvider, {})
+	.add(ProductsContextProvider, {})
+	.add(App, {})
+	.build();
+
+root.render(app);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

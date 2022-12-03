@@ -1,30 +1,34 @@
-import React, {ButtonHTMLAttributes} from "react";
+import React from "react";
 
 export type BtnPropsOrig_T = {
 	className?: String,
 	extension?: string,
 	borderColor?: string,
 	children?: any,
-	type?: "button" | "submit" | "reset",
 };
-
-export type BtnProps_T =
+export type BtnProps_T<As extends React.ElementType = "button"> =
 	BtnPropsOrig_T
-	& Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BtnPropsOrig_T>
+	& { as?: As }
+	& Omit<React.ComponentProps<As>, keyof BtnPropsOrig_T>
 
-export default function Btn (props: BtnProps_T) {
-	let {className: newClasses, children, extension, borderColor, type, ...others} = props;
-	let className                                                                  = "btn rounded-pill text-uppercase ";
+export default function Btn<As extends React.ElementType = "button"> (props: BtnProps_T<As>) {
+	let {className: newClasses, children, extension, borderColor, as, ...others} = props;
+
+	const AsElem = as ?? "button";
+
+	let className = "btn rounded-pill text-uppercase ";
 	if (extension != null) className += `btn-${extension} `;
 	if (borderColor != null) className += `btn-bordered-${borderColor} `;
 	if (newClasses != null) className += newClasses;
-	type ??= "button";
+	if(AsElem === "button"){
+		// @ts-ignore
+		others.type ??= "button";
+	}
 	return (
-		<button
+		<AsElem
 			className={className}
-			type={type}
 			{...others}>
 			{children}
-		</button>
+		</AsElem>
 	);
 }

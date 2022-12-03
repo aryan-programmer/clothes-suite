@@ -22,27 +22,6 @@
 	max-height: 60px;
 }
 
-$smallest-size-nav: sm;
-
-.sidenav-sizing {
-	@extend .col-xl-2, .col-lg-3, .col-md-4, .col-sm-5, .col-30, .d-#{$smallest-size-nav}-flex, .d-none;
-	@include media-breakpoint-down($smallest-size-nav) {
-		height: auto;
-	}
-	@include media-breakpoint-up($smallest-size-nav) {
-		height: 100vh;
-	}
-}
-
-.content-sizing {
-	@extend .col-xl-28, .col-lg-27, .col-md-26, .col-sm-25, .col-30;
-}
-
-.nav-link-with-icon {
-	@extend .d-flex, .flex-#{$smallest-size-nav}-column, .flex-row, .gap-#{$smallest-size-nav}-0, .gap-2, .px-2, .align-items-center, .text-center, .btn, .btn-el-1;
-	@include transition($btn-transition);
-}
-
-.topnav-sizing {
-	@extend .d-#{$smallest-size-nav}-none, .navbar-expand-#{$smallest-size-nav}, .d-flex;
+.justify-content-align-items-center {
+	@extend .d-flex, .justify-content-center, .align-items-center;
 }

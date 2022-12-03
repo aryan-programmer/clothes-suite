@@ -1,13 +1,17 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 import Container from "react-bootstrap/Container";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+import Popover from "react-bootstrap/esm/Popover";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import {Link} from "react-router-dom";
+import {Link, NavLink as BaseNavLink} from "react-router-dom";
+import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
 import {IDialogOpener, withDialog} from "../../lib/dialogs/DialogContext";
 import {HasUserContext_Props_T, withUserContext} from "../context/user.context";
 import {signOut} from "../utils/firebase/firebase";
-import {Alert} from "../../lib/dialogs/basic-dialogs/Alert";
+import CartComponent from "./CartComponent";
+import CartNavLink from "./CartNavLink";
 import {NavLink} from "./NavLink";
 
 export type SideNavOwnProps_T = {
@@ -16,7 +20,7 @@ export type SideNavOwnProps_T = {
 export type SideNavProps_T = SideNavOwnProps_T & HasUserContext_Props_T & IDialogOpener;
 export type SideNavState_T = {};
 
-class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
+class SideNavC extends React.Component<SideNavProps_T, SideNavState_T> {
 	constructor (props: SideNavProps_T) {
 		super(props);
 
@@ -38,7 +42,7 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 					<FontAwesomeIcon icon="boxes-stacked" /><br />Clothes suite
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-1">
+				<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-2">
 					<Nav className="flex-column w-100 gap-1" variant="pills">
 						<Nav.Link
 							className="nav-link-with-icon"
@@ -71,13 +75,7 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 								Sign out
 							</Nav.Link>
 						) /* end if */}
-						<Nav.Link
-							className="nav-link-with-icon"
-							activeClassName="active"
-							as={NavLink} to="/cart">
-							<FontAwesomeIcon icon="cart-shopping" />
-							Cart
-						</Nav.Link>
+						<CartNavLink />
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
@@ -85,4 +83,5 @@ class SideNav extends React.Component<SideNavProps_T, SideNavState_T> {
 	}
 }
 
-export default withDialog(withUserContext(SideNav));
+const SideNav = withDialog(withUserContext(SideNavC));
+export default SideNav;

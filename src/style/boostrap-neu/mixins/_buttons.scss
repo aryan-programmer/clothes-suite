@@ -21,11 +21,11 @@
 	--#{$prefix}btn-bg: #{$background};
 	--#{$prefix}btn-border-color: #{$border};
 	--#{$prefix}btn-hover-color: #{$hover-color};
-	--#{$prefix}btn-hover-bg: #{$hover-background};
+	--#{$prefix}btn-hover-bg: #{$background}; //#{$hover-background};
 	--#{$prefix}btn-hover-border-color: #{$hover-border};
 	--#{$prefix}btn-focus-shadow-rgb: #{to-rgb(mix($color, $border, 15%))};
 	--#{$prefix}btn-active-color: #{$active-color};
-	--#{$prefix}btn-active-bg: #{$active-background};
+	--#{$prefix}btn-active-bg: #{$background}; //#{$active-background};
 	--#{$prefix}btn-active-border-color: #{$active-border};
 	--#{$prefix}btn-active-shadow: #{$btn-active-box-shadow};
 	--#{$prefix}btn-disabled-color: #{$disabled-color};
