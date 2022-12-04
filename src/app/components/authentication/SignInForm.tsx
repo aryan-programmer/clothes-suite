@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {ChangeEvent, FormEvent} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import {DialogContext, IDialogOpener, OpenDialogFn, withDialog} from "../../../lib/dialogs/DialogContext";
 import nn from "../../../lib/functions/nn";
 import {
 	createUserDocumentOrOverrideData,
@@ -12,15 +12,18 @@ import {
 } from "../../utils/firebase/firebase";
 import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
 import Btn from "../common/Btn";
-import InputBox from "../common/InputBox";
+import {InputBox} from "../common/InputBoxes";
 
-export type SignInProps_T = IDialogOpener & {};
+export type SignInProps_T = {};
 export type SignInState_T = {
 	email: string,
 	password: string,
 };
 
 class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
+	static contextType = DialogContext;
+	context!: IDialogOpener;
+
 	constructor (props: SignInProps_T) {
 		super(props);
 
@@ -36,7 +39,7 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 			return;
 		}
 		const doc = await createUserDocumentOrOverrideData(credential.user);
-		await this.props.openDialog(Alert, {
+		await this.context.openDialog(Alert, {
 			body: "Signed in successfully",
 			backgroundColor: "light-success",
 		})
@@ -47,7 +50,7 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 		const {email, password} = this.state;
 		try {
 			const res = nn(await signInWithEmailAndPassword(email, password));
-			await this.props.openDialog(Alert, {
+			await this.context.openDialog(Alert, {
 				body: "Signed in successfully",
 				backgroundColor: "light-success",
 			});
@@ -60,7 +63,7 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 					message = "No user with that email was found";
 			}
 			console.log(e);
-			await this.props.openDialog(Alert, {
+			await this.context.openDialog(Alert, {
 				body: message,
 				backgroundColor: "light-danger",
 			})
@@ -117,4 +120,4 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 	}
 }
 
-export default withDialog(SignInForm);
+export default SignInForm;

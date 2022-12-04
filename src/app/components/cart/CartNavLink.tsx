@@ -9,20 +9,20 @@ import {CartContext} from "../../context/cart.context";
 import {clamp99} from "../../utils/consts";
 import {smallestSizeSideNav} from "../../utils/css-vars";
 import {Media} from "../../utils/media-breakpoints";
-import CartComponent from "./CartComponent";
+import CartPopover from "./CartPopover";
 
 export type CartNavLinkProps_T = {};
 
 type RenderCartNavProps_T = {};
 
 function CartNavContent (props: RenderCartNavProps_T) {
-	const {cartItems} = useContext(CartContext);
+	const {numItems} = useContext(CartContext);
 	return (
 		<>
 			<div className="cart-icon">
 				<FontAwesomeIcon icon="cart-shopping" className="h4-imp mb-0" />
 				<span className="cart-icons__items-badge bg-primary">
-					{clamp99(cartItems)}
+					{clamp99(numItems)}
 				</span>
 			</div>
 			Cart
@@ -68,7 +68,7 @@ export default function CartNavLink (props: CartNavLinkProps_T) {
 					overlay={
 						<Popover className="">
 							<Popover.Body>
-								<CartComponent isSmall />
+								<CartPopover isSmall />
 							</Popover.Body>
 						</Popover>
 					}

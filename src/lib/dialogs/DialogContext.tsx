@@ -20,11 +20,11 @@ export interface IDialogOpener {
 	): Promise<TResult>;
 }
 
-export const DialogContext = createContext<OpenDialogFn>(
-	function () {
+export const DialogContext = createContext<IDialogOpener>({
+	openDialog () {
 		throw new Error("DialogOpener not implemented. Please wrap the main application with DialogOpenerProvider");
 	}
-);
+});
 
 type DialogProvider_Props_T = {
 	children: any,
@@ -60,7 +60,7 @@ export class DialogProvider extends Component<DialogProvider_Props_T, DialogProv
 
 	override render () {
 		return (
-			<DialogContext.Provider value={this.openDialog}>
+			<DialogContext.Provider value={this}>
 				{this.props.children}
 				{this.state.dialog}
 			</DialogContext.Provider>
@@ -69,7 +69,7 @@ export class DialogProvider extends Component<DialogProvider_Props_T, DialogProv
 }
 
 export function useDialog (): OpenDialogFn {
-	return useContext(DialogContext);
+	return useContext(DialogContext).openDialog;
 }
 
 export function withDialog<TProps extends Record<string, any> & IDialogOpener> (
@@ -79,7 +79,7 @@ export function withDialog<TProps extends Record<string, any> & IDialogOpener> (
 		return (
 			<WrappedComponent
 				{...{
-					openDialog: useContext(DialogContext),
+					openDialog: useContext(DialogContext).openDialog,
 					...p
 				} as TProps}
 			/>

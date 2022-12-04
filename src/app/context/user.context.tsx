@@ -35,9 +35,9 @@ export function UserContextProvider (props: UserContextProps_T) {
 }
 
 export type HasUserContext_Props_T = {
-	userContext: UserContextData_T,
+	UserContext: UserContextData_T,
 }
 
 export function withUserContext<TProps extends Record<string, any>> (WrappedComponent: ComponentType<TProps>) {
-	return withContext(WrappedComponent, "userContext", UserContext);
+	return withContext(WrappedComponent, "UserContext", UserContext);
 }

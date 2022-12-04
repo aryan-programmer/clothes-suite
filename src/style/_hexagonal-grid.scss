@@ -1,11 +1,11 @@
 .hex-grid-parent {
 	display: flex;
-	--s: 230px; /* size  */
-	--m: 12px; /* margin */
-	--f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
+	--hex-width: #{$thumbnail-size};
+	--hex-margin: 12px;
+	--hex-shape-outside-fn: calc(1.732 * var(--hex-width) + 4 * var(--hex-margin) - 1px);
 	@include media-breakpoint-down(sm) {
-		--s: 36vw; /* size  */
-		--m: 5px; /* margin */
+		--hex-width: #{$thumbnail-size-sm};
+		--hex-margin: 5px;
 	}
 }
 
@@ -14,22 +14,22 @@
 
 	&::before {
 		content: "";
-		width: calc(var(--s) / 2 + var(--m));
+		width: calc(var(--hex-width) / 2 + var(--hex-margin));
 		float: left;
 		height: 120%;
-		shape-outside: repeating-linear-gradient(#0000 0 calc(var(--f) - 3px), #000 0 var(--f));
+		shape-outside: repeating-linear-gradient(#0000 0 calc(var(--hex-shape-outside-fn) - 3px), #000 0 var(--hex-shape-outside-fn));
 	}
 }
 
 .hex {
 	$m: 1;
 	position: relative;
-	width: var(--s);
-	margin: var(--m);
-	height: calc(var(--s) * 1.1547);
+	width: var(--hex-width);
+	margin: var(--hex-margin);
+	height: calc(var(--hex-width) * 1.1547);
 	display: inline-block;
 	font-size: initial;
-	margin-bottom: calc(var(--m) - var(--s) * 0.2885);
+	margin-bottom: calc(var(--hex-margin) - var(--hex-width) * 0.2885);
 	filter: drop-shadow(-3px*$m -3px*$m 6px*$m var(--light-bg-light-shadow)) drop-shadow(3px *$m 3px*$m 6px*$m var(--light-bg-dark-shadow));;
 	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, filter .15s ease-in-out, transform .15s ease-in-out, width .15s ease-in-out, height .15s ease-in-out;
 
@@ -55,9 +55,9 @@
 
 		& > .hex-content {
 			position: absolute;
-			width: var(--s);
-			height: calc(var(--s) * 1.1547 * 0.5);
-			top: calc(var(--s) * 1.1547 * 0.25);
+			width: var(--hex-width);
+			height: calc(var(--hex-width) * 1.1547 * 0.5);
+			top: calc(var(--hex-width) * 1.1547 * 0.25);
 		}
 	}
 }

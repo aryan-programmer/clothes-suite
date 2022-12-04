@@ -10,6 +10,9 @@
 @import "./functions";
 @import "./colors";
 
+$table-bg-scale: -80%;
+$table-variants: $theme-colors;
+
 // Flags switches and basic config
 $enable-rounded: true;
 $enable-shadows: true;

@@ -3,7 +3,8 @@ import {Route, Routes} from 'react-router-dom';
 import {overrideThemeVariables} from 'ui-neumorphism';
 import variables from "../../style/material-pallete.module.scss";
 import AuthenticationPage from "./authentication/Authentication.Page";
-import CartComponent from "./cart/CartComponent";
+import CartPage from "./cart/Cart.Page";
+import CartPopover from "./cart/CartPopover";
 import RoundingFilter from "./common/RoundingFilter";
 import HomePage from "./Home.Page";
 import NavBarWrapper from "./navigation/NavBarWrapper";
@@ -25,7 +26,7 @@ function App (props: AppProps_T) {
 				<Route path="/" element={<NavBarWrapper />}>
 					<Route index element={<HomePage />} />
 					<Route path="/shop" element={<ShopPage />}></Route>
-					<Route path="/cart" element={<CartComponent />}></Route>
+					<Route path="/cart" element={<CartPage />}></Route>
 					<Route path="/auth" element={<AuthenticationPage />}></Route>
 				</Route>
 			</Routes>

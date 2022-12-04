@@ -11,19 +11,13 @@ import {signOut} from "../../utils/firebase/firebase";
 import CartNavLink from "../cart/CartNavLink";
 import {NavLink} from "../common/NavLink";
 
-export type SideNavOwnProps_T = {
+type SideNavOwnProps_T = {
 	handleClose (): void;
 };
 export type SideNavProps_T = SideNavOwnProps_T & HasUserContext_Props_T & IDialogOpener;
 export type SideNavState_T = {};
 
 class SideNavC extends React.Component<SideNavProps_T, SideNavState_T> {
-	constructor (props: SideNavProps_T) {
-		super(props);
-
-		this.state = {};
-	}
-
 	signOut = async () => {
 		this.props.handleClose();
 		await signOut();
@@ -56,7 +50,7 @@ class SideNavC extends React.Component<SideNavProps_T, SideNavState_T> {
 							<FontAwesomeIcon icon="store" />
 							Shop
 						</Nav.Link>
-						{/* if */ this.props.userContext.user == null ? (
+						{/* if */ this.props.UserContext.user == null ? (
 							<Nav.Link
 								className="nav-link-with-icon"
 								activeClassName="active"

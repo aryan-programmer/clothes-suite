@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import {DialogContext, IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
 import nn from "../../../lib/functions/nn";
 import {Optional} from "../../../lib/types";
 import {
@@ -10,9 +10,9 @@ import {
 } from "../../utils/firebase/firebase";
 import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
 import Btn from "../common/Btn";
-import InputBox from "../common/InputBox";
+import {InputBox} from "../common/InputBoxes";
 
-export type SignUpProps_T = IDialogOpener & {};
+export type SignUpProps_T = {};
 export type SignUpState_T = {
 	name: string,
 	email: string,
@@ -21,6 +21,9 @@ export type SignUpState_T = {
 };
 
 class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
+	static contextType = DialogContext;
+	context!: IDialogOpener;
+
 	constructor (props: SignUpProps_T) {
 		super(props);
 
@@ -42,7 +45,7 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 			try {
 				const res = nn(await signUpWithEmailAndPassword(email, password));
 				const doc = await createUserDocumentOrOverrideData(res.user, {displayName: name});
-				await this.props.openDialog(Alert, {
+				await this.context.openDialog(Alert, {
 					body: "Signed in successfully",
 					backgroundColor: "light-success",
 				});
@@ -56,7 +59,7 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 			}
 		}
 		if ((error?.length ?? 0) > 0)
-			await this.props.openDialog(Alert, {
+			await this.context.openDialog(Alert, {
 				body: error,
 				backgroundColor: "light-danger",
 			});
@@ -118,4 +121,4 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 	}
 }
 
-export default withDialog(SignUpForm);
+export default SignUpForm;

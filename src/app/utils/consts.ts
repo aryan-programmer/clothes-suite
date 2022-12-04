@@ -6,3 +6,7 @@ export const fac              = new FastAverageColor();
 export function clamp99 (v: number) {
 	return v > 99 ? "99+" : v;
 }
+
+export function inc (v: number) {
+	return v + 1;
+}

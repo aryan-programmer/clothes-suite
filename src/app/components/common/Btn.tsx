@@ -1,4 +1,5 @@
-import React from "react";
+import _ from "lodash";
+import React, {useRef} from "react";
 
 export type BtnPropsOrig_T = {
 	className?: String,
@@ -11,7 +12,7 @@ export type BtnProps_T<As extends React.ElementType = "button"> =
 	& { as?: As }
 	& Omit<React.ComponentProps<As>, keyof BtnPropsOrig_T>
 
-export default function Btn<As extends React.ElementType = "button"> (props: BtnProps_T<As>) {
+function Btn<As extends React.ElementType = "button"> (props: BtnProps_T<As>) {
 	let {className: newClasses, children, extension, borderColor, as, ...others} = props;
 
 	const AsElem = as ?? "button";
@@ -32,3 +33,5 @@ export default function Btn<As extends React.ElementType = "button"> (props: Btn
 		</AsElem>
 	);
 }
+
+export default React.memo(Btn);
