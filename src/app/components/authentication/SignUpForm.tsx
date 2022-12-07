@@ -1,14 +1,10 @@
 import React, {ChangeEvent, FormEvent} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {DialogContext, IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
+import {DialogContext, IDialogOpener} from "../../../lib/dialogs/DialogContext";
 import nn from "../../../lib/functions/nn";
 import {Optional} from "../../../lib/types";
-import {
-	createUserDocumentOrOverrideData,
-	FirebaseError,
-	signUpWithEmailAndPassword
-} from "../../utils/firebase/firebase";
-import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
+import {createUserDocumentOrOverrideData, FirebaseError, signUpWithEmailAndPassword} from "../../utils/firebase";
+import {FirebaseAuthErrorCodes} from "../../utils/firebase/FirebaseAuthErrorCodes";
 import Btn from "../common/Btn";
 import {InputBox} from "../common/InputBoxes";
 

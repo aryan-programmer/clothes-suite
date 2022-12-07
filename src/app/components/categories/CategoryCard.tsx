@@ -1,5 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
+import {Link} from "react-router-dom";
 import {spacing} from "../../utils/spacing";
 import {Category} from "../../utils/types";
 
@@ -7,7 +8,8 @@ export type CategoriesCardProps_T = {
 	cat: Category
 };
 
-export default function CategoriesCard ({cat}: CategoriesCardProps_T) {
+export default function CategoryCard ({cat}: CategoriesCardProps_T) {
+	const v = 30;
 	return (
 		<div
 			className="card el-in-1 rounded-4 bg-gradient--perfect-white" style={{
@@ -21,15 +23,18 @@ export default function CategoriesCard ({cat}: CategoriesCardProps_T) {
 				marginLeft: "auto",
 				marginRight: "auto",
 			}}>
-				<div
-					className="btn btn-el-2 btn-bordered-primary bg-light default-shadows rounded-5" style={{
-					marginLeft: spacing(3),
-					marginRight: spacing(3),
-					padding: spacing(3),
-				}}>
+				<Link
+					className="btn btn-el-2 btn-bordered-primary bg-light default-shadows "
+					to={`/shop/${cat.title.toLowerCase()}`}
+					style={{
+						marginLeft: spacing(3),
+						marginRight: spacing(3),
+						padding: spacing(3),
+						borderRadius: `${v}% ${100 - v}% ${v}% ${100 - v}% / ${100 - v}% ${v}% ${100 - v}% ${v}%`
+					}}>
 					<FontAwesomeIcon className="display-3" icon={cat.icon} /><br />
 					<h4 className="text-uppercase fw-light my-2">Shop Now</h4>
-				</div>
+				</Link>
 			</div>
 			<div className="card-footer rounded-4 rounded-top-0 add-bg-noise h2 text-center mb-0">
 				{cat.title}

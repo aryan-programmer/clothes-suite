@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import Table from "react-bootstrap/Table";
+import roundToTwo from "../../../lib/functions/roundToTwo";
 import {CartContext} from "../../context/cart.context";
 import CartTableRow from "./CartTableRow";
 
@@ -28,7 +29,7 @@ export default function CartPage (props: CartPageProps_T) {
 					<tr className="sticky-bottom">
 						<td colSpan={2}></td>
 						<td className="h4-imp text-end">Total</td>
-						<td className="h4-imp">${totalCost}</td>
+						<td className="h4-imp">${roundToTwo(totalCost)}</td>
 						<td></td>
 					</tr>
 					</tbody>

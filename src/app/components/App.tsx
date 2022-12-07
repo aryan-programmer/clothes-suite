@@ -1,36 +1,26 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Route, Routes} from 'react-router-dom';
-import {overrideThemeVariables} from 'ui-neumorphism';
-import variables from "../../style/material-pallete.module.scss";
 import AuthenticationPage from "./authentication/Authentication.Page";
 import CartPage from "./cart/Cart.Page";
-import CartPopover from "./cart/CartPopover";
 import RoundingFilter from "./common/RoundingFilter";
 import HomePage from "./Home.Page";
 import NavBarWrapper from "./navigation/NavBarWrapper";
-import ShopPage from "./shop/Shop.Page";
+import ShopRoutesPage from "./shop/ShopRoutes.Page";
 
 type AppProps_T = {};
 
 function App (props: AppProps_T) {
-	useEffect(() => {
-		overrideThemeVariables({
-			'--light-bg': 'transparent', // hsl(155,43%,95%,100%)
-			'--primary': variables["blue-300"],
-			'--primary-light': variables["blue-200"],
-		});
-	}, []);
 	return (
 		<>
 			<Routes>
 				<Route path="/" element={<NavBarWrapper />}>
 					<Route index element={<HomePage />} />
-					<Route path="/shop" element={<ShopPage />}></Route>
+					<Route path="/shop/*" element={<ShopRoutesPage />}></Route>
 					<Route path="/cart" element={<CartPage />}></Route>
 					<Route path="/auth" element={<AuthenticationPage />}></Route>
 				</Route>
 			</Routes>
-			<RoundingFilter/>
+			<RoundingFilter />
 		</>
 	);
 }

@@ -2,7 +2,7 @@ import {User} from "firebase/auth";
 import React, {ComponentType, createContext, useEffect, useState} from "react";
 import {Optional} from "../../lib/types";
 import {withContext} from "../../lib/withContext";
-import {createUserDocumentOrOverrideData, onAuthStateChanged} from "../utils/firebase/firebase";
+import {createUserDocumentOrOverrideData, onAuthStateChanged} from "../utils/firebase";
 
 export type UserContextProps_T = {
 	children: any,

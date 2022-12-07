@@ -1,16 +1,16 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {ChangeEvent, FormEvent} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {DialogContext, IDialogOpener, OpenDialogFn, withDialog} from "../../../lib/dialogs/DialogContext";
+import {DialogContext, IDialogOpener} from "../../../lib/dialogs/DialogContext";
 import nn from "../../../lib/functions/nn";
 import {
 	createUserDocumentOrOverrideData,
+	FirebaseAuthErrorCodes,
 	FirebaseError,
 	getRedirectResult,
 	signInWithEmailAndPassword,
-	signInWithGoogleRedirect,
-} from "../../utils/firebase/firebase";
-import {FirebaseAuthErrorCodes} from "../../utils/firebase/firebaseAuthErrorCodes";
+	signInWithGoogleRedirect
+} from "../../utils/firebase";
 import Btn from "../common/Btn";
 import {InputBox} from "../common/InputBoxes";
 
@@ -38,7 +38,7 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 		if (credential == null) {
 			return;
 		}
-		const doc = await createUserDocumentOrOverrideData(credential.user);
+		await createUserDocumentOrOverrideData(credential.user);
 		await this.context.openDialog(Alert, {
 			body: "Signed in successfully",
 			backgroundColor: "light-success",
@@ -49,7 +49,7 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 		event.preventDefault();
 		const {email, password} = this.state;
 		try {
-			const res = nn(await signInWithEmailAndPassword(email, password));
+			nn(await signInWithEmailAndPassword(email, password));
 			await this.context.openDialog(Alert, {
 				body: "Signed in successfully",
 				backgroundColor: "light-success",

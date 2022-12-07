@@ -1,5 +1,4 @@
-import _ from "lodash";
-import React, {useRef} from "react";
+import React from "react";
 
 export type BtnPropsOrig_T = {
 	className?: String,

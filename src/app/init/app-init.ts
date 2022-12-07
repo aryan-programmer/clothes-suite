@@ -9,7 +9,7 @@ import {
 import {DialogProvider} from "../../lib/dialogs/DialogContext";
 import App from "../components/App";
 import {CartContextProvider} from "../context/cart.context";
-import {ProductsContextProvider} from "../context/products.context";
+import {ProductCategoriesContextProvider} from "../context/product-categories.context";
 import {UserContextProvider} from "../context/user.context";
 import {APPLICATION_NAME} from "../utils/consts";
 import {MediaContextProvider} from "../utils/media-breakpoints";
@@ -23,7 +23,7 @@ export const app = new RenderChain()
 	.add(ConfirmPropsContext.Provider, {value: {...confirmDefaultProps, title: APPLICATION_NAME}})
 	.add(DialogProvider, {})
 	.add(UserContextProvider, {})
-	.add(ProductsContextProvider, {})
+	.add(ProductCategoriesContextProvider, {})
 	.add(CartContextProvider, {})
 	.add(App, {})
 	.build();

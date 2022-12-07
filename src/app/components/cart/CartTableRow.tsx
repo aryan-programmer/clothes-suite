@@ -27,7 +27,8 @@ class CartTableRow extends React.Component<CartTableRowProps_T, CartTableRowStat
 		const {imageUrl, name, price, quantity} = this.props.item;
 		return (
 			<tr>
-				<td><img className="img-thumbnail-sized img-thumbnail el-1 rounded-3 m-2" src={imageUrl} /></td>
+				<td className="d-flex justify-content-align-items-center">
+					<img className="img-thumbnail-sized img-thumbnail el-1 rounded-3 m-2" src={imageUrl} /></td>
 				<td className="">{name}</td>
 				<td className="">
 					<InputBoxControlledUnlabeled

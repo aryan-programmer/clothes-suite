@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
 import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
 import {HasUserContext_Props_T, withUserContext} from "../../context/user.context";
-import {signOut} from "../../utils/firebase/firebase";
+import {signOut} from "../../utils/firebase";
 import CartNavLink from "../cart/CartNavLink";
 import {NavLink} from "../common/NavLink";
 

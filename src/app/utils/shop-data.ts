@@ -1,58 +1,82 @@
-import {Product} from "./types";
+import _ from "lodash";
+import {hash} from "../../lib/functions/hash";
+import roundToTwo from "../../lib/functions/roundToTwo";
+import {ProductList, ProductsByCategory} from "./types";
 
-export const initProducts: Product[] = [
-	{
-		id: 1,
-		name: "Primary Hat",
-		imageUrl: "https://picsum.photos/seed/product-1/200/300?rand=1",
-		price: 25
-	},
-	{
-		id: 2,
-		name: "Secondary Brim",
-		imageUrl: "https://picsum.photos/seed/product-2/200/300?rand=2",
-		price: 18
-	},
-	{
-		id: 3,
-		name: "Tertiary Cowboy",
-		imageUrl: "https://picsum.photos/seed/product-3/200/300?rand=3",
-		price: 35
-	},
-	{
-		id: 4,
-		name: "Quaternary Fedora",
-		imageUrl: "https://picsum.photos/seed/product-4/200/300?rand=4",
-		price: 25
-	},
-	{
-		id: 5,
-		name: "Success Beanie",
-		imageUrl: "https://picsum.photos/seed/product-5/200/300?rand=5",
-		price: 18
-	},
-	{
-		id: 6,
-		name: "Info Cap",
-		imageUrl: "https://picsum.photos/seed/product-6/200/300?rand=6",
-		price: 10
-	},
-	{
-		id: 7,
-		name: "Danger Beanie",
-		imageUrl: "https://picsum.photos/seed/product-7/200/300?rand=7",
-		price: 17
-	},
-	{
-		id: 8,
-		name: "Top Hat",
-		imageUrl: "https://picsum.photos/seed/product-8/200/300?rand=8",
-		price: 19
-	},
-	{
-		id: 9,
-		name: "Red Hat",
-		imageUrl: "https://picsum.photos/seed/product-9/200/300?rand=9",
-		price: 16
-	}
+const colors = [
+	"Primary",
+	"Secondary",
+	"Tertiary",
+	"Quaternary",
+	"Quinary",
+	"Info",
+	"Success",
+	"Warning",
+	"Danger",
+	"Light",
+	"Dark"
 ];
+
+const productTypes = [
+	{
+		type: "hats",
+		subCategories: ["Hat", "Brim", "Beanie", "Cap", "Fedora", "Top Hat"]
+	},
+	{
+		type: "jackets",
+		subCategories: ["Jacket", "Coat", "Trench-coat", "Sterling", "Sweater Vest"]
+	},
+	{
+		type: "sneakers",
+		subCategories: [
+			"Authentic Sneakers",
+			"Canvas",
+			"Designer Sneakers",
+			"Basketball Sneakers",
+			"Leather Sneakers",
+			"Plimsoll Sneakers",
+			"Slip-ons",
+			"Synthetic Sneakers"
+		]
+	},
+	{
+		type: "mens",
+		subCategories: ["Shirt", "T-Shirt", "Vest", "Long-sleeve", "Sweater", "Suit"]
+	},
+	{
+		type: "womens",
+		subCategories: ["Tank-top", "Blouse", "Dress", "Sweater", "Suit"]
+	},
+]
+
+const minItems = 5;
+const maxItems = 14;
+
+const minPrice = 0.01;
+const maxPrice = 50;
+
+const minWidth  = 300;
+const maxWidth  = 600;
+const minHeight = 200;
+const maxHeight = 400;
+
+export function generateProducts (): ProductsByCategory {
+	const res: ProductsByCategory = {};
+	for (const {type, subCategories} of productTypes) {
+		const products: ProductList = {};
+		const n                     = _.random(minItems, maxItems);
+		for (let i = 0; i < n; i++) {
+			let id       = hash(type + i + new Date().toString() + _.uniqueId());
+			let width    = _.random(minWidth, maxWidth);
+			let height   = _.random(minHeight, maxHeight);
+			products[id] = {
+				id,
+				name: colors[_.random(colors.length - 1)] + " " + subCategories[_.random(subCategories.length - 1)],
+				price: roundToTwo(_.random(minPrice, maxPrice, true)),
+				imageUrl: `https://picsum.photos/seed/${id}/${width}/${height}.jpg`
+			};
+		}
+		res[type] = products;
+	}
+	return res;
+}

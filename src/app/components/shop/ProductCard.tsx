@@ -9,11 +9,11 @@ export type ProductCardProps_T = {
 };
 
 export default function ProductCard (props: ProductCardProps_T) {
-	const {product}                     = props;
+	const {product} = props;
 	const [imgAvgColor, setImgAvgColor] = useState("#000");
-	const [textColor, setTextColor]     = useState("#fff");
-	const {cart, addItem} = useContext(CartContext);
-	const addCurrentItem = useCallback(()=>addItem(product), [addItem, product]);
+	const [textColor, setTextColor] = useState("#fff");
+	const {addItem} = useContext(CartContext);
+	const addCurrentItem = useCallback(() => addItem(product), [addItem, product]);
 	useEffect(() => {
 		fac.getColorAsync(product.imageUrl, {top: 45}).then(value => {
 			setImgAvgColor(value.hex);
@@ -23,11 +23,17 @@ export default function ProductCard (props: ProductCardProps_T) {
 	return (
 		<div className="hex">
 			<div className="hex-rounded">
-				<div className="hex-card hex-button bg-light justify-content-align-items-center" onClick={addCurrentItem}>
+				<div
+					className="hex-card hex-button bg-light"
+					onClick={addCurrentItem}>
 					<div className="hex-image">
-						<img className="w-100 h-100" src={product.imageUrl} crossOrigin="anonymous" />
+						<img
+							className="w-100 h-100"
+							src={product.imageUrl}
+							crossOrigin="anonymous"
+							alt={product.name} />
 					</div>
-					<div className="hex-content justify-content-align-items-center flex-column">
+					<div className="hex-content  d-flex flex-column justify-content-align-items-center">
 						<div
 							className="align-self-stretch px-4 justify-content-align-items-center"
 							style={{
