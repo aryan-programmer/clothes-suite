@@ -27,18 +27,17 @@ const CartHeading = styled.h2.attrs({
 `;
 
 const TableTotalHeading = styled.td.attrs({
-	className: "h4-imp" as string
+	className: "h4-imp font-monospace" as string
 })<ComponentProps<"td">>`
 	&&& {
-		padding-top: ${spacing(1)};
-		padding-bottom: 0;
+		padding: ${spacing(1)};
 	}
 `;
 
 export type CartPageProps_T = {};
 
 export default function CartPage (props: CartPageProps_T) {
-	const {cart, totalCost, numItems} = useContext(CartContext);
+	const {state: {cart, numItems, totalCost}} = useContext(CartContext);
 	return (
 		<CartTableContainer>
 			<CartHeading>Your Cart</CartHeading>

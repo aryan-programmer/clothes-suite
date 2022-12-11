@@ -31,7 +31,7 @@ const CartIconBadge = styled.span.attrs({
 `
 
 function CartNavContent () {
-	const {numItems} = useContext(CartContext);
+	const {state: {numItems}} = useContext(CartContext);
 	return (
 		<>
 			<CartIcon>

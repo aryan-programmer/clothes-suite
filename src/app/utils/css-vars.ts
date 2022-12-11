@@ -23,9 +23,8 @@ export function breakpointMax (v: string) {
 
 export function shadowsFromColor (hex: string, isDark: boolean = false) {
 	const {r, g, b} = nn(hexToRgb(hex));
-	let v           = rgbToHsl(r, g, b);
-	const hue       = v[0] * 360;
-	console.log(hex, r, g, b, v);
+	let hsl         = rgbToHsl(r, g, b);
+	const hue       = hsl[0] * 360;
 	return isDark ? css`
 			--light-bg-dark-shadow: hsla(${hue}, 60%, 20%);
 			--light-bg-light-shadow: hsla(${hue}, 70%, 40%);

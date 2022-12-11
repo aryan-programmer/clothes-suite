@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {ChangeEvent} from "react";
-import {CartContext, CartContextData_T} from "../../context/cart.context";
+import {CartActions, CartContext, CartContextData_T} from "../../context/cart.context";
 import {CartItem} from "../../utils/types";
 import Btn from "../common/Btn";
 import {ImgThumbnail} from "../common/ImgThumbnail";
@@ -17,11 +17,11 @@ class CartTableRow extends React.Component<CartTableRowProps_T, CartTableRowStat
 	context!: CartContextData_T;
 
 	onQuantityChanged = (ev: ChangeEvent<HTMLInputElement>) => {
-		this.context.setItemQuantity(this.props.index, Math.round(+ev.target.value));
+		this.context.dispatch(CartActions.SetItemQuantity(this.props.index, Math.round(+ev.target.value)));
 	}
 
 	onRemove = () => {
-		this.context.removeItem(this.props.index);
+		this.context.dispatch(CartActions.RemoveItem(this.props.index));
 	}
 
 	override render () {
@@ -43,7 +43,7 @@ class CartTableRow extends React.Component<CartTableRowProps_T, CartTableRowStat
 				</td>
 				<td>{price}</td>
 				<td>
-					<Btn borderColor="danger" className="" onClick={this.onRemove}>
+					<Btn borderColor="danger" onClick={this.onRemove}>
 						<FontAwesomeIcon icon={["far", "trash-can"]} />
 					</Btn>
 				</td>

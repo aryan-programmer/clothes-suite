@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import styled from "styled-components";
-import {CartContext} from "../../context/cart.context";
+import {CartActions, CartContext} from "../../context/cart.context";
 import {fac} from "../../utils/consts";
 import {shadowsFromColor} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
@@ -48,8 +48,11 @@ export default function ProductCard (props: ProductCardProps_T) {
 	const [imgAvgColor, setImgAvgColor] = useState("#000");
 	const [textColor, setTextColor]     = useState("#fff");
 	const [isDark, setIsDark]           = useState(false);
-	const {addItem}                     = useContext(CartContext);
-	const addCurrentItem                = useCallback(() => addItem(product), [addItem, product]);
+	const {dispatch}                    = useContext(CartContext);
+	const addCurrentItem                = useCallback(
+		() => dispatch(CartActions.AddItem(product)),
+		[dispatch, product]
+	);
 	useEffect(() => {
 		fac.getColorAsync(product.imageUrl, {top: 45}).then(value => {
 			setIsDark(value.isDark);

@@ -7,7 +7,7 @@ import Btn from "../common/Btn";
 export type CartComponentProps_T = {};
 
 export default function CartPopover (props: CartComponentProps_T) {
-	const {cart, numItems} = useContext(CartContext);
+	const {state: {cart, numItems}} = useContext(CartContext);
 	return (
 		<div className="mx-auto" style={{maxWidth: "500px"}}>
 			<Btn as={Link} className="w-100 mb-2" to="/cart" borderColor="tertiary">
