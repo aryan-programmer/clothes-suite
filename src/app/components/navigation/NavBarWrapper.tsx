@@ -4,80 +4,135 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import {useMediaQuery} from "react-responsive";
 import {useLocation} from "react-router";
 import {Outlet} from "react-router-dom";
-import {smallestSizeSideNav} from "../../utils/css-vars";
-import {Media} from "../../utils/media-breakpoints";
+import styled from "styled-components";
+import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
+import {spacing} from "../../utils/spacing";
 import CartNavLink from "../cart/CartNavLink";
 import Btn from "../common/Btn";
 import SideNav from "./SideNav";
 
 export type NavBarProps_T = {};
 
+const sidenavWidth    = "120px";
+const backgroundName  = "gradient--salt-mountain";
+const backgroundClass = "bg-" + backgroundName;
+
+const WrapperDiv = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 100vh;
+	align-content: flex-start;
+`;
+
+const SidenavNavbar = styled(Navbar).attrs({
+	className: `scroll-y shadow-lg el-1 ${backgroundClass}`
+})`
+	display: flex;
+	align-items: stretch;
+	align-self: stretch;
+	width: ${sidenavWidth};
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1020;
+	padding: ${spacing(1)};
+`;
+
+const TopNavbar = styled(Navbar).attrs({
+	className: `el-1 ${backgroundClass}`,
+	expand: true
+})`
+	position: sticky;
+	top: 0;
+	z-index: 1020;
+	width: 100%;
+	padding: ${spacing(3)};
+`;
+
+const SidenavOffcanvasBody = styled(Offcanvas.Body).attrs({
+	className: backgroundClass
+})`
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	position: relative;
+`;
+
+const SidenavOffcanvasCloseButton = styled(Btn).attrs({})`
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: min-content;
+	margin: ${spacing(4)};
+	z-index: 1000;
+`;
+
+const OutletWrapper = styled.div`
+	flex-grow: 1;
+	height: 100%;
+	padding: ${spacing(3)};
+	@media (min-width: ${sideNavBreakpointMinWidth}) {
+		margin-left: ${sidenavWidth};
+	}
+`;
+
 export default function NavBarWrapper (props: NavBarProps_T) {
 	const [show, setShow] = useState(false);
-	const history         = useLocation()
+	const location        = useLocation()
+	const showSideNav     = useMediaQuery({minWidth: sideNavBreakpointMinWidth});
 
 	const handleClose = useCallback(() => setShow(false), []);
 	const handleShow  = useCallback(() => setShow(true), []);
 
+	// Call only when the location changes not every time handleClose changes
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(handleClose, [history]);
+	useEffect(handleClose, [location]);
 
 	return (
-		<div className="row-30 vw-100 justify-content-end">
-			<Media
-				greaterThanOrEqual={smallestSizeSideNav}
-				className="row-30 sidenav-sizing align-self-stretch align-items-stretch fixed-top scroll-y shadow-lg">
-				<Navbar bg="gradient--salt-mountain" className="el-1 align-items-start p-1">
+		<WrapperDiv>
+			{/* if */ showSideNav ?
+				<SidenavNavbar>
 					<SideNav handleClose={handleClose} />
-				</Navbar>
-			</Media>
-			<Media
-				className="sticky-top"
-				lessThan={smallestSizeSideNav}>
-				<Navbar className="topnav-sizing bg-gradient--salt-mountain el-1 w-100 p-3" expand="xs">
-					<Container className="justify-content-between">
-						<div>
-							<Btn
-								onClick={handleShow}
-								borderColor="dark"
-								className="h5-imp mb-0 text-wrap text-center fw-bold mx-1">
-								<FontAwesomeIcon icon="bars"></FontAwesomeIcon>
-							</Btn>
-							<a className="navbar-brand h4-imp mb-0 text-wrap fw-bold mx-1">
-								<FontAwesomeIcon icon="boxes-stacked" className="me-2" />Clothes suite
-							</a>
-						</div>
-						<Nav className="" variant="pills">
+				</SidenavNavbar>
+				/* else */ :
+				<TopNavbar>
+					<Container className="justify-content-between align-items-center">
+						<Btn onClick={handleShow} borderColor="dark" className="h5-imp fw-bold">
+							<FontAwesomeIcon icon="bars"></FontAwesomeIcon>
+						</Btn>
+						<Navbar.Brand className="h4-imp fw-bold">
+							<FontAwesomeIcon icon="boxes-stacked" className="me-2" />Clothes suite
+						</Navbar.Brand>
+						<Nav variant="pills">
 							<CartNavLink />
 						</Nav>
 					</Container>
-				</Navbar>
-			</Media>
+				</TopNavbar>
+			}
 			<Offcanvas
 				show={show}
 				onHide={handleClose}
-				backdropClassName="bg-gradient--salt-mountain">
-				<Offcanvas.Body className="bg-gradient--salt-mountain">
-					<div className="d-flex w-100 justify-content-end">
-						<Btn
-							borderColor="dark"
-							className="h5-imp mb-0 text-wrap text-center fw-bold mx-0"
-							onClick={handleClose}>
-							<FontAwesomeIcon icon="close"></FontAwesomeIcon>
-						</Btn>
-					</div>
+				backdropClassName={backgroundClass}>
+				<SidenavOffcanvasBody>
+					<SidenavOffcanvasCloseButton
+						borderColor="dark"
+						className="h5-imp fw-bold"
+						onClick={handleClose}>
+						<FontAwesomeIcon icon="close"></FontAwesomeIcon>
+					</SidenavOffcanvasCloseButton>
 					<Navbar className="pt-0" expand={true}>
 						<SideNav handleClose={handleClose} />
 					</Navbar>
-				</Offcanvas.Body>
+				</SidenavOffcanvasBody>
 			</Offcanvas>
-			<div className="row-30 content-sizing d-flex justify-content-center">
-				<div className="col-30 p-lg-4 p-3 h-100">
-					<Outlet />
-				</div>
-			</div>
-		</div>
+			<OutletWrapper>
+				<Outlet />
+			</OutletWrapper>
+		</WrapperDiv>
 	);
 }

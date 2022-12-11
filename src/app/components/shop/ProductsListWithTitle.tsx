@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 import {Link} from "react-router-dom";
 import {ProductList} from "../../utils/types";
+import {HexGrid} from "../common/hexagon-grid/HexGrid";
 import ProductCard from "./ProductCard";
 
 export type ProductsPageProps_T = {
@@ -14,7 +15,7 @@ export default function ProductsListWithTitle (props: ProductsPageProps_T) {
 	const {title, products} = props;
 	const hasLink           = props.hasLink ?? false;
 	return (
-		<div className="hex-grid-vars">
+		<div>
 			{/*if */ hasLink !== false ?
 				<Link
 					className="display-2 link link-quaternary text-uppercase fw-normal text-decoration-none"
@@ -27,11 +28,11 @@ export default function ProductsListWithTitle (props: ProductsPageProps_T) {
 					style={{
 						marginLeft: "calc(var(--hex-width) * 0.25)"
 					}}>{title}</div>}
-			<div className="hex-grid shadows-bg-primary w-100">
+			<HexGrid className="shadows-bg-primary w-100">
 				{_.map(products, (value) => (
 					<ProductCard product={value} key={value.id} />
 				))}
-			</div>
+			</HexGrid>
 			<div style={{paddingTop: "calc(var(--hex-height) * 0.25)"}} className="mb-4"></div>
 		</div>
 	);

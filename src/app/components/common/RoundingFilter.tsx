@@ -2,6 +2,8 @@ import React from "react";
 
 export type RoundingFilterProps_T = {};
 
+export const RoundingFilterId = "round";
+
 export default function RoundingFilter (props: RoundingFilterProps_T) {
 	return (
 		<svg
@@ -13,7 +15,7 @@ export default function RoundingFilter (props: RoundingFilterProps_T) {
 			xmlns="http://www.w3.org/2000/svg"
 			version="1.1">
 			<defs>
-				<filter id="round">
+				<filter id={RoundingFilterId}>
 					<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
 					<feColorMatrix
 						in="blur"

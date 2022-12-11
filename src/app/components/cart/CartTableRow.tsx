@@ -3,6 +3,7 @@ import React, {ChangeEvent} from "react";
 import {CartContext, CartContextData_T} from "../../context/cart.context";
 import {CartItem} from "../../utils/types";
 import Btn from "../common/Btn";
+import {ImgThumbnail} from "../common/ImgThumbnail";
 import {InputBoxControlledUnlabeled} from "../common/InputBoxes";
 
 export type CartTableRowProps_T = {
@@ -28,9 +29,9 @@ class CartTableRow extends React.Component<CartTableRowProps_T, CartTableRowStat
 		return (
 			<tr>
 				<td className="d-flex justify-content-align-items-center">
-					<img className="img-thumbnail-sized img-thumbnail el-1 rounded-3 m-2" src={imageUrl} /></td>
-				<td className="">{name}</td>
-				<td className="">
+					<ImgThumbnail src={imageUrl} /></td>
+				<td>{name}</td>
+				<td>
 					<InputBoxControlledUnlabeled
 						type="number"
 						value={quantity}
@@ -40,9 +41,9 @@ class CartTableRow extends React.Component<CartTableRowProps_T, CartTableRowStat
 						required
 						step="1" />
 				</td>
-				<td className="">{price}</td>
-				<td className="">
-					<Btn extension="lg" borderColor="danger" className="" onClick={this.onRemove}>
+				<td>{price}</td>
+				<td>
+					<Btn borderColor="danger" className="" onClick={this.onRemove}>
 						<FontAwesomeIcon icon={["far", "trash-can"]} />
 					</Btn>
 				</td>

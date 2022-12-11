@@ -1,12 +1,38 @@
-import _ from "lodash";
+import {css} from "styled-components";
+import {hexToRgb, rgbToHsl} from "../../lib/functions/colors";
+import nn from "../../lib/functions/nn";
 import vars from "../../style/export-vars.module.scss";
 
-export const spacer                                  = +vars["spacer-1"];
-export const spacerUnit                              = vars["spacer-1-unit"];
-let breakpointsOrig: Record<string, string | number> = JSON.parse(vars["breakpoints"].slice(1, -1));
-export const breakpoints: Record<string, number>     = _.mapValues(breakpointsOrig,
-	(value, key) => typeof value == "number" ? value : parseInt(value));
-export const smallestSizeSideNav                     = "sm";// vars["smallest-size-side-nav"];
-console.log(breakpoints, smallestSizeSideNav);
+export const spacer     = +vars["spacer-1"];
+export const spacerUnit = vars["spacer-1-unit"];
+
+export const breakpoints: Record<string, string | number> = JSON.parse(vars["breakpoints"].slice(1, -1));
+
+export const smallestSizeSideNav = vars["smallest-size-side-nav"];
+export const btnTransition       = vars["btn-transition"];
+export const thumbnailSize       = "145px";// vars["thumbnail-size"];
+export const thumbnailSizeSm     = "25vw";//vars["thumbnail-size-sm"];
+
+export const borderRadiusValues = JSON.parse(vars["border-radius-values"].slice(1, -1));
+
+export const sideNavBreakpointMinWidth = breakpoints[smallestSizeSideNav];
+
+export function breakpointMax (v: string) {
+	return (parseInt(breakpoints[v].toString()) - 0.02) + "px";
+}
+
+export function shadowsFromColor (hex: string, isDark: boolean = false) {
+	const {r, g, b} = nn(hexToRgb(hex));
+	let v           = rgbToHsl(r, g, b);
+	const hue       = v[0] * 360;
+	console.log(hex, r, g, b, v);
+	return isDark ? css`
+			--light-bg-dark-shadow: hsla(${hue}, 60%, 20%);
+			--light-bg-light-shadow: hsla(${hue}, 70%, 40%);
+	` : css`
+			--light-bg-dark-shadow: hsla(${hue}, 60%, 65%);
+			--light-bg-light-shadow: hsla(${hue}, 70%, 93%);
+	`;
+}
 
 export {vars};

@@ -1,26 +1,17 @@
 // From https://webgradients.com/
-// 062 Wide Matrix Right
-@include define-gradient(
-		gradient--wide-matrix--right,
-		rgb(0, 0, 0, 255),
-		linear-gradient(to right, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%),
-);
-
-// 162 Perfect White (Circular)
-@include define-gradient(
-		gradient--perfect-white--circular,
-		#f1f2f8,
-		radial-gradient(circle closest-side at center, #FFE6FA 0%, #E3FDF5 100%),
-);
-
-.img-thumbnail-sized {
-	max-height: #{$thumbnail-size};
-	max-width: #{$thumbnail-size};
-	@include media-breakpoint-down(sm) {
-		max-height: #{$thumbnail-size};
-		max-width: #{$thumbnail-size-xsm};
-	}
-}
+//// 062 Wide Matrix Right
+//@include define-gradient(
+//		gradient--wide-matrix--right,
+//		rgb(0, 0, 0, 255),
+//		linear-gradient(to right, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%),
+//);
+//
+//// 162 Perfect White (Circular)
+//@include define-gradient(
+//		gradient--perfect-white--circular,
+//		#f1f2f8,
+//		radial-gradient(circle closest-side at center, #FFE6FA 0%, #E3FDF5 100%),
+//);
 
 .justify-content-align-items-center {
 	@extend .d-flex, .justify-content-center, .align-items-center;

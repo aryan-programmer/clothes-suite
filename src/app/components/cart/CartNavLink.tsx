@@ -1,39 +1,55 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useCallback, useContext, useEffect, useState} from "react";
-import Nav from "react-bootstrap/Nav";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import {useMediaQuery} from "react-responsive";
 import {useLocation} from "react-router";
-import {Link, useMatch} from "react-router-dom";
+import {useMatch} from "react-router-dom";
+import styled from "styled-components";
 import {CartContext} from "../../context/cart.context";
 import {clamp99} from "../../utils/consts";
-import {smallestSizeSideNav} from "../../utils/css-vars";
-import {Media} from "../../utils/media-breakpoints";
+import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
+import {spacing} from "../../utils/spacing";
+import NavLinkWithIcon from "../common/NavLinkWithIcon";
 import CartPopover from "./CartPopover";
 
 export type CartNavLinkProps_T = {};
 
-type RenderCartNavProps_T = {};
+const CartIcon = styled.div`
+	position: relative;
+	margin-top: ${spacing(3)};
+`;
 
-function CartNavContent (props: RenderCartNavProps_T) {
+const CartIconBadge = styled.span.attrs({
+	className: "badge bg-primary"
+})`
+	position: absolute !important;
+	top: 0;
+	padding: ${spacing(1)};
+	transform: translate(-50%, -50%);
+	border-radius: 100em;
+`
+
+function CartNavContent () {
 	const {numItems} = useContext(CartContext);
 	return (
 		<>
-			<div className="cart-icon">
+			<CartIcon>
 				<FontAwesomeIcon icon="cart-shopping" className="h4-imp mb-0" />
-				<span className="cart-icons__items-badge bg-primary">
+				<CartIconBadge>
 					{clamp99(numItems)}
-				</span>
-			</div>
+				</CartIconBadge>
+			</CartIcon>
 			Cart
 		</>
 	);
 }
 
-export default function CartNavLink (props: CartNavLinkProps_T) {
-	const hasMatch                            = useMatch("/cart") != null;
+function CartNavButtonWithPopover () {
 	const [popoverVisible, setPopoverVisible] = useState(false);
-	const location                            = useLocation();
+
+	const hasMatch = useMatch("/cart") != null;
+	const location = useLocation();
 
 	const onToggle = useCallback(() => {
 		if (hasMatch) {
@@ -48,43 +64,43 @@ export default function CartNavLink (props: CartNavLinkProps_T) {
 		if (hasMatch) setPopoverVisible(false);
 	}, [hasMatch]);
 
-	let className: string;
+	let className = "";
 	if (hasMatch) {
-		className = "nav-link-with-icon active";
+		className = "active";
 	} else if (popoverVisible) {
-		className = "nav-link-with-icon active bg-tertiary shadows-bg-tertiary";
-	} else {
-		className = "nav-link-with-icon";
+		className = "active bg-tertiary shadows-bg-tertiary";
 	}
 
 	return (
-		<>
-			<Media greaterThanOrEqual={smallestSizeSideNav}>
-				<OverlayTrigger
-					show={popoverVisible}
-					onToggle={onToggle}
-					trigger="click"
-					placement="right"
-					overlay={
-						<Popover className="">
-							<Popover.Body>
-								<CartPopover isSmall />
-							</Popover.Body>
-						</Popover>
-					}
-				>
-					<Nav.Link className={className}>
-						<CartNavContent />
-					</Nav.Link>
-				</OverlayTrigger>
-			</Media>
-			<Media lessThan={smallestSizeSideNav}>
-				<Nav.Link
-					className={className}
-					as={Link} to="/cart">
-					<CartNavContent />
-				</Nav.Link>
-			</Media>
-		</>
+		<OverlayTrigger
+			show={popoverVisible}
+			onToggle={onToggle}
+			trigger="click"
+			placement="right"
+			overlay={
+				<Popover className="">
+					<Popover.Body>
+						<CartPopover />
+					</Popover.Body>
+				</Popover>
+			}
+		>
+			<NavLinkWithIcon className={className} noRedirect>
+				<CartNavContent />
+			</NavLinkWithIcon>
+		</OverlayTrigger>
+	);
+}
+
+export default function CartNavLink (props: CartNavLinkProps_T) {
+	const showingSideNav = useMediaQuery({minWidth: sideNavBreakpointMinWidth});
+
+	return (
+		showingSideNav ?
+			<CartNavButtonWithPopover />
+			:
+			<NavLinkWithIcon to="/cart">
+				<CartNavContent />
+			</NavLinkWithIcon>
 	);
 }

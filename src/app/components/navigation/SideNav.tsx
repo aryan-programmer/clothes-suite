@@ -9,7 +9,7 @@ import {IDialogOpener, withDialog} from "../../../lib/dialogs/DialogContext";
 import {HasUserContext_Props_T, withUserContext} from "../../context/user.context";
 import {signOut} from "../../utils/firebase";
 import CartNavLink from "../cart/CartNavLink";
-import {NavLink} from "../common/NavLink";
+import NavLinkWithIcon from "../common/NavLinkWithIcon";
 
 type SideNavOwnProps_T = {
 	handleClose (): void;
@@ -34,37 +34,27 @@ class SideNavC extends React.Component<SideNavProps_T, SideNavState_T> {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-2">
-					<Nav className="flex-column w-100 gap-1" variant="pills">
-						<Nav.Link
-							className="nav-link-with-icon"
-							activeClassName="active"
-							as={NavLink}
-							to="/">
+					<Nav className="flex-column w-100 gap-2" variant="pills">
+						<NavLinkWithIcon to="/">
 							<FontAwesomeIcon icon="home-lg" />
 							Home
-						</Nav.Link>
-						<Nav.Link
-							className="nav-link-with-icon"
-							activeClassName="active"
-							as={NavLink} to="/shop">
+						</NavLinkWithIcon>
+						<NavLinkWithIcon to="/shop">
 							<FontAwesomeIcon icon="store" />
 							Shop
-						</Nav.Link>
+						</NavLinkWithIcon>
 						{/* if */ this.props.UserContext.user == null ? (
-							<Nav.Link
-								className="nav-link-with-icon"
-								activeClassName="active"
-								as={NavLink} to="/auth">
+							<NavLinkWithIcon to="/auth">
 								<FontAwesomeIcon icon="sign-in" />
 								Sign in
-							</Nav.Link>
+							</NavLinkWithIcon>
 						) /* else */ : (
-							<Nav.Link
-								className="nav-link-with-icon"
-								onClick={this.signOut}>
+							<NavLinkWithIcon
+								onClick={this.signOut}
+								noRedirect>
 								<FontAwesomeIcon icon="sign-out" />
 								Sign out
-							</Nav.Link>
+							</NavLinkWithIcon>
 						) /* end if */}
 						<CartNavLink />
 					</Nav>

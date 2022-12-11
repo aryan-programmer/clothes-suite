@@ -7,4 +7,13 @@
 	spacer-1-unit: #{unit($spacer-1)};
 	breakpoints: json-stringify($grid-breakpoints);
 	smallest-size-side-nav: #{$smallest-size-side-nav};
+	btn-transition: #{$btn-transition};
+	border-radius-values: json-stringify((
+		sm: $border-radius-sm,
+		md: $border-radius,
+		lg: $border-radius-lg,
+		xl: $border-radius-xl,
+		2 xl: $border-radius-2xl,
+		pill: $border-radius-pill,
+	));
 }

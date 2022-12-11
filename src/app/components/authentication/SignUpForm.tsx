@@ -3,9 +3,14 @@ import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
 import {DialogContext, IDialogOpener} from "../../../lib/dialogs/DialogContext";
 import nn from "../../../lib/functions/nn";
 import {Optional} from "../../../lib/types";
-import {createUserDocumentOrOverrideData, FirebaseError, signUpWithEmailAndPassword} from "../../utils/firebase";
-import {FirebaseAuthErrorCodes} from "../../utils/firebase/FirebaseAuthErrorCodes";
+import {
+	createUserDocumentOrOverrideData,
+	FirebaseAuthErrorCodes,
+	FirebaseError,
+	signUpWithEmailAndPassword
+} from "../../utils/firebase";
 import Btn from "../common/Btn";
+import {FormCard, FormCardFooterButtons, FormCardHeader, FormCardInputs} from "../common/FormCard";
 import {InputBox} from "../common/InputBoxes";
 
 export type SignUpProps_T = {};
@@ -70,11 +75,11 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 
 	override render () {
 		return (
-			<form className="card bg-gradient--confident-cloud rounded-4" onSubmit={this.onSubmit}>
-				<div className="card-header add-bg-noise rounded-4 rounded-bottom-0">
-					<h2 className="mb-0">Don't have an account? Register now!</h2>
-				</div>
-				<div className="card-body d-flex flex-column gap-2">
+			<FormCard className="bg-gradient--confident-cloud" onSubmit={this.onSubmit}>
+				<FormCardHeader>
+					Don't have an account? Register now!
+				</FormCardHeader>
+				<FormCardInputs>
 					<InputBox
 						type="text"
 						required
@@ -103,16 +108,15 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 						label="Confirm Password"
 						onChange={this.onInputBoxChange}
 					/>
-				</div>
-				<div className="card-footer rounded-4 rounded-top-0">
+				</FormCardInputs>
+				<FormCardFooterButtons>
 					<Btn
 						extension="lg"
 						borderColor="secondary"
-						className=""
 						type="submit">Sign Up
 					</Btn>
-				</div>
-			</form>
+				</FormCardFooterButtons>
+			</FormCard>
 		);
 	}
 }

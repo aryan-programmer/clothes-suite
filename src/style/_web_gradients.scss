@@ -63,12 +63,12 @@
 //	(linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)),
 //);
 //
-//// 010 Winter Neva
-//@include define-gradient(
-//	gradient--winter-neva,
-//	#b2d7fc,
-//	(linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)),
-//);
+// 010 Winter Neva
+@include define-gradient(
+		gradient--winter-neva,
+		#b2d7fc,
+			(linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)),
+);
 //
 //// 011 Dusty Grass
 //@include define-gradient(
@@ -154,12 +154,12 @@
 //	(linear-gradient(to top, #30cfd0 0%, #330867 100%)),
 //);
 //
-//// 023 Rare Wind
-//@include define-gradient(
-//	gradient--rare-wind,
-//	#d7e2e7,
-//	(linear-gradient(to top, #a8edea 0%, #fed6e3 100%)),
-//);
+// 023 Rare Wind
+@include define-gradient(
+		gradient--rare-wind,
+		#d7e2e7,
+			(linear-gradient(to top, #a8edea 0%, #fed6e3 100%)),
+);
 //
 //// 024 Near Moon
 //@include define-gradient(

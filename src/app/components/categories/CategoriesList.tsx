@@ -1,19 +1,44 @@
 import React from "react";
 import {Category} from "../../utils/types";
+import {HexGrid} from "../common/hexagon-grid/HexGrid";
 import CategoryCard from "./CategoryCard";
 
-export type CategoriesListProps_T = {
-	categories: Category[],
-};
+export type CategoriesListProps_T = {};
 
-export default function CategoriesList ({categories}: CategoriesListProps_T) {
+const categories: Category[] = [
+	{
+		id: 1,
+		title: "Hats",
+		icon: "hat-cowboy-side",
+	},
+	{
+		id: 2,
+		title: "Jackets",
+		icon: "vest",
+	},
+	{
+		id: 3,
+		title: "Sneakers",
+		icon: "shoe-prints"
+	},
+	{
+		id: 4,
+		title: "Womens",
+		icon: "female"
+	},
+	{
+		id: 5,
+		title: "Mens",
+		icon: "male"
+	},
+];
+
+export default function CategoriesList (props: CategoriesListProps_T) {
 	return (
-		<div className="row gx-4 gy-3 justify-content-center">
+		<HexGrid>
 			{categories.map(value => (
-				<div className="col-12 col-sm-6 col-md-4" key={value.id}>
-					<CategoryCard cat={value} />
-				</div>))
-			}
-		</div>
+				<CategoryCard cat={value} key={value.id} />
+			))}
+		</HexGrid>
 	);
 }

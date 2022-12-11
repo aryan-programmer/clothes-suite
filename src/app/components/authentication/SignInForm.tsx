@@ -12,6 +12,7 @@ import {
 	signInWithGoogleRedirect
 } from "../../utils/firebase";
 import Btn from "../common/Btn";
+import {FormCard, FormCardFooterButtons, FormCardHeader, FormCardInputs} from "../common/FormCard";
 import {InputBox} from "../common/InputBoxes";
 
 export type SignInProps_T = {};
@@ -81,13 +82,13 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 	override render () {
 		return (
 			<>
-				<form
-					className="card bg-gradient--tempting-azure rounded-4 mb-3 shadows-bg-light-primary"
+				<FormCard
+					className="bg-gradient--tempting-azure mb-3 shadows-bg-light-primary"
 					onSubmit={this.onSubmit}>
-					<div className="card-header add-bg-noise rounded-4 rounded-bottom-0">
-						<h2 className="mb-0">Already have an account? Sign in here.</h2>
-					</div>
-					<div className="card-body d-flex flex-column gap-2">
+					<FormCardHeader>
+						Already have an account? Sign in here.
+					</FormCardHeader>
+					<FormCardInputs>
 						<InputBox
 							type="email"
 							required
@@ -102,19 +103,18 @@ class SignInForm extends React.Component<SignInProps_T, SignInState_T> {
 							label="Password"
 							onChange={this.onInputBoxChange}
 						/>
-					</div>
-					<div className="card-footer rounded-4 rounded-top-0 d-flex gap-3">
+					</FormCardInputs>
+					<FormCardFooterButtons>
 						<Btn
 							extension="lg"
 							borderColor="primary"
-							className=""
 							type="submit">Sign In
 						</Btn>
-						<Btn extension="lg" className="" borderColor="primary" onClick={signInWithGoogleRedirect}>
+						<Btn extension="lg" borderColor="primary" onClick={signInWithGoogleRedirect}>
 							<FontAwesomeIcon icon={["fab", "google"]} /> Sign in with Google
 						</Btn>
-					</div>
-				</form>
+					</FormCardFooterButtons>
+				</FormCard>
 			</>
 		);
 	}
