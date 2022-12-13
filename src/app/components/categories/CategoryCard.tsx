@@ -10,7 +10,7 @@ export type CategoriesCardProps_T = {
 
 export default function CategoryCard ({cat}: CategoriesCardProps_T) {
 	const navigate         = useNavigate();
-	const navigateCallback = useCallback(() => navigate(`/shop/${cat.title.toLowerCase()}`), [navigate]);
+	const navigateCallback = useCallback(() => navigate(`/shop/${cat.title.toLowerCase()}`), [cat.title, navigate]);
 	return (
 		<HexButton className="bg-gradient--perfect-white" rounded onClick={navigateCallback}>
 			<HexImage>

@@ -27,6 +27,7 @@ export function Alert (props: DialogComponent_Props_T<CloseReason, AlertData_T>)
 		      backdrop,
 		      showClose,
 		      contentClassName,
+		      // eslint-disable-next-line @typescript-eslint/no-unused-vars
 		      ...others
 	      }: AlertData_T  = {
 		...alertContext,

@@ -68,7 +68,7 @@ export class DialogProvider extends Component<DialogProvider_Props_T, DialogProv
 	}
 }
 
-export function useDialog (): OpenDialogFn {
+export function useOpenDialog (): OpenDialogFn {
 	return useContext(DialogContext).openDialog;
 }
 

@@ -1,29 +1,21 @@
 import _ from "lodash";
-import React, {Fragment, useContext} from "react";
-import {ProductCategoriesContext} from "../../context/product-categories.context";
-import {ProductList} from "../../utils/types";
+import React, {Fragment} from "react";
+import {selectNProductsInEachCategory} from "../../store/categories/categories-selector";
+import {useAppSelector} from "../../store/store";
 import ProductsListWithTitle from "./ProductsListWithTitle";
 
 export type ShopPageProps_T = {};
 
 export default function ShopHomePage (props: ShopPageProps_T) {
-	const {productCategories} = useContext(ProductCategoriesContext);
+	const productCategories = useAppSelector(state => selectNProductsInEachCategory(state, 5));
 	return (
 		<>
-			{_.map(productCategories, (value, key) => {
-				const products: ProductList = {};
-				let i                       = 1;
-				for (const product of _.keys(value)) {
-					if (i++ > 5) break;
-					products[product] = value[product];
-				}
-				return (
-					<Fragment key={key}>
-						<ProductsListWithTitle title={key} products={products} hasLink={`/shop/${key}`} />
-						{/*<hr/>*/}
-					</Fragment>
-				);
-			})}
+			{_.map(productCategories, (value, key) =>
+				<Fragment key={key}>
+					<ProductsListWithTitle title={key} products={value} hasLink={`/shop/${key}`} />
+					{/*<hr/>*/}
+				</Fragment>
+			)}
 		</>
 	);
 }

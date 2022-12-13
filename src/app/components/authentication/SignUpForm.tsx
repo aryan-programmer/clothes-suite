@@ -45,7 +45,7 @@ class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
 		} else {
 			try {
 				const res = nn(await signUpWithEmailAndPassword(email, password));
-				const doc = await createUserDocumentOrOverrideData(res.user, {displayName: name});
+				await createUserDocumentOrOverrideData(res.user, {displayName: name});
 				await this.context.openDialog(Alert, {
 					body: "Signed in successfully",
 					backgroundColor: "light-success",

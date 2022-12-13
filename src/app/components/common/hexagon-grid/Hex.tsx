@@ -4,13 +4,21 @@ import {mergeRefs} from "react-merge-refs";
 import styled, {css} from "styled-components";
 import {useActive, useHover} from "../../../../lib/functions/useHover";
 import {FlexColumnCenter} from "../flex-center";
-import {RoundingFilterId} from "../RoundingFilter";
+import {InsetShadowFilterId, RoundingFilterId} from "../RoundingFilter";
 
 const hexTransitionTimeMs = 150;
 const hexActiveTimeMs     = 175;
 const hexTransitionAnim   = `${hexTransitionTimeMs / 1000}s ease-in-out`;
-const hexTransitionProps  = ["color", "background-color", "border-color", "box-shadow", "filter", "transform", "width", "height"];
+const hexTransitionProps  = ["background-color", "filter", "transform", "width", "height"];
 const hexTransitions      = _.chain(hexTransitionProps).map(value => `${value} ${hexTransitionAnim}`).join(",").value();
+
+function getFilterDropShadow (m: number) {
+	const v = 3 * m;
+	const w = 6 * m;
+	return css`
+			filter: drop-shadow(${v}px ${v}px ${w}px var(--light-bg-dark-shadow)) drop-shadow(-${v}px -${v}px ${w}px var(--light-bg-light-shadow));
+	`;
+}
 
 export const HexImage = styled.div`
 	position: absolute;
@@ -41,16 +49,20 @@ export const HexRounded = styled.div`
 `;
 
 const HexHover = css`
-	filter: drop-shadow(-1.5px -1.5px 3px var(--light-bg-light-shadow)) drop-shadow(1.5px 1.5px 3px var(--light-bg-dark-shadow));
+  ${getFilterDropShadow(0.5)};
+	//filter: drop-shadow(-1.5px -1.5px 3px var(--light-bg-light-shadow)) drop-shadow(1.5px 1.5px 3px var(--light-bg-dark-shadow));
 
 	${HexCard} {
 		cursor: pointer;
 	}
 `;
 
-const HexActive = css`
-	filter: none;
+const HexInset = css`
+	filter: url(#${InsetShadowFilterId});
+`;
 
+const HexActive = css`
+	${HexInset}
 	${HexCard} {
 		cursor: pointer;
 
@@ -64,6 +76,7 @@ const HexActive = css`
 export type HexDiv_Props_T = ComponentProps<"div"> & {
 	hover?: boolean;
 	active?: boolean;
+	inset?: boolean;
 };
 
 export const HexDiv = styled.div<HexDiv_Props_T>`
@@ -74,7 +87,7 @@ export const HexDiv = styled.div<HexDiv_Props_T>`
 	display: inline-block;
 	font-size: initial;
 	margin-bottom: calc(var(--hex-margin) - var(--hex-height) * 0.25);
-	filter: drop-shadow(-3px -3px 6px var(--light-bg-light-shadow)) drop-shadow(3px 3px 6px var(--light-bg-dark-shadow));;
+	${getFilterDropShadow(1)};
 	transition: ${hexTransitions};
 
 	& > ${HexCard}, & > ${HexRounded} {
@@ -85,7 +98,7 @@ export const HexDiv = styled.div<HexDiv_Props_T>`
 		height: 100%;
 	}
 
-	${(props) => (props.active ? HexActive : (props.hover ? HexHover : null))}
+	${(props) => (props.active ? HexActive : props.inset ? HexInset : (props.hover ? HexHover : null))}
 `;
 
 export type HexButton_Props_T<HexContainer_T extends React.ElementType = typeof HexDiv> = ComponentProps<"div"> & {
@@ -114,6 +127,7 @@ export const HexButton = React.forwardRef<HTMLDivElement, HexButton_Props_T>(
 		const [hoverRef, hover]                 = useHover();
 		const [activeRef, activeOrig]           = useActive();
 		const [active, setActive]               = useState(activeOrig);
+		const [inset, setInset]                 = useState(false);
 		const [canDeactivate, setCanDeactivate] = useState(false);
 		const rounded                           = props.rounded ?? false;
 
@@ -129,7 +143,11 @@ export const HexButton = React.forwardRef<HTMLDivElement, HexButton_Props_T>(
 			} else {
 				if (canDeactivate) {
 					setActive(false);
+					setInset(true);
 					setCanDeactivate(false);
+					setTimeout(() => {
+						setInset(false);
+					}, hexTransitionTimeMs);
 				}
 			}
 		}, [activeOrig, canDeactivate]);
@@ -141,7 +159,7 @@ export const HexButton = React.forwardRef<HTMLDivElement, HexButton_Props_T>(
 				{...cardProps as any}>{props.children}</HexCard>
 		);
 		return (
-			<HexContainer hover={hover} active={active} {...hexContainerProps as any}>
+			<HexContainer hover={hover} active={active} inset={inset} {...hexContainerProps as any}>
 				{rounded ? <HexRounded className={roundingFilterClassName}>{hexCard}</HexRounded> : hexCard}
 			</HexContainer>
 		);

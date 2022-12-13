@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {app} from './app/init/app-init';
 import "./app/init/fontawesome-icons";

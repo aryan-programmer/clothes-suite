@@ -1,12 +1,13 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import {useMediaQuery} from "react-responsive";
 import {useLocation} from "react-router";
 import {useMatch} from "react-router-dom";
 import styled from "styled-components";
-import {CartContext} from "../../context/cart.context";
+import {selectNumCartItems} from "../../store/cart/cart-selectors";
+import {useAppSelector} from "../../store/store";
 import {clamp99} from "../../utils/consts";
 import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
@@ -31,7 +32,7 @@ const CartIconBadge = styled.span.attrs({
 `
 
 function CartNavContent () {
-	const {state: {numItems}} = useContext(CartContext);
+	const numItems = useAppSelector(selectNumCartItems);
 	return (
 		<>
 			<CartIcon>

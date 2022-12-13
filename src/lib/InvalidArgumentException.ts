@@ -1,5 +1,2 @@
-export class InvalidArgumentException extends Error{
-	constructor (error: string) {
-		super(error);
-	}
+export class InvalidArgumentException extends Error {
 }

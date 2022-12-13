@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import {breakpointMax, breakpoints} from "../../../utils/css-vars";
 import {HexDiv} from "./Hex";
 import {HexGrid} from "./HexGrid";
 
-const smMin  = breakpoints["sm"];
+//const smMin  = breakpoints["sm"];
 const mdMax  = breakpointMax("md");
 const cutoff = "750px";
 

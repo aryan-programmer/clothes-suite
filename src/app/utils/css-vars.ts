@@ -26,8 +26,8 @@ export function shadowsFromColor (hex: string, isDark: boolean = false) {
 	let hsl         = rgbToHsl(r, g, b);
 	const hue       = hsl[0] * 360;
 	return isDark ? css`
-			--light-bg-dark-shadow: hsla(${hue}, 60%, 20%);
-			--light-bg-light-shadow: hsla(${hue}, 70%, 40%);
+			--light-bg-dark-shadow: hsla(${hue}, 60%, ${(20 + hsl[2] * 100) / 2}%);
+			--light-bg-light-shadow: hsla(${hue}, 70%, 83%);
 	` : css`
 			--light-bg-dark-shadow: hsla(${hue}, 60%, 65%);
 			--light-bg-light-shadow: hsla(${hue}, 70%, 93%);

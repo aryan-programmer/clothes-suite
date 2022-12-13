@@ -1,8 +1,9 @@
-import React, {ComponentProps, useContext} from "react";
+import React, {ComponentProps} from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 import roundToTwo from "../../../lib/functions/roundToTwo";
-import {CartContext} from "../../context/cart.context";
+import {selectCart, selectNumCartItems, selectTotalCartPrice} from "../../store/cart/cart-selectors";
+import {useAppSelector} from "../../store/store";
 import {borderRadiusValues} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
 import CartTableRow from "./CartTableRow";
@@ -37,7 +38,9 @@ const TableTotalHeading = styled.td.attrs({
 export type CartPageProps_T = {};
 
 export default function CartPage (props: CartPageProps_T) {
-	const {state: {cart, numItems, totalCost}} = useContext(CartContext);
+	const cart      = useAppSelector(selectCart);
+	const numItems  = useAppSelector(selectNumCartItems);
+	const totalCost = useAppSelector(selectTotalCartPrice);
 	return (
 		<CartTableContainer>
 			<CartHeading>Your Cart</CartHeading>
@@ -59,7 +62,7 @@ export default function CartPage (props: CartPageProps_T) {
 						</td>
 					</tr> :
 					cart.map((value, i) => (
-						<CartTableRow item={value} index={i} key={value.id} />
+						<CartTableRow {...value} index={i} key={value.id} />
 					))
 				}
 				<tr className="sticky-bottom bg-light-success">

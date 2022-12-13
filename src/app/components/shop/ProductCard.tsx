@@ -1,7 +1,8 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, {useCallback, useContext, useEffect, useState} from "react";
-import styled from "styled-components";
-import {CartActions, CartContext} from "../../context/cart.context";
+import React, {useCallback, useEffect, useState} from "react";
+import styled, {css} from "styled-components";
+import {cartSlice} from "../../store/cart/cart-slice";
+import {useAppDispatch} from "../../store/store";
 import {fac} from "../../utils/consts";
 import {shadowsFromColor} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
@@ -13,11 +14,11 @@ export type ProductCardProps_T = {
 	product: Product,
 };
 
-type ProductImage_TextOverlay_Props_T = {
+type ProductImageTextOverlay_Props_T = {
 	textColor: string,
 	imgAvgColor: string,
 };
-const ProductImage_TextOverlay = styled.div<ProductImage_TextOverlay_Props_T>`
+const ProductImageTextOverlay = styled.div<ProductImageTextOverlay_Props_T>`
 	${FlexCenter};
 	align-self: stretch;
 	color: ${props => props.textColor};
@@ -36,11 +37,13 @@ type HexButtonContainerWithBg_Props_T = HexDiv_Props_T & {
 	isDark: boolean;
 };
 const HexButtonContainerWithBg = styled(HexDiv)<HexButtonContainerWithBg_Props_T>`
-	${HexCard} {
-		background: ${props => props.backgroundColor};
-	}
+	${props => props.isDark ? css`
+		${HexCard} {
+			background-color: ${props.backgroundColor} !important;
+		}
 
-	${props => props.isDark ? shadowsFromColor(props.backgroundColor, props.isDark) : null}
+		${shadowsFromColor(props.backgroundColor, props.isDark)}
+	` : null}
 `;
 
 export default function ProductCard (props: ProductCardProps_T) {
@@ -48,9 +51,9 @@ export default function ProductCard (props: ProductCardProps_T) {
 	const [imgAvgColor, setImgAvgColor] = useState("#000");
 	const [textColor, setTextColor]     = useState("#fff");
 	const [isDark, setIsDark]           = useState(false);
-	const {dispatch}                    = useContext(CartContext);
+	const dispatch                      = useAppDispatch();
 	const addCurrentItem                = useCallback(
-		() => dispatch(CartActions.AddItem(product)),
+		() => dispatch(cartSlice.actions.addItem(product)),
 		[dispatch, product]
 	);
 	useEffect(() => {
@@ -64,6 +67,7 @@ export default function ProductCard (props: ProductCardProps_T) {
 		<HexButton
 			HexContainer={HexButtonContainerWithBg}
 			hexContainerProps={{backgroundColor: imgAvgColor, isDark}}
+			className="bg-light"
 			rounded
 			onClick={addCurrentItem}>
 			<HexImage>
@@ -74,9 +78,9 @@ export default function ProductCard (props: ProductCardProps_T) {
 					alt={product.name} />
 			</HexImage>
 			<HexBody>
-				<ProductImage_TextOverlay textColor={textColor} imgAvgColor={imgAvgColor}>
+				<ProductImageTextOverlay textColor={textColor} imgAvgColor={imgAvgColor}>
 					<h3>{product.name} <span className="h5-imp mx-2">${product.price}</span></h3>
-				</ProductImage_TextOverlay>
+				</ProductImageTextOverlay>
 				<div
 					className="bg-dark text-white p-2 text-center rounded-pill h3-imp"
 					style={{aspectRatio: "1/1"}}>
