@@ -3,7 +3,6 @@ import {CartItem, Product} from "../../utils/types";
 
 export const CART_STATE_NAME = "cartState";
 
-
 export type CartState_T = {
 	cart: CartItem[];
 }

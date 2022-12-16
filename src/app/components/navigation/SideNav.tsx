@@ -4,11 +4,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {Link} from "react-router-dom";
-import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
-import {useAppSelector} from "../../store/store";
+import {useAppDispatch, useAppSelector} from "../../store/store";
 import {userSlice} from "../../store/user/user-slice";
-import {signOut} from "../../utils/firebase";
 import CartNavLink from "../cart/CartNavLink";
 import NavLinkWithIcon from "../common/NavLinkWithIcon";
 
@@ -18,14 +15,11 @@ type SideNavProps_T = {
 
 export default function SideNavC (props: SideNavProps_T) {
 	const user            = useAppSelector(state => state[userSlice.name].user);
-	const openDialog      = useOpenDialog();
+	const dispatch        = useAppDispatch();
 	const signOutCallback = useCallback(async () => {
 		props.handleClose();
-		await signOut();
-		await openDialog(Alert, {
-			body: "Signed out successfully"
-		});
-	}, [openDialog, props]);
+		dispatch(userSlice.actions.signOut());
+	}, [dispatch, props]);
 	return (
 		<Container className="flex-column h-100">
 			<Navbar.Brand as={Link} className="h4 text-wrap text-center fw-bold mx-1" to="/">

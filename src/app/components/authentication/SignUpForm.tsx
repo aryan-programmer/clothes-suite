@@ -1,17 +1,12 @@
-import React, {ChangeEvent, FormEvent} from "react";
+import React, {FormEvent, useCallback} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {DialogContext, IDialogOpener} from "../../../lib/dialogs/DialogContext";
-import nn from "../../../lib/functions/nn";
-import {Optional} from "../../../lib/types";
-import {
-	createUserDocumentOrOverrideData,
-	FirebaseAuthErrorCodes,
-	FirebaseError,
-	signUpWithEmailAndPassword
-} from "../../utils/firebase";
+import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
+import {useBindString} from "../../../lib/functions/useBind";
+import {useAppDispatch} from "../../store/store";
+import {userSlice} from "../../store/user/user-slice";
 import Btn from "../common/Btn";
 import {FormCard, FormCardFooterButtons, FormCardHeader, FormCardInputs} from "../common/FormCard";
-import {InputBox} from "../common/InputBoxes";
+import {InputBoxControlled} from "../common/InputBoxes";
 
 export type SignUpProps_T = {};
 export type SignUpState_T = {
@@ -21,104 +16,70 @@ export type SignUpState_T = {
 	rePassword: string,
 };
 
-class SignUpForm extends React.Component<SignUpProps_T, SignUpState_T> {
-	static contextType = DialogContext;
-	context!: IDialogOpener;
+export function SignUpForm (props: SignUpProps_T) {
+	const openDialog                                  = useOpenDialog();
+	const [name, setName, bindName]                   = useBindString("");
+	const [email, setEmail, bindEmail]                = useBindString("");
+	const [password, setPassword, bindPassword]       = useBindString("1234567890");
+	const [rePassword, setRePassword, bindRePassword] = useBindString("1234567890");
+	const dispatch                                    = useAppDispatch();
 
-	constructor (props: SignUpProps_T) {
-		super(props);
-
-		this.state = {
-			name: "",
-			email: "",
-			password: "",
-			rePassword: "",
-		};
-	}
-
-	onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+	const onSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const {name, email, password, rePassword} = this.state;
-		let error: Optional<string>               = null;
 		if (password !== rePassword) {
-			error = "The passwords don't match";
-		} else {
-			try {
-				const res = nn(await signUpWithEmailAndPassword(email, password));
-				await createUserDocumentOrOverrideData(res.user, {displayName: name});
-				await this.context.openDialog(Alert, {
-					body: "Signed in successfully",
-					backgroundColor: "light-success",
-				});
-				return;
-			} catch (e) {
-				error = "Failed to sign up user";
-				if (e instanceof FirebaseError) {
-					if (e.code === FirebaseAuthErrorCodes.EMAIL_EXISTS)
-						error = "Email already used to sign up a user";
-				}
-			}
-		}
-		if ((error?.length ?? 0) > 0)
-			await this.context.openDialog(Alert, {
-				body: error,
+			await openDialog(Alert, {
+				body: "The passwords don't match",
 				backgroundColor: "light-danger",
 			});
-	};
+		} else {
+			dispatch(userSlice.actions.signUpStart({email, password, name}));
+		}
+	}, [dispatch, email, name, openDialog, password, rePassword]);
 
-	onInputBoxChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const {name, value} = event.target;
-		this.setState({
-			[name]: value,
-		} as unknown as SignUpState_T);
-	};
-
-	override render () {
-		return (
-			<FormCard className="bg-gradient--confident-cloud" onSubmit={this.onSubmit}>
-				<FormCardHeader>
-					Don't have an account? Register now!
-				</FormCardHeader>
-				<FormCardInputs>
-					<InputBox
-						type="text"
-						required
-						name="name"
-						label="Name"
-						onChange={this.onInputBoxChange}
-					/>
-					<InputBox
-						type="email"
-						required
-						name="email"
-						label="Email"
-						onChange={this.onInputBoxChange}
-					/>
-					<InputBox
-						type="password"
-						required
-						name="password"
-						label="Password"
-						onChange={this.onInputBoxChange}
-					/>
-					<InputBox
-						type="password"
-						required
-						name="rePassword"
-						label="Confirm Password"
-						onChange={this.onInputBoxChange}
-					/>
-				</FormCardInputs>
-				<FormCardFooterButtons>
-					<Btn
-						extension="lg"
-						borderColor="secondary"
-						type="submit">Sign Up
-					</Btn>
-				</FormCardFooterButtons>
-			</FormCard>
-		);
-	}
+	return (
+		<FormCard className="bg-gradient--confident-cloud" onSubmit={onSubmit}>
+			<FormCardHeader>
+				Don't have an account? Register now!
+			</FormCardHeader>
+			<FormCardInputs>
+				<InputBoxControlled
+					type="text"
+					required
+					name="name"
+					label="Name"
+					{...bindName}
+				/>
+				<InputBoxControlled
+					type="email"
+					required
+					name="email"
+					label="Email"
+					{...bindEmail}
+				/>
+				<InputBoxControlled
+					type="password"
+					required
+					name="password"
+					label="Password"
+					{...bindPassword}
+				/>
+				<InputBoxControlled
+					type="password"
+					required
+					name="rePassword"
+					label="Confirm Password"
+					{...bindRePassword}
+				/>
+			</FormCardInputs>
+			<FormCardFooterButtons>
+				<Btn
+					extension="lg"
+					borderColor="secondary"
+					type="submit">Sign Up
+				</Btn>
+			</FormCardFooterButtons>
+		</FormCard>
+	);
 }
 
 export default SignUpForm;

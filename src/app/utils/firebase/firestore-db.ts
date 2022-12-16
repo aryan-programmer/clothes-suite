@@ -7,7 +7,7 @@ import {
 	getDoc,
 	getFirestore,
 	setDoc,
-	writeBatch
+	writeBatch,
 } from "@firebase/firestore";
 import nn from "../../../lib/functions/nn";
 import {UserData} from "../types";
@@ -32,7 +32,7 @@ export async function createUserDocumentOrOverrideData (user: User, overridingDa
 				...overridingData,
 			});
 		} catch (error) {
-			console.error("Failed to create user", error)
+			console.error("Failed to set user metadata", error)
 			throw error;
 		}
 	}

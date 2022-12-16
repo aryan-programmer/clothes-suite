@@ -11,10 +11,12 @@ import {
 	signInWithPopup,
 	signInWithRedirect,
 	signOut as signOut_,
+	updateProfile,
 	User,
-	UserCredential
+	UserCredential,
 } from "@firebase/auth";
 import {Unsubscribe} from "@firebase/util";
+import {Optional} from "../../../lib/types";
 import {firebaseApp} from "./firebase-app";
 
 export const auth = getAuth(firebaseApp);
@@ -36,16 +38,22 @@ export function getRedirectResult () {
 	return getRedirectResult_(auth);
 }
 
-export async function signUpWithEmailAndPassword (email: string, password: string) {
+export async function signUp (email: string, password: string, displayName: string) {
 	if (email.length === 0) return;
 	if (password.length === 0) return;
-	return await createUserWithEmailAndPassword(auth, email, password);
+	const res = await createUserWithEmailAndPassword(auth, email, password);
+	if (auth.currentUser) {
+		await updateProfile(auth.currentUser, {
+			displayName
+		});
+	}
+	return auth.currentUser ?? res.user;
 }
 
 export async function signInWithEmailAndPassword (email: string, password: string) {
 	if (email.length === 0) return;
 	if (password.length === 0) return;
-	return await signInWithEmailAndPassword_(auth, email, password);
+	return (await signInWithEmailAndPassword_(auth, email, password)).user;
 }
 
 export function signOut () {
@@ -54,4 +62,13 @@ export function signOut () {
 
 export function onAuthStateChanged (nextOrObserver: NextOrObserver<User>, error?: ErrorFn, completed?: CompleteFn): Unsubscribe {
 	return onAuthStateChanged_(auth, nextOrObserver, error, completed);
+}
+
+export function restoreUserSession () {
+	return new Promise<Optional<User>>((resolve, reject) => {
+		const un = onAuthStateChanged(value => {
+			un();
+			resolve(value);
+		}, reject);
+	})
 }

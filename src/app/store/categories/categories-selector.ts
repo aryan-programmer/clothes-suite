@@ -1,7 +1,7 @@
 import {createSelector} from "@reduxjs/toolkit";
 import _ from "lodash";
 import {ProductList} from "../../utils/types";
-import {RootState} from "../store";
+import {RootState} from "../root-reducer";
 import {categoriesSlice} from "./categories-slice";
 
 export const selectNProductsInEachCategory = createSelector(
