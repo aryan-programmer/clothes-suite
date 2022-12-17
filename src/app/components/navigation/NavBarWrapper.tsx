@@ -1,4 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {useCallback, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -81,7 +82,7 @@ const OutletWrapper = styled.div`
 	}
 `;
 
-export default function NavBarWrapper (props: NavBarProps_T) {
+export default observer(function NavBarWrapper (props: NavBarProps_T) {
 	const [show, setShow] = useState(false);
 	const location        = useLocation()
 	const showSideNav     = useMediaQuery({minWidth: sideNavBreakpointMinWidth});
@@ -135,4 +136,4 @@ export default function NavBarWrapper (props: NavBarProps_T) {
 			</OutletWrapper>
 		</WrapperDiv>
 	);
-}
+});

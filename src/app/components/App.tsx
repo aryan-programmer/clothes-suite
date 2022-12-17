@@ -1,10 +1,9 @@
+import {observer} from "mobx-react";
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import {useOpenDialog} from "../../lib/dialogs/DialogContext";
-import {categoriesSlice} from "../store/categories/categories-slice";
-import {dialogSlice} from "../store/dialogs/dialogs";
-import {useAppDispatch, useAppSelector} from "../store/store";
-import {userSlice} from "../store/user/user-slice";
+import {useResolve} from "../../lib/injector/useResolve";
+import CategoriesStore from "../store/categories/categories-store";
+import UserStore from "../store/user/user-store";
 import AuthenticationPage from "./authentication/Authentication.Page";
 import CartPage from "./cart/Cart.Page";
 import RoundingFilter from "./common/RoundingFilter";
@@ -15,20 +14,16 @@ import ShopRoutesPage from "./shop/ShopRoutes.Page";
 type AppProps_T = {};
 
 function App (props: AppProps_T) {
-	const dispatch   = useAppDispatch();
-	const openDialog = useOpenDialog();
-	const dialog     = useAppSelector(state => state[dialogSlice.name]);
+	const categoriesStore = useResolve(CategoriesStore);
+	const userStore       = useResolve(UserStore);
 
 	useEffect(() => {
-		if (dialog.Dialog != null && dialog.data != null)
-			openDialog(dialog.Dialog, dialog.data).then(() => {
-				dispatch(dialogSlice.actions.onDialogClose());
-			});
-	}, [dialog, dispatch, openDialog]);
+		categoriesStore.fetchProducts();
+		userStore.restoreUser();
+		// Only run once
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-	useEffect(() => void dispatch(userSlice.actions.restoreUserSession()), [dispatch]);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => void dispatch(categoriesSlice.actions.fetchProducts()), []);
 
 	return (
 		<>
@@ -45,4 +40,4 @@ function App (props: AppProps_T) {
 	);
 }
 
-export default App;
+export default observer(App);

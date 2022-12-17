@@ -1,25 +1,45 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {ChangeEvent, FormEvent, useCallback, useEffect, useState} from "react";
-import {useAppDispatch} from "../../store/store";
-import {userSlice} from "../../store/user/user-slice";
+import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
+import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
+import {useResolve} from "../../../lib/injector/useResolve";
+import UserStore from "../../store/user/user-store";
 import {signInWithGoogleRedirect} from "../../utils/firebase";
+import {useHandleAsyncError} from "../../utils/useHandleAsyncError";
 import Btn from "../common/Btn";
 import {FormCard, FormCardFooterButtons, FormCardHeader, FormCardInputs} from "../common/FormCard";
 import {InputBox} from "../common/InputBoxes";
 
 export type SignInProps_T = {};
 
-export default function SignInForm (props: SignInProps_T) {
+export default observer(function SignInForm (props: SignInProps_T) {
 	const [email, setEmail]       = useState("");
 	const [password, setPassword] = useState("");
-	const dispatch                = useAppDispatch();
+	const openDialog              = useOpenDialog();
+	const userStore               = useResolve(UserStore);
+	const handleError             = useHandleAsyncError("Failed to sign in user");
 
-	useEffect(() => void dispatch(userSlice.actions.checkRedirectResult()), []);
+	useEffect(() => void handleError(async () => {
+		if (await userStore.checkRedirectResult()) {
+			await openDialog(Alert, {
+				body: "Signed in successfully",
+				backgroundColor: "light-success",
+			});
+		}
+	}), [handleError, openDialog, userStore]);
 
-	const onSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
+	const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		dispatch(userSlice.actions.emailSignInStart({email, password}));
-	}, [dispatch, email, password]);
+		handleError(async () => {
+			if (await userStore.emailSignIn(email, password)) {
+				await openDialog(Alert, {
+					body: "Signed in successfully",
+					backgroundColor: "light-success",
+				});
+			} else throw new Error("Failed");
+		});
+	}, [email, handleError, password, userStore]);
 
 	const onInputBoxChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		const {name, value} = event.target;
@@ -64,4 +84,4 @@ export default function SignInForm (props: SignInProps_T) {
 			</FormCard>
 		</>
 	);
-}
+});

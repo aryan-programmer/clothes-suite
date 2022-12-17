@@ -1,4 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {useCallback, useEffect, useState} from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -6,8 +7,8 @@ import {useMediaQuery} from "react-responsive";
 import {useLocation} from "react-router";
 import {useMatch} from "react-router-dom";
 import styled from "styled-components";
-import {selectNumCartItems} from "../../store/cart/cart-selectors";
-import {useAppSelector} from "../../store/store";
+import {useResolve} from "../../../lib/injector/useResolve";
+import CartStore from "../../store/cart/cart-store";
 import {clamp99} from "../../utils/consts";
 import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
@@ -31,8 +32,8 @@ const CartIconBadge = styled.span.attrs({
 	border-radius: 100em;
 `
 
-function CartNavContent () {
-	const numItems = useAppSelector(selectNumCartItems);
+const CartNavContent = observer(function CartNavContent () {
+	const {numItems} = useResolve(CartStore);
 	return (
 		<>
 			<CartIcon>
@@ -44,9 +45,9 @@ function CartNavContent () {
 			Cart
 		</>
 	);
-}
+});
 
-function CartNavButtonWithPopover () {
+const CartNavButtonWithPopover = observer(function CartNavButtonWithPopover () {
 	const [popoverVisible, setPopoverVisible] = useState(false);
 
 	const hasMatch = useMatch("/cart") != null;
@@ -91,9 +92,9 @@ function CartNavButtonWithPopover () {
 			</NavLinkWithIcon>
 		</OverlayTrigger>
 	);
-}
+});
 
-export default function CartNavLink (props: CartNavLinkProps_T) {
+export default observer(function CartNavLink (props: CartNavLinkProps_T) {
 	const showingSideNav = useMediaQuery({minWidth: sideNavBreakpointMinWidth});
 
 	return (
@@ -104,4 +105,4 @@ export default function CartNavLink (props: CartNavLinkProps_T) {
 				<CartNavContent />
 			</NavLinkWithIcon>
 	);
-}
+});

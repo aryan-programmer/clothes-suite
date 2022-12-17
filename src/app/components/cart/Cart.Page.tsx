@@ -1,9 +1,10 @@
+import {observer} from "mobx-react";
 import React, {ComponentProps} from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 import roundToTwo from "../../../lib/functions/roundToTwo";
-import {selectCart, selectNumCartItems, selectTotalCartPrice} from "../../store/cart/cart-selectors";
-import {useAppSelector} from "../../store/store";
+import {useResolve} from "../../../lib/injector/useResolve";
+import CartStore from "../../store/cart/cart-store";
 import {borderRadiusValues} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
 import CartTableRow from "./CartTableRow";
@@ -37,10 +38,8 @@ const TableTotalHeading = styled.td.attrs({
 
 export type CartPageProps_T = {};
 
-export default function CartPage (props: CartPageProps_T) {
-	const cart      = useAppSelector(selectCart);
-	const numItems  = useAppSelector(selectNumCartItems);
-	const totalCost = useAppSelector(selectTotalCartPrice);
+export default observer(function CartPage (props: CartPageProps_T) {
+	const {cart, numItems, totalCost} = useResolve(CartStore);
 	return (
 		<CartTableContainer>
 			<CartHeading>Your Cart</CartHeading>
@@ -75,4 +74,4 @@ export default function CartPage (props: CartPageProps_T) {
 			</Table>
 		</CartTableContainer>
 	);
-}
+});

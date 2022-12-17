@@ -1,11 +1,14 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {useCallback} from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {Link} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../store/store";
-import {userSlice} from "../../store/user/user-slice";
+import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
+import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
+import {useResolve} from "../../../lib/injector/useResolve";
+import UserStore from "../../store/user/user-store";
 import CartNavLink from "../cart/CartNavLink";
 import NavLinkWithIcon from "../common/NavLinkWithIcon";
 
@@ -13,13 +16,16 @@ type SideNavProps_T = {
 	handleClose (): void;
 };
 
-export default function SideNavC (props: SideNavProps_T) {
-	const user            = useAppSelector(state => state[userSlice.name].user);
-	const dispatch        = useAppDispatch();
+export default observer(function SideNavC (props: SideNavProps_T) {
+	const userStore       = useResolve(UserStore);
+	const openDialog      = useOpenDialog();
 	const signOutCallback = useCallback(async () => {
 		props.handleClose();
-		dispatch(userSlice.actions.signOut());
-	}, [dispatch, props]);
+		await userStore.signOut();
+		await openDialog(Alert, {
+			body: "Signed out successfully"
+		});
+	}, [openDialog, props.handleClose, userStore]);
 	return (
 		<Container className="flex-column h-100">
 			<Navbar.Brand as={Link} className="h4 text-wrap text-center fw-bold mx-1" to="/">
@@ -36,7 +42,7 @@ export default function SideNavC (props: SideNavProps_T) {
 						<FontAwesomeIcon icon="store" />
 						Shop
 					</NavLinkWithIcon>
-					{/* if */ user == null ? (
+					{/* if */ userStore.user == null ? (
 						<NavLinkWithIcon to="/auth">
 							<FontAwesomeIcon icon="sign-in" />
 							Sign in
@@ -54,4 +60,4 @@ export default function SideNavC (props: SideNavProps_T) {
 			</Navbar.Collapse>
 		</Container>
 	);
-}
+});

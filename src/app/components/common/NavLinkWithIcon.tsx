@@ -1,10 +1,11 @@
+import {observer} from "mobx-react";
 import Nav from "react-bootstrap/Nav";
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
 import {btnTransition, sideNavBreakpointMinWidth} from "../../utils/css-vars";
 import {spacing} from "../../utils/spacing";
 
-const NavLinkWithIcon = styled(Nav.Link).attrs(props => ({
+const NavLinkWithIcon = observer(styled(Nav.Link).attrs(props => ({
 	as: props.noRedirect ?? false ? "div" : NavLink,
 	className: "nav-link btn btn-el-1"
 }))`
@@ -20,5 +21,5 @@ const NavLinkWithIcon = styled(Nav.Link).attrs(props => ({
 		flex-direction: column;
 		gap: 0;
 	}
-`;
+`);
 export default NavLinkWithIcon;

@@ -1,3 +1,4 @@
+import {observer} from "mobx-react";
 import React from "react";
 
 export type RoundingFilterProps_T = {};
@@ -5,7 +6,7 @@ export type RoundingFilterProps_T = {};
 export const RoundingFilterId    = "round";
 export const InsetShadowFilterId = "inset-shadow";
 
-export default function RoundingFilter (props: RoundingFilterProps_T) {
+export default observer(function RoundingFilter (props: RoundingFilterProps_T) {
 	return (
 		<svg
 			style={{
@@ -49,4 +50,4 @@ export default function RoundingFilter (props: RoundingFilterProps_T) {
 			</defs>
 		</svg>
 	);
-}
+});

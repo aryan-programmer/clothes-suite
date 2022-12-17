@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {observer} from "mobx-react";
 import React from "react";
 import {Link} from "react-router-dom";
 import {ProductList} from "../../utils/types";
@@ -11,7 +12,7 @@ export type ProductsPageProps_T = {
 	hasLink?: string | false
 };
 
-export default function ProductsListWithTitle (props: ProductsPageProps_T) {
+export default observer(function ProductsListWithTitle (props: ProductsPageProps_T) {
 	const {title, products} = props;
 	const hasLink           = props.hasLink ?? false;
 	return (
@@ -36,4 +37,4 @@ export default function ProductsListWithTitle (props: ProductsPageProps_T) {
 			<div style={{paddingTop: "calc(var(--hex-height) * 0.25)"}} className="mb-4"></div>
 		</div>
 	);
-}
+});

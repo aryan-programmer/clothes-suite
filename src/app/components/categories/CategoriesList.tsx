@@ -1,3 +1,4 @@
+import {observer} from "mobx-react";
 import React from "react";
 import {Category} from "../../utils/types";
 import {HexGrid} from "../common/hexagon-grid/HexGrid";
@@ -33,7 +34,7 @@ const categories: Category[] = [
 	},
 ];
 
-export default function CategoriesList (props: CategoriesListProps_T) {
+export default observer(function CategoriesList (props: CategoriesListProps_T) {
 	return (
 		<HexGrid>
 			{categories.map(value => (
@@ -41,4 +42,4 @@ export default function CategoriesList (props: CategoriesListProps_T) {
 			))}
 		</HexGrid>
 	);
-}
+});

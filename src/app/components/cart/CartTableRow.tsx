@@ -1,28 +1,28 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {ChangeEvent, useCallback} from "react";
-import {cartSlice} from "../../store/cart/cart-slice";
-import {useAppDispatch} from "../../store/store";
-import {CartItem} from "../../utils/types";
+import {useResolve} from "../../../lib/injector/useResolve";
+import CartStore from "../../store/cart/cart-store";
 import Btn from "../common/Btn";
 import {ImgThumbnail} from "../common/ImgThumbnail";
 import {InputBoxControlledUnlabeled} from "../common/InputBoxes";
 
-export type CartTableRowProps_T = CartItem & {
+export type CartTableRowProps_T = {
 	index: number,
 };
 
-export default function CartTableRow (props: CartTableRowProps_T) {
-	const {imageUrl, name, price, quantity, index} = props;
-
-	const dispatch = useAppDispatch();
+export default observer(function CartTableRow (props: CartTableRowProps_T) {
+	const {index}                           = props;
+	const cartStore                         = useResolve(CartStore);
+	const {imageUrl, name, price, quantity} = cartStore.cart[index];
 
 	const onQuantityChanged = useCallback((ev: ChangeEvent<HTMLInputElement>) => {
-		dispatch(cartSlice.actions.setItemQuantity({index, quantity: Math.round(+ev.target.value)}));
-	}, [dispatch, index]);
+		cartStore.setItemQuantity(index, Math.round(+ev.target.value));
+	}, [index]);
 
 	const onRemove = useCallback(() => {
-		dispatch(cartSlice.actions.removeItem({index}));
-	}, [dispatch, index]);
+		cartStore.removeItem(index);
+	}, [index]);
 	return (
 		<tr>
 			<td className="d-flex justify-content-align-items-center">
@@ -46,4 +46,4 @@ export default function CartTableRow (props: CartTableRowProps_T) {
 			</td>
 		</tr>
 	);
-}
+});

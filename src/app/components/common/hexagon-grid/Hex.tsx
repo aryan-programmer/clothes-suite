@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {observer} from "mobx-react";
 import React, {ComponentProps, ForwardedRef, useEffect, useState} from "react";
 import {mergeRefs} from "react-merge-refs";
 import styled, {css} from "styled-components";
@@ -49,7 +50,7 @@ export const HexRounded = styled.div`
 `;
 
 const HexHover = css`
-  ${getFilterDropShadow(0.5)};
+	${getFilterDropShadow(0.5)};
 	//filter: drop-shadow(-1.5px -1.5px 3px var(--light-bg-light-shadow)) drop-shadow(1.5px 1.5px 3px var(--light-bg-dark-shadow));
 
 	${HexCard} {
@@ -79,7 +80,7 @@ export type HexDiv_Props_T = ComponentProps<"div"> & {
 	inset?: boolean;
 };
 
-export const HexDiv = styled.div<HexDiv_Props_T>`
+export const HexDiv = observer(styled.div<HexDiv_Props_T>`
 	position: relative;
 	width: var(--hex-width);
 	margin: var(--hex-margin);
@@ -99,7 +100,7 @@ export const HexDiv = styled.div<HexDiv_Props_T>`
 	}
 
 	${(props) => (props.active ? HexActive : props.inset ? HexInset : (props.hover ? HexHover : null))}
-`;
+`);
 
 export type HexButton_Props_T<HexContainer_T extends React.ElementType = typeof HexDiv> = ComponentProps<"div"> & {
 	children?: any;
@@ -116,51 +117,50 @@ export type HexButton_Props_T<HexContainer_T extends React.ElementType = typeof 
 	hexContainerProps?: ComponentProps<HexContainer_T>;
 };
 
-export const HexButton = React.forwardRef<HTMLDivElement, HexButton_Props_T>(
-	<HexContainer_T extends React.ElementType = typeof HexDiv> (
-		props: HexButton_Props_T<HexContainer_T>,
-		ref: ForwardedRef<HTMLDivElement>
-	) => {
-		let {className, roundingFilterClassName, children, HexContainer, hexContainerProps, ...cardProps} = props;
-		HexContainer ??= HexDiv;
+export const HexButton = observer(React.forwardRef<HTMLDivElement, HexButton_Props_T>(<HexContainer_T extends React.ElementType = typeof HexDiv> (
+	props: HexButton_Props_T<HexContainer_T>,
+	ref: ForwardedRef<HTMLDivElement>
+) => {
+	let {className, roundingFilterClassName, children, HexContainer, hexContainerProps, ...cardProps} = props;
+	HexContainer ??= HexDiv;
 
-		const [hoverRef, hover]                 = useHover();
-		const [activeRef, activeOrig]           = useActive();
-		const [active, setActive]               = useState(activeOrig);
-		const [inset, setInset]                 = useState(false);
-		const [canDeactivate, setCanDeactivate] = useState(false);
-		const rounded                           = props.rounded ?? false;
+	const [hoverRef, hover]                 = useHover();
+	const [activeRef, activeOrig]           = useActive();
+	const [active, setActive]               = useState(activeOrig);
+	const [inset, setInset]                 = useState(false);
+	const [canDeactivate, setCanDeactivate] = useState(false);
+	const rounded                           = props.rounded ?? false;
 
-		useEffect(() => {
-			if (activeOrig) {
-				if (!canDeactivate) {
-					setActive(true);
-					setCanDeactivate(false);
-					setTimeout(() => {
-						setCanDeactivate(true);
-					}, hexActiveTimeMs);
-				}
-			} else {
-				if (canDeactivate) {
-					setActive(false);
-					setInset(true);
-					setCanDeactivate(false);
-					setTimeout(() => {
-						setInset(false);
-					}, hexTransitionTimeMs);
-				}
+	useEffect(() => {
+		if (activeOrig) {
+			if (!canDeactivate) {
+				setActive(true);
+				setCanDeactivate(false);
+				setTimeout(() => {
+					setCanDeactivate(true);
+				}, hexActiveTimeMs);
 			}
-		}, [activeOrig, canDeactivate]);
+		} else {
+			if (canDeactivate) {
+				setActive(false);
+				setInset(true);
+				setCanDeactivate(false);
+				setTimeout(() => {
+					setInset(false);
+				}, hexTransitionTimeMs);
+			}
+		}
+	}, [activeOrig, canDeactivate]);
 
-		const hexCard = (
-			<HexCard
-				className={className}
-				ref={mergeRefs([hoverRef, activeRef, ref])}
-				{...cardProps as any}>{props.children}</HexCard>
-		);
-		return (
-			<HexContainer hover={hover} active={active} inset={inset} {...hexContainerProps as any}>
-				{rounded ? <HexRounded className={roundingFilterClassName}>{hexCard}</HexRounded> : hexCard}
-			</HexContainer>
-		);
-	});
+	const hexCard = (
+		<HexCard
+			className={className}
+			ref={mergeRefs([hoverRef, activeRef, ref])}
+			{...cardProps as any}>{props.children}</HexCard>
+	);
+	return (
+		<HexContainer hover={hover} active={active} inset={inset} {...hexContainerProps as any}>
+			{rounded ? <HexRounded className={roundingFilterClassName}>{hexCard}</HexRounded> : hexCard}
+		</HexContainer>
+	);
+}));

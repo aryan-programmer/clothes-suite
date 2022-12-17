@@ -1,15 +1,15 @@
+import {observer} from "mobx-react";
 import React from "react";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 import {Link} from "react-router-dom";
-import {selectCart, selectNumCartItems} from "../../store/cart/cart-selectors";
-import {useAppSelector} from "../../store/store";
+import {useResolve} from "../../../lib/injector/useResolve";
+import CartStore from "../../store/cart/cart-store";
 import Btn from "../common/Btn";
 
 export type CartComponentProps_T = {};
 
-export default function CartPopover (props: CartComponentProps_T) {
-	const cart     = useAppSelector(selectCart);
-	const numItems = useAppSelector(selectNumCartItems);
+export default observer(function CartPopover (props: CartComponentProps_T) {
+	const {cart, numItems} = useResolve(CartStore);
 	return (
 		<div className="mx-auto" style={{maxWidth: "500px"}}>
 			<Btn as={Link} className="w-100 mb-2" to="/cart" borderColor="tertiary">
@@ -30,4 +30,4 @@ export default function CartPopover (props: CartComponentProps_T) {
 			</ListGroup>
 		</div>
 	);
-}
+});

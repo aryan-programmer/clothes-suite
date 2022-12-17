@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {observer} from "mobx-react";
 import React, {ChangeEventHandler, InputHTMLAttributes, useRef} from "react";
 
 type InputBoxCommon_OwnProps_T = {
@@ -45,7 +46,7 @@ function InputBoxUnlabeled_ (props: InputBox_Props_T) {
 	);
 }
 
-export const InputBoxUnlabeled = React.memo(InputBoxUnlabeled_);
+export const InputBoxUnlabeled = observer(InputBoxUnlabeled_);
 
 function InputBox_ (props: InputBox_Props_T) {
 	const {current: id} = useRef(props.id ?? _.uniqueId("InputBox-id-"));
@@ -61,9 +62,9 @@ function InputBox_ (props: InputBox_Props_T) {
 	);
 }
 
-export const InputBox = React.memo(InputBox_);
+export const InputBox = observer(InputBox_);
 
-export function InputBoxControlledUnlabeled (props: InputBoxControlledUnlabeled_Props_T) {
+export const InputBoxControlledUnlabeled = observer(function InputBoxControlledUnlabeled (props: InputBoxControlledUnlabeled_Props_T) {
 	let {className: newClasses, placeholder, onChange, value, border, ...remainingProps} = props;
 
 	let className = "form-control rounded-pill ";
@@ -79,10 +80,9 @@ export function InputBoxControlledUnlabeled (props: InputBoxControlledUnlabeled_
 			value={value}
 			{...remainingProps} />
 	);
-}
+});
 
-
-export function InputBoxControlled (props: InputBoxControlled_Props_T) {
+export const InputBoxControlled = observer(function InputBoxControlled (props: InputBoxControlled_Props_T) {
 	const {current: id} = useRef(props.id ?? _.uniqueId("InputBoxControlled-id-"));
 
 	let {label, id: ___, ...remainingProps} = props;
@@ -95,4 +95,4 @@ export function InputBoxControlled (props: InputBoxControlled_Props_T) {
 			<label htmlFor={id}>{label}</label>
 		</div>
 	);
-}
+});

@@ -1,9 +1,11 @@
+import {observer} from "mobx-react";
 import React, {FormEvent, useCallback} from "react";
 import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
 import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
 import {useBindString} from "../../../lib/functions/useBind";
-import {useAppDispatch} from "../../store/store";
-import {userSlice} from "../../store/user/user-slice";
+import {useResolve} from "../../../lib/injector/useResolve";
+import UserStore from "../../store/user/user-store";
+import {useHandleAsyncError} from "../../utils/useHandleAsyncError";
 import Btn from "../common/Btn";
 import {FormCard, FormCardFooterButtons, FormCardHeader, FormCardInputs} from "../common/FormCard";
 import {InputBoxControlled} from "../common/InputBoxes";
@@ -16,13 +18,14 @@ export type SignUpState_T = {
 	rePassword: string,
 };
 
-export function SignUpForm (props: SignUpProps_T) {
+function SignUpForm (props: SignUpProps_T) {
 	const openDialog                                  = useOpenDialog();
 	const [name, setName, bindName]                   = useBindString("");
 	const [email, setEmail, bindEmail]                = useBindString("");
-	const [password, setPassword, bindPassword]       = useBindString("1234567890");
-	const [rePassword, setRePassword, bindRePassword] = useBindString("1234567890");
-	const dispatch                                    = useAppDispatch();
+	const [password, setPassword, bindPassword]       = useBindString("");
+	const [rePassword, setRePassword, bindRePassword] = useBindString("");
+	const userStore                                   = useResolve(UserStore);
+	const handleError                                 = useHandleAsyncError("Failed to sign in user");
 
 	const onSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -32,9 +35,16 @@ export function SignUpForm (props: SignUpProps_T) {
 				backgroundColor: "light-danger",
 			});
 		} else {
-			dispatch(userSlice.actions.signUpStart({email, password, name}));
+			await handleError(async () => {
+				if (await userStore.signUp(email, password, name)) {
+					await openDialog(Alert, {
+						body: "Signed up successfully",
+						backgroundColor: "light-success",
+					});
+				} else throw new Error("Failed");
+			});
 		}
-	}, [dispatch, email, name, openDialog, password, rePassword]);
+	}, [email, handleError, name, openDialog, password, rePassword, userStore]);
 
 	return (
 		<FormCard className="bg-gradient--confident-cloud" onSubmit={onSubmit}>
@@ -82,4 +92,4 @@ export function SignUpForm (props: SignUpProps_T) {
 	);
 }
 
-export default SignUpForm;
+export default observer(SignUpForm);

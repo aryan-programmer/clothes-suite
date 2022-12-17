@@ -1,3 +1,4 @@
+import {observer} from "mobx-react";
 import React from "react";
 
 export type BtnPropsOrig_T = {
@@ -33,4 +34,4 @@ function Btn<As extends React.ElementType = "button"> (props: BtnProps_T<As>) {
 	);
 }
 
-export default React.memo(Btn);
+export default observer(Btn);

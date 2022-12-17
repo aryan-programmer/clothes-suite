@@ -1,4 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {observer} from "mobx-react";
 import React, {useCallback} from "react";
 import {useNavigate} from "react-router";
 import {Category} from "../../utils/types";
@@ -8,7 +9,7 @@ export type CategoriesCardProps_T = {
 	cat: Category
 };
 
-export default function CategoryCard ({cat}: CategoriesCardProps_T) {
+export default observer(function CategoryCard ({cat}: CategoriesCardProps_T) {
 	const navigate         = useNavigate();
 	const navigateCallback = useCallback(() => navigate(`/shop/${cat.title.toLowerCase()}`), [cat.title, navigate]);
 	return (
@@ -22,4 +23,4 @@ export default function CategoryCard ({cat}: CategoriesCardProps_T) {
 			</HexImage>
 		</HexButton>
 	);
-}
+});
