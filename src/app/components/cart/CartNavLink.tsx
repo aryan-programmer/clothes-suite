@@ -10,7 +10,7 @@ import styled from "styled-components";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
 import {clamp99} from "../../utils/consts";
-import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
+import {sideNavBreakpointMinWidth} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 import NavLinkWithIcon from "../common/NavLinkWithIcon";
 import CartPopover from "./CartPopover";

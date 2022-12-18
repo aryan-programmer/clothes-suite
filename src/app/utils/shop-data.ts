@@ -52,8 +52,8 @@ const productTypes = [
 const minItems = 5;
 const maxItems = 14;
 
-const minPrice = 0.01;
-const maxPrice = 50;
+const minPrice = 1;
+const maxPrice = 1200;
 
 const minWidth  = 300;
 const maxWidth  = 600;

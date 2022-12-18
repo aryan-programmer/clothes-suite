@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import Nav from "react-bootstrap/Nav";
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
-import {btnTransition, sideNavBreakpointMinWidth} from "../../utils/css-vars";
+import {btnTransition, sideNavBreakpointMinWidth} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 
 const NavLinkWithIcon = observer(styled(Nav.Link).attrs(props => ({

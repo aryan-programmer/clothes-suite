@@ -4,6 +4,7 @@ import ListGroup from "react-bootstrap/esm/ListGroup";
 import {Link} from "react-router-dom";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
+import {CurrencySymbol} from "../../utils/consts";
 import Btn from "../common/Btn";
 
 export type CartComponentProps_T = {};
@@ -24,7 +25,7 @@ export default observer(function CartPopover (props: CartComponentProps_T) {
 						<ListGroup.Item key={value.id}>
 							<div><span className="mb-0 h5-imp">{value.name}</span>
 								<span className="ms-1 fw-normal float-end"></span></div>
-							<div>{value.quantity} x ${value.price}</div>
+							<div>{value.quantity} x {CurrencySymbol}{value.price}</div>
 						</ListGroup.Item>
 					))}
 			</ListGroup>

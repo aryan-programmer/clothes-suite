@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {breakpointMax, breakpoints} from "../../../utils/css-vars";
+import {breakpointMax, breakpoints} from "../../../utils/css";
 import {HexDiv} from "./Hex";
 import {HexGrid} from "./HexGrid";
 

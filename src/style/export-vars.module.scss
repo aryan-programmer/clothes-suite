@@ -16,4 +16,9 @@
 		2 xl: $border-radius-2xl,
 		pill: $border-radius-pill,
 	));
+	font-family-sans-serif: #{$font-family-sans-serif};
+	font-size-base: #{$font-size-base};
+	theme-colors: json-stringify($theme-colors);
+	font-url: "#{$font-url}";
+	font-url-short: "#{$font-url-short}";
 }

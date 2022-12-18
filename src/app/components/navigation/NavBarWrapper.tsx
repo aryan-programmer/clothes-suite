@@ -9,7 +9,7 @@ import {useMediaQuery} from "react-responsive";
 import {useLocation} from "react-router";
 import {Outlet} from "react-router-dom";
 import styled from "styled-components";
-import {sideNavBreakpointMinWidth} from "../../utils/css-vars";
+import {sideNavBreakpointMinWidth} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 import CartNavLink from "../cart/CartNavLink";
 import Btn from "../common/Btn";

@@ -6,7 +6,7 @@ import ShopHomePage from "./ShopHome.Page";
 
 export type ShopRoutesPageProps_T = {};
 
-export default observer(function ShopRoutesPage (props: ShopRoutesPageProps_T) {
+export default observer(function ShopRoutes (props: ShopRoutesPageProps_T) {
 	return (
 		<Routes>
 			<Route index element={<ShopHomePage />} />

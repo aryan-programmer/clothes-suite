@@ -1134,12 +1134,12 @@
 			(linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)),
 );
 //
-//// 163 Fresh Oasis
-//@include define-gradient(
-//	gradient--fresh-oasis,
-//	#9ecdf1,
-//	(linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%)),
-//);
+// 163 Fresh Oasis
+@include define-gradient(
+	gradient--fresh-oasis,
+	#9ecdf1,
+	(linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%)),
+);
 //
 //// 164 Strict November
 //@include define-gradient(

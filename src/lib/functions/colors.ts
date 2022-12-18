@@ -36,6 +36,10 @@ export function rgbToHsl (r: number, g: number, b: number) {
 		h /= 6;
 	}
 
+	h *= 360;
+	s *= 100;
+	l *= 100;
+
 	return [h, s, l];
 }
 
@@ -59,10 +63,14 @@ function hue2rgb (p: number, q: number, t: number) {
  * @param   {number}  l       The lightness
  * @return  {Array}           The RGB representation
  */
-export function hslToRgb (h: number, s: number, l: number) {
+export function hslToRgb (h: number, s: number, l: number): [number, number, number] {
 	let r: number,
 	    g: number,
 	    b: number;
+
+	h /= 360;
+	s /= 100;
+	l /= 100;
 
 	if (s === 0) {
 		r = g = b = l; // achromatic

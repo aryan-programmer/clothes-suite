@@ -41,6 +41,11 @@ export default class CartStore implements Disposable {
 		this.cart.splice(index, 1);
 	}
 
+	@action
+	clear(){
+		this.cart.splice(0);
+	}
+
 	@computed
 	get numItems () {
 		let cartItems = 0;

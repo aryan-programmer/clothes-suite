@@ -4,8 +4,8 @@ import React, {useCallback, useEffect, useState} from "react";
 import styled, {css} from "styled-components";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
-import {fac} from "../../utils/consts";
-import {shadowsFromColor} from "../../utils/css-vars";
+import {fac, CurrencySymbol} from "../../utils/consts";
+import {shadowsFromColorCss} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 import {Product} from "../../utils/types";
 import {FlexCenter} from "../common/flex-center";
@@ -43,7 +43,7 @@ const HexButtonContainerWithBg = observer(styled(HexDiv)<HexButtonContainerWithB
 			background-color: ${props.backgroundColor} !important;
 		}
 
-		${shadowsFromColor(props.backgroundColor, props.isDark)}
+		${shadowsFromColorCss(props.backgroundColor, props.isDark)}
 	` : null}
 `);
 
@@ -80,7 +80,7 @@ export default observer(function ProductCard (props: ProductCardProps_T) {
 			</HexImage>
 			<HexBody>
 				<ProductImageTextOverlay textColor={textColor} imgAvgColor={imgAvgColor}>
-					<h3>{product.name} <span className="h5-imp mx-2">${product.price}</span></h3>
+					<h3>{product.name} <span className="h5-imp mx-2">{CurrencySymbol}{product.price}</span></h3>
 				</ProductImageTextOverlay>
 				<div
 					className="bg-dark text-white p-2 text-center rounded-pill h3-imp"

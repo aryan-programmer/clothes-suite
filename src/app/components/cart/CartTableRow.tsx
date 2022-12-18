@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import React, {ChangeEvent, useCallback} from "react";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
+import {CurrencySymbol} from "../../utils/consts";
 import Btn from "../common/Btn";
 import {ImgThumbnail} from "../common/ImgThumbnail";
 import {InputBoxControlledUnlabeled} from "../common/InputBoxes";
@@ -18,11 +19,11 @@ export default observer(function CartTableRow (props: CartTableRowProps_T) {
 
 	const onQuantityChanged = useCallback((ev: ChangeEvent<HTMLInputElement>) => {
 		cartStore.setItemQuantity(index, Math.round(+ev.target.value));
-	}, [index]);
+	}, [cartStore, index]);
 
 	const onRemove = useCallback(() => {
 		cartStore.removeItem(index);
-	}, [index]);
+	}, [cartStore, index]);
 	return (
 		<tr>
 			<td className="d-flex justify-content-align-items-center">
@@ -38,7 +39,7 @@ export default observer(function CartTableRow (props: CartTableRowProps_T) {
 					required
 					step="1" />
 			</td>
-			<td>{price}</td>
+			<td>{CurrencySymbol}{price}</td>
 			<td>
 				<Btn borderColor="danger" onClick={onRemove}>
 					<FontAwesomeIcon icon={["far", "trash-can"]} />

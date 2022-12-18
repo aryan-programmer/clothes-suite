@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {borderRadiusValues, thumbnailSize, thumbnailSizeSm} from "../../utils/css-vars";
+import {borderRadiusValues, thumbnailSize, thumbnailSizeSm} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 
 const breakpoint = parseInt(thumbnailSize) * 100 / parseInt(thumbnailSizeSm);

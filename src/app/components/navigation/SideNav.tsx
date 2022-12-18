@@ -9,6 +9,7 @@ import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
 import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
 import {useResolve} from "../../../lib/injector/useResolve";
 import UserStore from "../../store/user/user-store";
+import {useOpenSuccessDialog} from "../../utils/useOpenErrorDialog";
 import CartNavLink from "../cart/CartNavLink";
 import NavLinkWithIcon from "../common/NavLinkWithIcon";
 
@@ -18,14 +19,12 @@ type SideNavProps_T = {
 
 export default observer(function SideNavC (props: SideNavProps_T) {
 	const userStore       = useResolve(UserStore);
-	const openDialog      = useOpenDialog();
+	const openSuccessDialog                           = useOpenSuccessDialog();
 	const signOutCallback = useCallback(async () => {
 		props.handleClose();
 		await userStore.signOut();
-		await openDialog(Alert, {
-			body: "Signed out successfully"
-		});
-	}, [openDialog, props.handleClose, userStore]);
+		await openSuccessDialog("Signed out successfully");
+	}, [openSuccessDialog, props, userStore]);
 	return (
 		<Container className="flex-column h-100">
 			<Navbar.Brand as={Link} className="h4 text-wrap text-center fw-bold mx-1" to="/">

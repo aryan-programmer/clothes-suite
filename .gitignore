@@ -102,3 +102,8 @@ fabric.properties
 
 # Custom Private files
 /src/app/utils/firebase/firebase.config.ts
+/.env.local-server
+
+# Local Netlify folder
+.netlify
+/*.log

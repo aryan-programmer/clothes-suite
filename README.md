@@ -1,6 +1,12 @@
 # Clothes Suite
 
-A clothes shopping web application developed with ReactJS (with Typescript) utilizing Firebase to store data.
+A clothes shopping web application developed with ReactJS (with Typescript).
+
+Key Features:
+- Utilizes Firebase to store data on the server side.
+- Implements global state-management with MobX. Uses TSyringe to ensure proper dependency injection of singleton stores.
+- Implements a demonstration payment API with Stripe.
+- Uses a customized version of Bootstrap 5 to implement a [neumorphism](https://www.toptal.com/designers/ui/neumorphic-ui-design) like interface.
 
 ## Setup
 
@@ -9,22 +15,21 @@ Before starting the application you must perform the following steps:
 - Run `yarn install` to install all necessary dependencies.
 - Create a Firebase project.
 - Add a web application to this project.
-- Paste the web app's Firebase configuration in src/app/utils/firebase/firebase.config.ts as:
+- Paste the web app's Firebase configuration in `.env.local` as a JSON object representation:
+- Paste the web app's Stripe Publishable Key in `.env.local` as well:
 
-```typescript
-import {FirebaseOptions} from "@firebase/app";
-
-export const firebaseConfig: FirebaseOptions = {
-	apiKey: "API_KEY",
-	authDomain: "AUTH_DOMAIN",
-	projectId: "PROJECT_ID",
-	storageBucket: "STORAGE_BUCKET",
-	messagingSenderId: "MESSAGING_SENDER_ID",
-	appId: "APP_ID",
-};
+```.dotenv
+REACT_APP_FIREBASE_CONFIG='{ "apiKey": "API_KEY", "authDomain": "AUTH_DOMAIN", "projectId": "PROJECT_ID", "storageBucket": "STORAGE_BUCKET", "messagingSenderId": "MESSAGING_SENDER_ID", "appId": "APP_ID" }'
+REACT_APP_STRIPE_PUBLIC_KEY=public_kvalue
 ```
 
-## Available Scripts
+- Paste the Stripe Secret key in `.env.local-server`:
+
+```dotenv
+STRIPE_PRIVATE_API_KEY=private_kvalue
+```
+
+## Available Commands
 
 In the project directory, you can run:
 
@@ -32,6 +37,10 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+#### `netlify dev`
+
+This runs the serverless function(s) so that one can test the payment API. The local server is generally hosted on [http://localhost:8888](http://localhost:8888) 
 
 ### `yarn test`
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {borderRadiusValues, breakpoints} from "../../utils/css-vars";
+import {borderRadiusValues, breakpoints} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 
 const formCardBorderRadius = borderRadiusValues["xl"];
@@ -21,6 +21,7 @@ export const FormCardInputs = styled.div`
 	padding: ${spacing(2)} ${spacing(4)};
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
 	gap: ${spacing(2)};
 `;
 

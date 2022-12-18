@@ -109,6 +109,11 @@ $popover-arrow-height: 1rem;
 $popover-max-width: 300px;
 $popover-max-height: 80vh;
 
+$alert-color-scale: 60%;
+$alert-box-shadow: $box-shadow;
+$alert-border-radius: $border-radius-pill;
+$alert-border-radius-not-pill: $border-radius-lg;
+
 $modal-backdrop-bg: $light;
 $modal-backdrop-opacity: .9;
 

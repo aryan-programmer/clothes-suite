@@ -1,4 +1,5 @@
 import {IconName} from "@fortawesome/fontawesome-common-types";
+import { FirebaseOptions } from "firebase/app";
 import {OptionalString} from "../../lib/types";
 
 export type Category = {
@@ -39,6 +40,9 @@ export type UserData = {
 	displayName: OptionalString;
 	createdAt: Date;
 };
+
+/** @see {isFirebaseOptions} ts-auto-guard:type-guard */
+export type FirebaseOptions_ = FirebaseOptions;
 
 declare module 'react' {
 	interface Attributes {

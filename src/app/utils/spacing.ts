@@ -1,4 +1,4 @@
-import {spacer, spacerUnit} from "./css-vars";
+import {spacer, spacerUnit} from "./css";
 
 const max   = 25;
 const cache = Array.from({length: max}, (x, i) => spacingNoCache(i));
