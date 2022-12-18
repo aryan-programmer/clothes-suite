@@ -1,6 +1,6 @@
 # Clothes Suite
 
-A clothes shopping web application developed with ReactJS (with Typescript).
+A clothes shopping web application developed with ReactJS (with Typescript). View the website hosted on Netlify: [https://clothes-suite-80b2ff.netlify.app/](https://clothes-suite-80b2ff.netlify.app/)
 
 Key Features:
 - Utilizes Firebase to store data on the server side.
@@ -22,8 +22,8 @@ Before starting the application you must perform the following steps:
 ```toml
 [context.environment]
   REACT_APP_FIREBASE_CONFIG='{ "apiKey": "API_KEY", "authDomain": "AUTH_DOMAIN", "projectId": "PROJECT_ID", "storageBucket": "STORAGE_BUCKET", "messagingSenderId": "MESSAGING_SENDER_ID", "appId": "APP_ID" }'
-  REACT_APP_STRIPE_PUBLIC_KEY=public_kvalue
-  STRIPE_PRIVATE_API_KEY=private_kvalue
+  REACT_APP_STRIPE_PUBLIC_KEY='public_kvalue'
+  STRIPE_PRIVATE_API_KEY='private_kvalue'
 ```
 
 ## Available Commands
