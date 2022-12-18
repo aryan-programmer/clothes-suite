@@ -1,12 +1,10 @@
 import {Handler} from '@netlify/functions';
-import * as dotenv from 'dotenv';
 import Stripe from "stripe";
 import nn from "../../src/lib/functions/nn";
 import {assertTypeOf} from "../../src/lib/types";
 import {CreatePaymentIntent_ResponseBody_T} from "../types";
 import {isCreatePaymentIntentRequestBody} from "../types.guard";
 
-dotenv.config({path: ".env.local-server"});
 const stripe = new Stripe(nn(process.env.STRIPE_PRIVATE_API_KEY), {
 	apiVersion: "2022-11-15"
 });

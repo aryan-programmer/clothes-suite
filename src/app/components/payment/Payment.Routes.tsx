@@ -10,7 +10,7 @@ export default observer(function PaymentRoutes (props: PaymentRoutesProps_T) {
 	return (
 		<Routes>
 			<Route index element={<PaymentPage />} />
-			<Route path="/success" element={<PaymentFinishedPage/>}/>
+			<Route path="/success" element={<PaymentFinishedPage />} />
 		</Routes>
 	);
 });

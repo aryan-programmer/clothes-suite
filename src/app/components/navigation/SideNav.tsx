@@ -5,8 +5,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {Link} from "react-router-dom";
-import {Alert} from "../../../lib/dialogs/basic-dialogs/Alert";
-import {useOpenDialog} from "../../../lib/dialogs/DialogContext";
 import {useResolve} from "../../../lib/injector/useResolve";
 import UserStore from "../../store/user/user-store";
 import {useOpenSuccessDialog} from "../../utils/useOpenErrorDialog";
@@ -18,9 +16,9 @@ type SideNavProps_T = {
 };
 
 export default observer(function SideNavC (props: SideNavProps_T) {
-	const userStore       = useResolve(UserStore);
-	const openSuccessDialog                           = useOpenSuccessDialog();
-	const signOutCallback = useCallback(async () => {
+	const userStore         = useResolve(UserStore);
+	const openSuccessDialog = useOpenSuccessDialog();
+	const signOutCallback   = useCallback(async () => {
 		props.handleClose();
 		await userStore.signOut();
 		await openSuccessDialog("Signed out successfully");

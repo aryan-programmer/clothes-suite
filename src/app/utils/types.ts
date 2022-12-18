@@ -1,5 +1,5 @@
 import {IconName} from "@fortawesome/fontawesome-common-types";
-import { FirebaseOptions } from "firebase/app";
+import {FirebaseOptions} from "firebase/app";
 import {OptionalString} from "../../lib/types";
 
 export type Category = {

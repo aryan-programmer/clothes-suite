@@ -90,10 +90,10 @@ export default observer(function PaymentPage (props: PaymentFormProps_T) {
 
 	return (
 		Math.round(amount * 100) === 0 ?
-			<h3>Please add some items to the cart before payment.</h3>:
-		isEmpty(clientSecret) ? null :
-			<Elements stripe={stripe} options={options}>
-				<PaymentForm />
-			</Elements>
+			<h3>Please add some items to the cart before payment.</h3> :
+			isEmpty(clientSecret) ? null :
+				<Elements stripe={stripe} options={options}>
+					<PaymentForm />
+				</Elements>
 	);
 });

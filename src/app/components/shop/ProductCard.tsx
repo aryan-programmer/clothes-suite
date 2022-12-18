@@ -4,7 +4,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import styled, {css} from "styled-components";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
-import {fac, CurrencySymbol} from "../../utils/consts";
+import {CurrencySymbol, fac} from "../../utils/consts";
 import {shadowsFromColorCss} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 import {Product} from "../../utils/types";

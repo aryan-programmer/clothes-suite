@@ -42,7 +42,7 @@ export default class CartStore implements Disposable {
 	}
 
 	@action
-	clear(){
+	clear () {
 		this.cart.splice(0);
 	}
 

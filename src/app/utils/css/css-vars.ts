@@ -1,6 +1,3 @@
-import {css} from "styled-components";
-import {hexToRgb, hslToRgb, rgbToHex, rgbToHsl} from "../../../lib/functions/colors";
-import nn from "../../../lib/functions/nn";
 import vars from "../../../style/export-vars.module.scss";
 
 export const spacer     = +vars["spacer-1"];
@@ -21,6 +18,6 @@ export const sideNavBreakpointMinWidth = breakpoints[smallestSizeSideNav];
 export const fontFamilySansSerif = vars["font-family-sans-serif"];
 export const fontSizeBase        = vars["font-size-base"];
 export const fontUrl             = vars["font-url"].slice(1, -1);
-export const fontUrlShort             = vars["font-url-short"].slice(1, -1);
+export const fontUrlShort        = vars["font-url-short"].slice(1, -1);
 
 export {vars};

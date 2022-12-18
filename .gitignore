@@ -107,3 +107,4 @@ fabric.properties
 # Local Netlify folder
 .netlify
 /*.log
+netlify.toml

@@ -15,18 +15,15 @@ Before starting the application you must perform the following steps:
 - Run `yarn install` to install all necessary dependencies.
 - Create a Firebase project.
 - Add a web application to this project.
-- Paste the web app's Firebase configuration in `.env.local` as a JSON object representation:
-- Paste the web app's Stripe Publishable Key in `.env.local` as well:
+- Paste the web app's Firebase configuration in `netlify.toml` as a JSON object representation:
+- Paste the web app's Stripe Publishable Key in `netlify.toml` as well:
+- Paste the Stripe Secret key in `netlify.toml`:
 
-```.dotenv
-REACT_APP_FIREBASE_CONFIG='{ "apiKey": "API_KEY", "authDomain": "AUTH_DOMAIN", "projectId": "PROJECT_ID", "storageBucket": "STORAGE_BUCKET", "messagingSenderId": "MESSAGING_SENDER_ID", "appId": "APP_ID" }'
-REACT_APP_STRIPE_PUBLIC_KEY=public_kvalue
-```
-
-- Paste the Stripe Secret key in `.env.local-server`:
-
-```dotenv
-STRIPE_PRIVATE_API_KEY=private_kvalue
+```toml
+[context.environment]
+  REACT_APP_FIREBASE_CONFIG='{ "apiKey": "API_KEY", "authDomain": "AUTH_DOMAIN", "projectId": "PROJECT_ID", "storageBucket": "STORAGE_BUCKET", "messagingSenderId": "MESSAGING_SENDER_ID", "appId": "APP_ID" }'
+  REACT_APP_STRIPE_PUBLIC_KEY=public_kvalue
+  STRIPE_PRIVATE_API_KEY=private_kvalue
 ```
 
 ## Available Commands

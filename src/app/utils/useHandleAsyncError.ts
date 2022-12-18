@@ -3,7 +3,7 @@ import {getMessageFromError} from "./firebase";
 import {useOpenErrorDialog} from "./useOpenErrorDialog";
 
 export function useHandleAsyncError (defaultMessage = "Unknown error"): (callback: () => Promise<void>) => Promise<void> {
-	const openErrorDialog  = useOpenErrorDialog();
+	const openErrorDialog = useOpenErrorDialog();
 	return useCallback(async (callback: () => Promise<void>) => {
 		try {
 			await callback();

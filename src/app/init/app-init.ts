@@ -11,7 +11,6 @@ import {HexGridVarsProvider} from "../components/common/hexagon-grid/HexGridVars
 import "../store/store";
 import {APPLICATION_NAME} from "../utils/consts";
 import {RenderChain} from "../utils/render-chain";
-import {stripe} from "../utils/stripe";
 
 export const app = new RenderChain()
 	.add(BrowserRouter, {})
