@@ -1,6 +1,6 @@
 import _ from "lodash";
 import {observer} from "mobx-react";
-import React, {Fragment} from "react";
+import React from "react";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CategoriesStore from "../../store/categories/categories-store";
 import {LoaderContainer} from "../common/loader";
@@ -16,10 +16,7 @@ export default observer(function ShopHomePage (props: ShopPageProps_T) {
 			{categoriesStore.isLoading ?
 				<LoaderContainer /> :
 				_.map(previewedCategories, (value, key) =>
-					<Fragment key={key}>
-						<ProductsListWithTitle title={key} products={value} hasLink={`/shop/${key}`} />
-						{/*<hr/>*/}
-					</Fragment>
+					<ProductsListWithTitle title={key} products={value} key={key} hasLink={`/shop/${key}`} />
 				)}
 		</div>
 	);

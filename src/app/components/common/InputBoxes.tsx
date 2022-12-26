@@ -30,8 +30,8 @@ export type InputBoxControlledUnlabeled_Props_T = InputBoxCommon_Props_T<InputBo
 	value?: string | ReadonlyArray<string> | number | undefined;
 }>;
 
-function InputBoxUnlabeled_ (props: InputBox_Props_T) {
-	let {className: newClasses, placeholder, onChange, value: ___, label, border, ...remainingProps} = props;
+function InputBoxUnlabeled_ (props: InputBoxUnlabeled_Props_T) {
+	let {className: newClasses, placeholder, onChange, value: ___, border, ...remainingProps} = props;
 
 	let className = "form-control rounded-pill ";
 	placeholder ??= " ";

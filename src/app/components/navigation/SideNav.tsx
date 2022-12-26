@@ -29,7 +29,7 @@ export default observer(function SideNavC (props: SideNavProps_T) {
 				<FontAwesomeIcon icon="boxes-stacked" /><br />Clothes suite
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-2">
+			<Navbar.Collapse id="basic-navbar-nav" className="flex-column w-100 px-2 pb-3">
 				<Nav className="flex-column w-100 gap-2" variant="pills">
 					<NavLinkWithIcon to="/">
 						<FontAwesomeIcon icon="home-lg" />

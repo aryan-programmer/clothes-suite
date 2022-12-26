@@ -1,16 +1,19 @@
 import {observer} from "mobx-react";
-import React, {useEffect} from 'react';
+import React, {lazy, Suspense, useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {useResolve} from "../../lib/injector/useResolve";
 import CategoriesStore from "../store/categories/categories-store";
 import UserStore from "../store/user/user-store";
-import AuthenticationPage from "./authentication/Authentication.Page";
-import CartPage from "./cart/Cart.Page";
+import {LoaderContainer} from "./common/loader";
 import RoundingFilter from "./common/RoundingFilter";
+import ScrollToTop from "./common/ScrollToTop";
 import HomePage from "./Home.Page";
 import NavBarWrapper from "./navigation/NavBarWrapper";
-import PaymentRoutes from "./payment/Payment.Routes";
-import ShopRoutes from "./shop/Shop.Routes";
+
+const ShopRoutesLZ         = lazy(() => import("./shop/Shop.Routes"));
+const PaymentRoutesLZ      = lazy(() => import("./payment/Payment.Routes"));
+const AuthenticationPageLZ = lazy(() => import("./authentication/Authentication.Page"));
+const CartPageLZ           = lazy(() => import("./cart/Cart.Page"));
 
 type AppProps_T = {};
 
@@ -27,18 +30,19 @@ function App (props: AppProps_T) {
 
 
 	return (
-		<>
+		<Suspense fallback={<LoaderContainer />}>
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<NavBarWrapper />}>
 					<Route index element={<HomePage />} />
-					<Route path="/shop/*" element={<ShopRoutes />}></Route>
-					<Route path="/cart" element={<CartPage />}></Route>
-					<Route path="/auth" element={<AuthenticationPage />}></Route>
-					<Route path="/payment/*" element={<PaymentRoutes />}></Route>
+					<Route path="/shop/*" element={<ShopRoutesLZ />}></Route>
+					<Route path="/cart" element={<CartPageLZ />}></Route>
+					<Route path="/auth" element={<AuthenticationPageLZ />}></Route>
+					<Route path="/payment/*" element={<PaymentRoutesLZ />}></Route>
 				</Route>
 			</Routes>
 			<RoundingFilter />
-		</>
+		</Suspense>
 	);
 }
 

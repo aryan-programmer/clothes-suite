@@ -13,6 +13,10 @@ const knowObjects                         = new Map<any, string>();
 const refsRec: Record<string, any>        = {};
 const generate: Generator<string, string> = generator();
 
+export function randomAddress () {
+	return generate.next().value;
+}
+
 export const addresses: Readonly<Record<string, any>> = refsRec;
 
 export function getAddress (object: object) {

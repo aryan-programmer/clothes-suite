@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {observer} from "mobx-react";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {createContext, useCallback, useContext, useEffect, useState} from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import {useMediaQuery} from "react-responsive";
@@ -16,6 +16,8 @@ import NavLinkWithIcon from "../common/NavLinkWithIcon";
 import CartPopover from "./CartPopover";
 
 export type CartNavLinkProps_T = {};
+
+export const ShouldDisplayCartTextContext = createContext(true);
 
 const CartIcon = styled.div`
 	position: relative;
@@ -33,7 +35,8 @@ const CartIconBadge = styled.span.attrs({
 `
 
 const CartNavContent = observer(function CartNavContent () {
-	const {numItems} = useResolve(CartStore);
+	const {numItems}            = useResolve(CartStore);
+	const shouldDisplayCartText = useContext(ShouldDisplayCartTextContext);
 	return (
 		<>
 			<CartIcon>
@@ -42,7 +45,7 @@ const CartNavContent = observer(function CartNavContent () {
 					{clamp99(numItems)}
 				</CartIconBadge>
 			</CartIcon>
-			Cart
+			{shouldDisplayCartText ? "Cart" : null}
 		</>
 	);
 });
@@ -99,8 +102,7 @@ export default observer(function CartNavLink (props: CartNavLinkProps_T) {
 
 	return (
 		showingSideNav ?
-			<CartNavButtonWithPopover />
-			:
+			<CartNavButtonWithPopover /> :
 			<NavLinkWithIcon to="/cart">
 				<CartNavContent />
 			</NavLinkWithIcon>

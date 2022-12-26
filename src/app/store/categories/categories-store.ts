@@ -28,7 +28,7 @@ export default class CategoriesStore {
 	});
 
 	getNProductsInEachCategory = computedFn(function (this: CategoriesStore, n: number) {
-		return _.mapValues(this.productCategories, (value, key) => {
+		return _.mapValues(this.productCategories, (value) => {
 			const products: ProductList = {};
 			let i                       = 1;
 			for (const product of _.keys(value)) {

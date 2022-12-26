@@ -12,7 +12,7 @@ export type CartTableRowProps_T = {
 	index: number,
 };
 
-export default observer(function CartTableRow (props: CartTableRowProps_T) {
+function useCommon (props: CartTableRowProps_T) {
 	const {index}                           = props;
 	const cartStore                         = useResolve(CartStore);
 	const {imageUrl, name, price, quantity} = cartStore.cart[index];
@@ -24,6 +24,11 @@ export default observer(function CartTableRow (props: CartTableRowProps_T) {
 	const onRemove = useCallback(() => {
 		cartStore.removeItem(index);
 	}, [cartStore, index]);
+	return {imageUrl, name, price, quantity, onQuantityChanged, onRemove};
+}
+
+export const CartTableRow = observer(function CartTableRow (props: CartTableRowProps_T) {
+	const {imageUrl, name, price, quantity, onQuantityChanged, onRemove} = useCommon(props);
 	return (
 		<tr>
 			<td className="d-flex justify-content-align-items-center">
@@ -48,3 +53,34 @@ export default observer(function CartTableRow (props: CartTableRowProps_T) {
 		</tr>
 	);
 });
+
+export const CartTableRowSm = observer(function CartTableRow (props: CartTableRowProps_T) {
+	const {imageUrl, name, price, quantity, onQuantityChanged, onRemove} = useCommon(props);
+	return (
+		<tr>
+			<td className="d-flex flex-column text-center justify-content-align-items-center">
+				<span className="font-smallish">{name}</span>
+				<ImgThumbnail src={imageUrl} />
+			</td>
+			<td>
+				<InputBoxControlledUnlabeled
+					type="number"
+					value={quantity}
+					onChange={onQuantityChanged}
+					min="0"
+					max="100"
+					required
+					step="1" />
+			</td>
+			<td className="font-monospace text-end">{CurrencySymbol}{price.toFixed(2)}</td>
+			<td>
+				<div className="d-flex justify-content-center">
+					<Btn borderColor="danger" extension="sm" className="mx-auto" onClick={onRemove}>
+						<FontAwesomeIcon icon={["far", "trash-can"]} />
+					</Btn>
+				</div>
+			</td>
+		</tr>
+	);
+});
+

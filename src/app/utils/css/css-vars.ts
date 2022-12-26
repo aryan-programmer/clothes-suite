@@ -7,8 +7,6 @@ export const breakpoints: Record<string, string | number> = JSON.parse(vars["bre
 
 export const smallestSizeSideNav = vars["smallest-size-side-nav"];
 export const btnTransition       = vars["btn-transition"];
-export const thumbnailSize       = "145px";
-export const thumbnailSizeSm     = "25vw";
 
 export const borderRadiusValues = JSON.parse(vars["border-radius-values"].slice(1, -1));
 export const themeColors        = JSON.parse(vars["theme-colors"].slice(1, -1));

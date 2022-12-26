@@ -23,8 +23,8 @@ function getFilterDropShadow (m: number) {
 
 export const HexImage = styled.div`
 	position: absolute;
-	width: 85%;
-	height: 85%;
+	width: var(--hex-image-percentage-size);
+	height: var(--hex-image-percentage-size);
 	clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
 	transition: ${hexTransitions};
 	${FlexColumnCenter};
@@ -51,7 +51,6 @@ export const HexRounded = styled.div`
 
 const HexHover = css`
 	${getFilterDropShadow(0.5)};
-	//filter: drop-shadow(-1.5px -1.5px 3px var(--light-bg-light-shadow)) drop-shadow(1.5px 1.5px 3px var(--light-bg-dark-shadow));
 
 	${HexCard} {
 		cursor: pointer;
@@ -80,7 +79,7 @@ export type HexDiv_Props_T = ComponentProps<"div"> & {
 	inset?: boolean;
 };
 
-export const HexDiv = observer(styled.div<HexDiv_Props_T>`
+export const HexDiv = styled.div<HexDiv_Props_T>`
 	position: relative;
 	width: var(--hex-width);
 	margin: var(--hex-margin);
@@ -100,7 +99,7 @@ export const HexDiv = observer(styled.div<HexDiv_Props_T>`
 	}
 
 	${(props) => (props.active ? HexActive : props.inset ? HexInset : (props.hover ? HexHover : null))}
-`);
+`;
 
 export type HexButton_Props_T<HexContainer_T extends React.ElementType = typeof HexDiv> = ComponentProps<"div"> & {
 	children?: any;

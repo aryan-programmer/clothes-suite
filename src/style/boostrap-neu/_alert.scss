@@ -25,7 +25,7 @@
 	@include border-radius(var(--#{$prefix}alert-border-radius));
 }
 
-.alert.not-pill{
+.alert.not-pill {
 	--#{$prefix}alert-border-radius: #{$alert-border-radius-not-pill};
 }
 
@@ -74,4 +74,5 @@
 		@include alert-variant($alert-background, $alert-border, $alert-color);
 	}
 }
+
 // scss-docs-end alert-modifiers

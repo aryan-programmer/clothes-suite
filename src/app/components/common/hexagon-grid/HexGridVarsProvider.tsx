@@ -3,7 +3,7 @@ import {breakpointMax, breakpoints} from "../../../utils/css";
 import {HexDiv} from "./Hex";
 import {HexGrid} from "./HexGrid";
 
-//const smMin  = breakpoints["sm"];
+const smMin  = breakpoints["sm"];
 const mdMax  = breakpointMax("md");
 const cutoff = "750px";
 
@@ -11,6 +11,11 @@ export const HexGridVarsProvider = styled.div`
 	--hex-width: calc(var(--hex-width-orig) - var(--hex-margin) * 2 - 1px);
 	--hex-height: calc(var(--hex-width) * 1.1547);
 	--hex-margin: 12px;
+	--hex-image-percentage-size: 85%;
+	@media (max-width: ${smMin}) {
+		--hex-margin: 6px;
+		--hex-image-percentage-size: 90%;
+	}
 
 	/* HEXAGON SIZING AND EVEN ROW INDENTATION */
 	@media (min-width: ${breakpoints["lg"]}) {

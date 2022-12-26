@@ -15,6 +15,7 @@ export default observer(function AuthenticationPage (props: SignInProps_T) {
 		if (userStore.user != null) {
 			redirect("/");
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userStore.user]);
 	return (
 		<div className="row g-4">

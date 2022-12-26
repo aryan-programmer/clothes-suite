@@ -11,7 +11,7 @@ import {Outlet} from "react-router-dom";
 import styled from "styled-components";
 import {sideNavBreakpointMinWidth} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
-import CartNavLink from "../cart/CartNavLink";
+import CartNavLink, {ShouldDisplayCartTextContext} from "../cart/CartNavLink";
 import Btn from "../common/Btn";
 import SideNav from "./SideNav";
 
@@ -76,9 +76,11 @@ const SidenavOffcanvasCloseButton = styled(Btn).attrs({})`
 const OutletWrapper = styled.div`
 	flex-grow: 1;
 	height: 100%;
-	padding: ${spacing(3)};
+	width: 100%;
+	padding: ${spacing(2)};
 	@media (min-width: ${sideNavBreakpointMinWidth}) {
 		margin-left: ${sidenavWidth};
+		padding: ${spacing(3)};
 	}
 `;
 
@@ -106,12 +108,14 @@ export default observer(function NavBarWrapper (props: NavBarProps_T) {
 						<Btn onClick={handleShow} borderColor="dark" className="h5-imp fw-bold">
 							<FontAwesomeIcon icon="bars"></FontAwesomeIcon>
 						</Btn>
-						<Navbar.Brand className="h4-imp fw-bold">
-							<FontAwesomeIcon icon="boxes-stacked" className="me-2" />Clothes suite
+						<Navbar.Brand className="h4-imp fw-bold mx-1">
+							<FontAwesomeIcon icon="boxes-stacked" className="me-1" />Clothes suite
 						</Navbar.Brand>
-						<Nav variant="pills">
-							<CartNavLink />
-						</Nav>
+						<ShouldDisplayCartTextContext.Provider value={false}>
+							<Nav variant="pills">
+								<CartNavLink />
+							</Nav>
+						</ShouldDisplayCartTextContext.Provider>
 					</Container>
 				</TopNavbar>
 			}

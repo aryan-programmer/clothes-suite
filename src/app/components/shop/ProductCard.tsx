@@ -5,7 +5,7 @@ import styled, {css} from "styled-components";
 import {useResolve} from "../../../lib/injector/useResolve";
 import CartStore from "../../store/cart/cart-store";
 import {CurrencySymbol, fac} from "../../utils/consts";
-import {shadowsFromColorCss} from "../../utils/css";
+import {borderRadiusValues, shadowsFromColorCss} from "../../utils/css";
 import {spacing} from "../../utils/spacing";
 import {Product} from "../../utils/types";
 import {FlexCenter} from "../common/flex-center";
@@ -23,7 +23,7 @@ const ProductImageTextOverlay = observer(styled.div<ProductImageTextOverlay_Prop
 	${FlexCenter};
 	align-self: stretch;
 	color: ${props => props.textColor};
-	background: radial-gradient(closest-side, ${props => props.imgAvgColor}, ${props => props.imgAvgColor}00);
+	background: radial-gradient(closest-side, ${props => props.imgAvgColor} 0%, ${props => props.imgAvgColor}77 75%, ${props => props.imgAvgColor}00 100%);
 	aspect-ratio: 1 / 1.5;
 	text-align: center;
 	padding: ${spacing(3)} ${spacing(5)};
@@ -37,7 +37,8 @@ type HexButtonContainerWithBg_Props_T = HexDiv_Props_T & {
 	backgroundColor: string;
 	isDark: boolean;
 };
-const HexButtonContainerWithBg = observer(styled(HexDiv)<HexButtonContainerWithBg_Props_T>`
+
+const HexButtonContainerWithBg = styled(HexDiv)<HexButtonContainerWithBg_Props_T>`
 	${props => props.isDark ? css`
 		${HexCard} {
 			background-color: ${props.backgroundColor} !important;
@@ -45,7 +46,16 @@ const HexButtonContainerWithBg = observer(styled(HexDiv)<HexButtonContainerWithB
 
 		${shadowsFromColorCss(props.backgroundColor, props.isDark)}
 	` : null}
-`);
+`;
+
+const CartAddIconDiv = styled.div`
+	aspect-ratio: 1 / 1;
+	background: black;
+	color: white;
+	padding: ${spacing(2)};
+	text-align: center;
+	border-radius: ${borderRadiusValues["pill"]};
+`;
 
 export default observer(function ProductCard (props: ProductCardProps_T) {
 	const {product}                     = props;
@@ -82,11 +92,9 @@ export default observer(function ProductCard (props: ProductCardProps_T) {
 				<ProductImageTextOverlay textColor={textColor} imgAvgColor={imgAvgColor}>
 					<h3>{product.name} <span className="h5-imp mx-2">{CurrencySymbol}{product.price}</span></h3>
 				</ProductImageTextOverlay>
-				<div
-					className="bg-dark text-white p-2 text-center rounded-pill h3-imp"
-					style={{aspectRatio: "1/1"}}>
+				<CartAddIconDiv>
 					<FontAwesomeIcon icon="cart-plus" />
-				</div>
+				</CartAddIconDiv>
 			</HexBody>
 		</HexButton>
 	);

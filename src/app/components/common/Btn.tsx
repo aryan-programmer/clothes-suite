@@ -6,6 +6,7 @@ export type BtnPropsOrig_T = {
 	extension?: string,
 	borderColor?: string,
 	children?: any,
+	rounded?: string,
 };
 export type BtnProps_T<As extends React.ElementType = "button"> =
 	BtnPropsOrig_T
@@ -13,11 +14,11 @@ export type BtnProps_T<As extends React.ElementType = "button"> =
 	& Omit<React.ComponentProps<As>, keyof BtnPropsOrig_T>
 
 function Btn<As extends React.ElementType = "button"> (props: BtnProps_T<As>) {
-	let {className: newClasses, children, extension, borderColor, as, ...others} = props;
+	let {className: newClasses, children, extension, borderColor, as, rounded, ...others} = props;
 
 	const AsElem = as ?? "button";
 
-	let className = "btn rounded-pill text-uppercase ";
+	let className = `btn text-uppercase rounded-${rounded ?? "pill"} `;
 	if (extension != null) className += `btn-${extension} `;
 	if (borderColor != null) className += `btn-bordered-${borderColor} `;
 	if (newClasses != null) className += newClasses;

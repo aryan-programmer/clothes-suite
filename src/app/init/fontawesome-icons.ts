@@ -2,6 +2,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {faGoogle} from "@fortawesome/free-brands-svg-icons";
 import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
 import {
+	faArrowLeft,
 	faBars,
 	faBoxesStacked,
 	faCartPlus,
@@ -40,5 +41,6 @@ library.add(
 	faGoogle,
 	faPlus,
 	faCartPlus,
-	faTrashCan
+	faTrashCan,
+	faArrowLeft
 );
