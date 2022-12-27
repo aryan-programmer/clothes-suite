@@ -20,3 +20,4 @@ export const app = new RenderChain()
 	.add(HexGridVarsProvider, {})
 	.add(App, {})
 	.build();
+console.log('public url: ', process.env)
