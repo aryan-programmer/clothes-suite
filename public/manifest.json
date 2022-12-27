@@ -1,6 +1,6 @@
 {
   "short_name": "Clothes Suite",
-  "name": "A clothes shopping web application developed with ReactJS (with Typescript)",
+  "name": "Clothes Suite",
   "icons": [
     {
       "src": "favicon.ico",
