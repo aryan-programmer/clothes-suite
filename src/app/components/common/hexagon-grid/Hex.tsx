@@ -5,7 +5,7 @@ import {mergeRefs} from "react-merge-refs";
 import styled, {css} from "styled-components";
 import {useActive, useHover} from "../../../../lib/functions/useHover";
 import {FlexColumnCenter} from "../flex-center";
-import {InsetShadowFilterId, RoundingFilterId} from "../RoundingFilter";
+import {InsetShadowFilterId, RoundingFilterId} from "../SVGDefinitions";
 
 const hexTransitionTimeMs = 150;
 const hexActiveTimeMs     = 175;

@@ -1,11 +1,9 @@
 import React from "react";
 
-export type RoundingFilterProps_T = {};
-
 export const RoundingFilterId    = "round";
 export const InsetShadowFilterId = "inset-shadow";
 
-export default function RoundingFilter (props: RoundingFilterProps_T) {
+export default function SVGDefinitions () {
 	return (
 		<svg
 			style={{

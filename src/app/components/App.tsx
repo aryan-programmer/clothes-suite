@@ -5,7 +5,7 @@ import {useResolve} from "../../lib/injector/useResolve";
 import CategoriesStore from "../store/categories/categories-store";
 import UserStore from "../store/user/user-store";
 import {LoaderContainer} from "./common/loader";
-import RoundingFilter from "./common/RoundingFilter";
+import SVGDefinitions from "./common/SVGDefinitions";
 import ScrollToTop from "./common/ScrollToTop";
 import HomePage from "./Home.Page";
 import NavBarWrapper from "./navigation/NavBarWrapper";
@@ -41,7 +41,7 @@ function App (props: AppProps_T) {
 					<Route path="/payment/*" element={<PaymentRoutesLZ />}></Route>
 				</Route>
 			</Routes>
-			<RoundingFilter />
+			<SVGDefinitions />
 		</Suspense>
 	);
 }
